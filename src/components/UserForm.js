@@ -1,6 +1,6 @@
 import React, { Component } from 'react' 
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Form, Button, Header, Message } from 'semantic-ui-react'
+import { Container, Form, Button, Header, Message, Icon } from 'semantic-ui-react'
 
 export default class UserForm extends Component {
     constructor(props) {
@@ -40,6 +40,7 @@ export default class UserForm extends Component {
 
         const authUser = await fetch(url,requestOptions).then(response => response.json())
         if(authUser.status === 200 || authUser.status === 201){
+            console.log(authUser);
             this.props.setCurrentUser(authUser.data)
             this.setState({
                 loginSuccess: true
@@ -98,6 +99,12 @@ export default class UserForm extends Component {
                         type='password'
                         onChange={(event)=>this.handleChange(event)}
                     />
+                    {this.state.message?
+                        <Message color='red'>
+                            <Icon name='warning sign'/>
+                            {this.state.message}
+                        </Message>: null
+                    }
                     <Button color='teal' fluid size='large'>
                         {this.props.context === 'login'?
                         <> Login </>:
@@ -108,13 +115,15 @@ export default class UserForm extends Component {
                 {/* User login Message */}
                 {this.props.context === 'login'?
                 <Message color='orange' style={{width: '70%', margin:'0 auto'}}>
-                    No Login? <Link to='/user/new'>Sign Up!</Link>
+                    {/* No Login? <Link to='/user/new'>Sign Up!</Link> */}
+                    No Login? <a href='/user/new'>Sign Up!</a>
                 </Message>:null
                 }
                 {/* User Sign Up Message */}
                 {this.props.context === 'signup'?
                 <Message color='orange' style={{width: '70%', margin:'0 auto'}}>
-                    Already have an account? <Link to='/user/login'>Sign In!</Link>
+                    {/* Already have an account? <Link to='/user/login'>Sign In!</Link> */}
+                    Already have an account? <a href='/user/login'>Sign In!</a>
                 </Message>:null
                 }
             </Container>

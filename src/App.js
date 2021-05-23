@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { Header } from 'semantic-ui-react';
+import { Header, Container } from 'semantic-ui-react';
 //// Components
 import UserForm from './components/UserForm'
 import Footer from './components/Footer'
@@ -111,7 +111,14 @@ function App() {
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
               {!currentUser? <Redirect to='/user/login'/> : 
-              <Header> Welcome, {currentUser.username} </Header>
+              <>
+              <Container style={{ height:'90vh'}}>
+                <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
+              </Container>
+              <footer>
+                <Footer style={{margin:'0', padding: '0'}}/>
+              </footer>
+              </>
               }
             </Route>
 
