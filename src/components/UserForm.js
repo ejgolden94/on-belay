@@ -39,7 +39,7 @@ export default class UserForm extends Component {
         }
 
         const authUser = await fetch(url,requestOptions).then(response => response.json())
-        if(authUser.status === 200){
+        if(authUser.status === 200 || authUser.status === 201){
             this.props.setCurrentUser(authUser.data)
             this.setState({
                 loginSuccess: true
