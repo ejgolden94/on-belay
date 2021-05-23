@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 //// Components
 import UserForm from './components/UserForm'
 import Footer from './components/Footer'
@@ -54,6 +54,13 @@ function App() {
                 <Footer />
               </footer>
             </Route>
+
+            {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
+            <Route path="/">
+              {/* if current user is not logged in this will redirect you to user login */}
+              {!currentUser? <Redirect to='/user/login'/> : ''}
+            </Route>
+
 
           </Switch>
         </BrowserRouter>
