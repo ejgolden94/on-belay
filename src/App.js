@@ -1,5 +1,9 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+//// Components
+import UserForm from './components/UserForm'
+import Footer from './components/Footer'
 
 let baseURL = ''
 
@@ -10,7 +14,7 @@ if (process.env.NODE_ENV === 'development'){
 }
 
 function App() {
-  // [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState('')
   const [routes, setRoutes] = useState([])
 
   const getRoutes = async() => {
@@ -31,10 +35,28 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        Routes
-        {routes? routes.map(route => <li key={route.id}>{route.name}</li>): ''}
-      </header>
+      <BrowserRouter>
+          <Switch>
+
+            {/* /// User Login /// */}
+            <Route path="/user/login">
+              <UserForm context='login' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
+
+            {/* /// User Sign Up /// */}
+            <Route path="/user/new">
+              <UserForm context='signup' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
+          </Switch>
+        </BrowserRouter>
     </div>
   );
 }
