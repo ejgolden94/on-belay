@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# On Belay
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the front end of a Personal Climbing Tracker app. This app is meant to allow climbers to track their progress as they get better at the sport. It also is a place to record "beta" for yourself so you can remember your climbs and what you did to achieve them.
 
-## Available Scripts
+Technologies Used:
+`React`
+`Node.Js`
+`Recharts`
+`Flask`
+`Python`
+`Peewee`
 
-In the project directory, you can run:
+----
+## User Stories:
+### General 
+- As a Climber, I want to be able to track my progress as I get better at the sport and achieve long term goals 
+- As a user, I want to remember my past climbs. 
 
-### `yarn start`
+### Tracking a climb:
+- As a climber I want to be able to make a log of a climb and the salient data points that will haelp me track my progress over time 
+    - data points include: climb type, height, rating, my performance, gym or outdoor, my time(?), the type of wall it was, a picture and any notes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### See my logs
+- I want to be able to see all of my logged climbs in one place 
+- I want to be able to click into a log to see what information I recorded
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Reporting
+- I want to be able to navigate to a personal dashboard that shows me stats of my climbing career
+- on a givent route I would like to see stats about my progress on that route, such as toal times attempted and a timeline of attempts stacked by performance 
 
-### `yarn test`
+### Routes
+- routes can be established by anyone and I would like to make a log against an established route (public)
+- I can also create private routes 
+- Public Routes can have comments and ratings from users 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### STRETCH
+- route pages include a map
+- you can share your stats or a climb log (export them to social media)
+- you can view someones profile (and dashboard)
 
-### `yarn build`
+----
+## Data 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Users
+Users are each individual climber - they can log a climb, see/create a route, have a profile
+users have logs, users have routes
+```
+    username=CharField(unique=True)
+    email=CharField(unique=True)
+    password=CharField()
+    display_name=CharField()
+    description=CharField()
+    is_admin=BooleanField()
+    created=DateTimeField(default=datetime.datetime.now)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Routes
+users create routes, routes have logs, routes have comments and ratings
+users have many routes
+```
+    name=CharField(unique=True)
+    location=CharField()
+    description=Charfield()
+    image=BigBitField()
+    created=DateTimeField(default=datetime.datetime.now)
+    creator=ForeignKeyField(User, backref='my_routes')
+```
+(if routes have multiple images there might need to be an images table...)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Climb Logs
+users create logs on a route (users have many logs, routes have many logs) 
+```
+    image=BigBitField()
+    created=DateTimeField(default=datetime.datetime.now)
+    creator=ForeignKeyField(User, backref='my_climbs')
+    route=ForeignKeyField(Route, backref='route_climbs')
+    notes=CharField()
+    climb_type=CharField()
+    height=IntegerField()
+    rating=CharField()
+    performance=CharField()
+    gym_outdoor=CharField()
+    time=DecimalField()
+    wall_type=CharField()
+```
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+----
+## Wire Frame
+![Wire Frame](./On_Belay.png)
