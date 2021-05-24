@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom'
 export default function ClimbRoute (props) {
     const {route} = props
     return (
-        
-    <Segment style={{width:'60%'}}>
+
+    <Segment style={{width:'60%', margin:'25px auto' }}>
         <div style={{display: 'flex', alignItems:'center', justifyContent: 'center'}}>
             <Image
                 floated='left'
