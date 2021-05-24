@@ -86,7 +86,7 @@ function App() {
   console.log(routes);
   console.log(currentUser);
   return (
-    <div className="App">
+    <div className="App" style={{margin:'0', padding: '0'}}>
       <BrowserRouter>
           <Switch>
 
