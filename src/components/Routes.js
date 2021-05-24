@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react' 
 import {Container} from 'semantic-ui-react'
+import ClimbRoute from './ClimbRoute'
 
 export default function Routes(props){
     const {baseURL} = props
@@ -22,8 +23,10 @@ export default function Routes(props){
 
     console.log(routes);
     return (
-        <ul>
-        {routes.map(route => <li key={route.id}>{route.name}</li>)}
-        </ul>
+        <Container style={{margin:'100px auto', minHeight:'90vh'}}>
+        {routes.map(route => 
+            <ClimbRoute key={route.id} route={route}/>
+        )}
+        </Container>
     )
 }
