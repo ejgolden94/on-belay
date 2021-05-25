@@ -1,9 +1,10 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { Header, Container } from 'semantic-ui-react';
+import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Header, Container, Button } from 'semantic-ui-react';
 //// Components
 import UserForm from './components/UserForm'
+import Routes from './components/Routes'
 import Footer from './components/Footer'
 
 let baseURL = ''
@@ -16,18 +17,6 @@ if (process.env.NODE_ENV === 'development'){
 
 function App() {
   const [currentUser, setCurrentUser] = useState('')
-  const [routes, setRoutes] = useState([])
-
-  const getRoutes = async() => {
-    const url = baseURL + '/routes/'
-    const requestOptions = {
-      method:'GET',
-      credentials: 'include'
-    }
-
-    let foundRoutes = await fetch(url,requestOptions).then(response => response.json())
-    setRoutes(foundRoutes.data)
-  }
 
   // const postRoute = async() => {
   //   const url = baseURL + '/routes/'
@@ -77,16 +66,15 @@ function App() {
   }
 
   useEffect(() => {
-    getRoutes() // putting this function call inside of an anonymous function due to warning: "Effect callbacks are synchronous to prevent race conditions."
+    // putting this function call inside of an anonymous function due to warning: "Effect callbacks are synchronous to prevent race conditions."
     getUsers()
     getClimbs()
     // postRoute()
   },[])
 
-  console.log(routes);
   console.log(currentUser);
   return (
-    <div className="App">
+    <div className="App" style={{margin:'0', padding: '0'}}>
       <BrowserRouter>
           <Switch>
 
@@ -107,6 +95,14 @@ function App() {
               </footer>
             </Route>
 
+            {/* /// Routes /// */}
+            <Route path="/routes">
+              <Routes baseURL={baseURL}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
@@ -114,6 +110,7 @@ function App() {
               <>
               <Container style={{ height:'90vh'}}>
                 <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
+                <Button as={Link} to='/routes'>See Routes</Button>
               </Container>
               <footer>
                 <Footer style={{margin:'0', padding: '0'}}/>
