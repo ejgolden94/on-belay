@@ -5,6 +5,7 @@ import { Header, Container, Button } from 'semantic-ui-react';
 //// Components
 import UserForm from './components/UserForm'
 import Routes from './components/Routes'
+import ClimbRoute from './components/ClimbRoute'
 import Footer from './components/Footer'
 
 let baseURL = ''
@@ -90,6 +91,14 @@ function App() {
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
+            {/* /// Show Route /// */}
+            <Route path="/routes/:routeId">
+              <ClimbRoute baseURL={baseURL}/>
               <footer>
                 <Footer />
               </footer>
