@@ -1,26 +1,11 @@
 import React from 'react' 
 import {Card, Icon, Image, Segment, Header} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
-export default function ClimbRoute (props) {
-    const {route} = props
-    return (
-        <Link to={'/routes/'+route.id} style={{color:'inherit'}} >
-        <Segment style={{width:'60%', margin:'25px auto' }}>
-            <div style={{display: 'flex', alignItems:'center', justifyContent: 'center'}}>
-                <Image
-                    floated='left'
-                    size='small'
-                    rounded
-                    src='https://ptrenew.com/wp-content/uploads/Screen-Shot-2019-04-05-at-1.35.48-PM.png'
-                    />
-                <div style={{textAlign:'left'}}>
-                    <Header>{route.name}</Header>
-                    <div>{route.description.slice(0,100)+'...'}</div>
-                    <Icon name='fire' style={{marginTop:'10px'}}/>6 climbs Logged
-                </div>
-            </div>
-        </Segment>
-        </Link>
+export default function ClimbRoute (props){
+    const location = useLocation();
+    const locationId = location.pathname.split('/')[2]
+    return(
+        <Header>Hey {locationId}</Header>
     )
 }
