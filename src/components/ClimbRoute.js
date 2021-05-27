@@ -3,6 +3,7 @@ import NotFound from './NotFound'
 import {Header, Image, Icon, Segment, Divider, Rating, Container} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
 import {calculateRatingClass} from '../calculateRatingClass'
+import {formatDate} from '../formatDate'
 import ClimbCard from './ClimbCard'
 
 export default function ClimbRoute (props){
@@ -112,7 +113,7 @@ export default function ClimbRoute (props){
                         {route.data.wall_type}
                     </div>
                     <div className='route-meta'>
-                        <em style={{display:'block'}}>This route was created on {route.data.created}.</em>
+                        <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
                         <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>
                     </div>
                 </Container>

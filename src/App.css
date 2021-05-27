@@ -63,7 +63,7 @@
 .route-meta{
   color: gray;
   text-align: left;
-  margin: 0 !important;
+  font-size: 0.9em;
 }
 .five{
   background-color: rgb(25, 194, 81);

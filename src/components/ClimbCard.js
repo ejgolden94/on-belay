@@ -1,15 +1,10 @@
 import React from 'react' 
 import {Card, Icon} from 'semantic-ui-react'
 import {calculateRatingClass} from '../calculateRatingClass'
+import {formatDate} from '../formatDate'
 
 export default function ClimbCard (props){
     const {climb} = props
-
-    const convertDate = (dateString) => {
-        const d = new Date(dateString)
-        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-        return d.toLocaleDateString('en',dateOptions)
-    }
 
     return(
         <Card key={climb.id} className='climbcard'>
@@ -19,7 +14,7 @@ export default function ClimbCard (props){
                     {climb.route.rating}
                 </div>
                 <div>
-                    {convertDate(climb.created)}
+                    {formatDate(climb.created, 'long')}
                     <div>
                         <Icon
                             name='lightning'
