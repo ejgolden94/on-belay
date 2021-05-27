@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import NotFound from './NotFound'
 import {Header, Image, Icon, Segment, Divider, Rating, Container} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
+import {calculateRatingClass} from '../calculateRatingClass'
 import ClimbCard from './ClimbCard'
 
 export default function ClimbRoute (props){
@@ -79,14 +80,6 @@ export default function ClimbRoute (props){
                     <div>--</div>
                     <div>--</div>
                 </Segment>
-{/* height: 50
-location: "In the asylum area of rumney, all the way to the far left"
-rating: "5.11+"
-wall_type: "overhang" 
-created
-creator
-*/}
-
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
@@ -95,12 +88,16 @@ creator
                 </Divider>
                 <Container style={{padding:'1vh'}}>
                     <div className='route-desc'>
-                        <div className='circle' style={{marginRight:'10px', minWidth:'75px', height:'75px', backgroundColor:'tomato'}}>
+                        <div className={'circle '+calculateRatingClass(route.data.rating)} style={{marginRight:'10px', minWidth:'75px', height:'75px'}}>
                             {route.data.rating}
                         </div>
                         <div>
                             {route.data.description}
                         </div>
+                    </div>
+                    <div className='route-desc'>
+                        <h4 style={{marginRight:'10px'}}>Height:</h4>
+                        {route.data.height}'
                     </div>
                     <div className='route-desc'>
                         <h4 style={{marginRight:'10px'}}>Protection:</h4>
