@@ -1,5 +1,6 @@
 import React from 'react' 
 import {Card, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import {calculateRatingClass} from '../calculateRatingClass'
 import {formatDate} from '../formatDate'
 
@@ -7,6 +8,7 @@ export default function ClimbCard (props){
     const {climb} = props
 
     return(
+        <Link to={'/climbs/'+ climb.id} style={{color:'inherit'}}>
         <Card key={climb.id} className='climbcard'>
             <Card.Header>{climb.route.name}</Card.Header>
             <Card.Content className='climbcard-content'>
@@ -25,5 +27,6 @@ export default function ClimbCard (props){
                 </div>
             </Card.Content>
         </Card>
+        </Link>
     )
 }

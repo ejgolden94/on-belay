@@ -7,7 +7,9 @@ import UserForm from './components/UserForm'
 import Routes from './components/Routes'
 import ClimbRoute from './components/ClimbRoute'
 import Climbs from './components/Climbs'
+import Climb from './components/Climb'
 import Footer from './components/Footer'
+
 
 let baseURL = ''
 
@@ -95,6 +97,14 @@ function App() {
             {/* /// Routes /// */}
             <Route path="/routes">
               <Routes baseURL={baseURL}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
+            {/* /// Show Climb /// */}
+            <Route path="/climbs/:climbId">
+              <Climb baseURL={baseURL}/>
               <footer>
                 <Footer />
               </footer>
