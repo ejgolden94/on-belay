@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react' 
 import NotFound from './NotFound'
-import {Header, Image, Icon, Segment, Divider, Rating} from 'semantic-ui-react'
+import {Header, Image, Icon, Segment, Divider, Rating, Container} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
+import ClimbCard from './ClimbCard'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -9,6 +10,7 @@ export default function ClimbRoute (props){
 
     const {baseURL} = props
     const [route, setRoute] = useState([])
+    const [climbs, setClimbs] = useState([])
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -22,12 +24,24 @@ export default function ClimbRoute (props){
         setRoute(foundRoute)
     }
 
+    const getUsersRouteClimbs = async () => {
+        const url = baseURL + '/routes/' + locationId + '/climbs?user=true'
+        const requestOptions = {
+            method:'GET',
+            credentials: 'include'
+        }
+        const climbs = await fetch(url, requestOptions).then(response => response.json())
+        console.log(climbs);
+        setClimbs(climbs.data)
+    } 
+
     const handleRate = () =>{
-        
+
     }
 
     useEffect(()=> {
         getRoute()
+        getUsersRouteClimbs()
     },[])
 
     console.log(route);
@@ -45,11 +59,11 @@ export default function ClimbRoute (props){
                     color='teal' 
                     name='angle left' 
                     size='large' 
-                    className='float-left'
+                    className='back-btn'
                     style={{zIndex:'100'}}
                     />
             </Link>
-            <Segment style={{maxWidth: '80%', margin: '0 auto 5vh auto', border:'none', padding: '0'}}>
+            <Segment style={{width: '80%', maxWidth:'600px', margin: '0 auto 5vh auto', border:'none', padding: '0', boxShadow: 'none'}}>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
                     {route.data.name}
                 </Header>
@@ -57,43 +71,83 @@ export default function ClimbRoute (props){
                     src={route.data.image? route.data.image:'/climb-route-stock.jpeg' } 
                     style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
                 />
+
+                {/* ------------  Stats ----------- */}
                 <Segment className='stats' style={{backgroundColor:'lightgray', margin:'0 0 2vh 0'}}>
                     <div>Your Stats:</div>
                     <div>--</div>
                     <div>--</div>
                     <div>--</div>
                 </Segment>
+{/* height: 50
+location: "In the asylum area of rumney, all the way to the far left"
+rating: "5.11+"
+wall_type: "overhang" 
+created
+creator
+*/}
+
+                {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Description
                     </Header>
                 </Divider>
-                <p>{route.data.description}</p>
+                <Container style={{padding:'1vh'}}>
+                    <div className='route-desc'>
+                        <div className='circle' style={{marginRight:'10px', minWidth:'75px', height:'75px', backgroundColor:'tomato'}}>
+                            {route.data.rating}
+                        </div>
+                        <div>
+                            {route.data.description}
+                        </div>
+                    </div>
+                    <div className='route-desc'>
+                        <h4 style={{marginRight:'10px'}}>Protection:</h4>
+                        {route.data.protection}
+                    </div>
+                    <div className='route-desc'>
+                        <h4 style={{marginRight:'10px'}}>Location:</h4>
+                        {route.data.location}
+                    </div>
+                    <div className='route-desc'>
+                        <h4 style={{marginRight:'10px'}}>Wall Characteristic:</h4>
+                        {route.data.wall_type}
+                    </div>
+                    <div className='route-meta'>
+                        <em style={{display:'block'}}>This route was created on {route.data.created}.</em>
+                        <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>
+                    </div>
+                </Container>
+
+                {/* ------------  YOUR CLIMBS ----------- */}
+                <Divider horizontal>
+                    <Header as='h3'>
+                        Your Climbs
+                    </Header>
+                </Divider>
+                <Container style={{padding:'1vh'}}>
+                    {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>): ''}
+                </Container>
+
+                {/* ------------  COMMENTS ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Comments
                     </Header>
                 </Divider>
                 {/* add comment s component right here */}
-                    <Segment rounded  style={{display:'flex', width:'80%', margin:'0 auto'}}>
+                    <Segment rounded style={{display:'flex', width:'80%', margin:'0 auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 1</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>I have a lot to say a bout this route...</Segment>
                         <Rating defaultRating={3} maxRating={5} disabled={true} clearable onRate={handleRate}/>
                     </Segment>
-                    <Segment rounded  style={{display:'flex', width:'80%', margin:'20px auto'}}>
+                    <Segment rounded style={{display:'flex', width:'80%', margin:'20px auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 2</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>Same...</Segment>
                         <Rating defaultRating={3} maxRating={5} disabled clearable onRate={handleRate}/>
                     </Segment>
-                <Divider horizontal>
-                    <Header as='h3'>
-                        Your Climbs
-                    </Header>
-                </Divider>
-                {/* add climb component right here */}
-                    <Segment rounded  style={{display:'flex', width:'80%', margin:'0 auto'}}>
-                        <Segment style={{border:'none', boxShadow:'none'}}>climb climb climb</Segment>
-                    </Segment>
+                    
             </Segment>
             </>
             :''

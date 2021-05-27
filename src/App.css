@@ -30,7 +30,7 @@
   display: inline;
 }
 
-.float-left {
+.back-btn {
   position: absolute;
   left: 10px;
   top: 2vh;
@@ -45,6 +45,26 @@
   width: 100%
 }
 
+.route-desc {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1vh 0;
+  text-align: left;
+}
+
+.circle {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.route-meta{
+  color: gray;
+  text-align: left;
+  margin: 0 !important;
+}
 .five{
   background-color: rgb(25, 194, 81);
 }
@@ -111,11 +131,4 @@
 
 .fifteen{
   background-color: rgb(6, 167, 216);
-}
-
-.circle {
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
