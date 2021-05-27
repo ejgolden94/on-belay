@@ -51,7 +51,7 @@ export default function Climbs(props) {
 
     useEffect(() => {
         const getClimbs = async() => {
-            const url = baseURL+'/climbs/'
+            const url = baseURL+'/climbs/my_climbs'
             const requestOptions = {
                 method:'GET',
                 credentials: 'include',
@@ -65,7 +65,7 @@ export default function Climbs(props) {
 
     console.log(climbs);
     return (
-        <Container style={{margin:'50px auto'}}>
+        <Container style={{margin:'50px auto', minHeight:'80vh'}}>
         <Header>Your Climbs</Header>
         {climbs? climbs.map(climb => 
             <Card key={climb.id} className='climbcard'>
