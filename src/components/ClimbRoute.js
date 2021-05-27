@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react' 
 import NotFound from './NotFound'
-import {Header, Image, Icon, Segment, Divider} from 'semantic-ui-react'
+import {Header, Image, Icon, Segment, Divider, Rating} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
 
 export default function ClimbRoute (props){
@@ -20,6 +20,10 @@ export default function ClimbRoute (props){
         let foundRoute = await fetch(url,requestOptions).then(response => response.json())
         console.log(foundRoute);
         setRoute(foundRoute)
+    }
+
+    const handleRate = () =>{
+        
     }
 
     useEffect(()=> {
@@ -74,16 +78,19 @@ export default function ClimbRoute (props){
                     <Segment rounded  style={{display:'flex', width:'80%', margin:'0 auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 1</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>I have a lot to say a bout this route...</Segment>
+                        <Rating defaultRating={3} maxRating={5} disabled={true} clearable onRate={handleRate}/>
                     </Segment>
                     <Segment rounded  style={{display:'flex', width:'80%', margin:'20px auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 2</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>Same...</Segment>
+                        <Rating defaultRating={3} maxRating={5} disabled clearable onRate={handleRate}/>
                     </Segment>
                 <Divider horizontal>
                     <Header as='h3'>
                         Your Climbs
                     </Header>
                 </Divider>
+                {/* add climb component right here */}
                     <Segment rounded  style={{display:'flex', width:'80%', margin:'0 auto'}}>
                         <Segment style={{border:'none', boxShadow:'none'}}>climb climb climb</Segment>
                     </Segment>
