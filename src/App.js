@@ -9,6 +9,7 @@ import ClimbRoute from './components/ClimbRoute'
 import Climbs from './components/Climbs'
 import Climb from './components/Climb'
 import Footer from './components/Footer'
+import ClimbForm from './components/ClimbForm';
 
 
 let baseURL = ''
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'development'){
 
 function App() {
   const [currentUser, setCurrentUser] = useState('')
+  const [currentClimb, setCurrentClimb] = useState({})
 
   // const postRoute = async() => {
   //   const url = baseURL + '/routes/'
@@ -102,9 +104,21 @@ function App() {
               </footer>
             </Route>
 
+            {/* /// Create Climb /// */}
+            <Route 
+              path="/climbs/new"
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser}/>}
+            />
+
+            {/* /// Edit Climb /// */}
+            <Route 
+              path="/climbs/:climbId/edit"
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} climb={currentClimb.data}/>}
+            />
+
             {/* /// Show Climb /// */}
             <Route path="/climbs/:climbId">
-              <Climb baseURL={baseURL}/>
+              <Climb baseURL={baseURL} setCurrentClimb={setCurrentClimb}/>
               <footer>
                 <Footer />
               </footer>

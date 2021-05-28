@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react' 
-import {useLocation} from 'react-router-dom'
-import {Container, Header, Divider, Segment, Image } from 'semantic-ui-react'
+import {Link, useLocation} from 'react-router-dom'
+import {Container, Header, Divider, Segment, Image, Button, Icon } from 'semantic-ui-react'
 import NotFound from './NotFound'
 import BackButton from './BackButton'
-import {calculateRatingClass} from '../calculateRatingClass'
 import {formatDate} from '../formatDate'
 import RouteDetails from './RouteDetails'
 
 export default function Climb (props){
-    const {baseURL} = props
+    const {baseURL, setCurrentClimb} = props
     const location = useLocation()
     const climbId = location.pathname.split('/')[2]
     const [climb, setClimb] = useState({});
@@ -22,9 +21,10 @@ export default function Climb (props){
             }
             const climb = await fetch(url, requestOptions).then(response => response.json())
             setClimb(climb)
+            setCurrentClimb(climb)
         }
         getClimb()
-    }, []);
+    }, [baseURL,climbId,setCurrentClimb]);
 
     console.log(climb);
     if (climb.status === 404){
@@ -35,7 +35,7 @@ export default function Climb (props){
         climb.data? 
         <Container style={{minHeight:'90vh'}}>
         <BackButton/>
-            <Segment style={{width: '80%', maxWidth:'600px', margin: '0 auto 5vh auto', border:'none', padding: '0', boxShadow: 'none'}}>
+            <Segment className='page-container'>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
                     {climb.data.route.name}
                 </Header>
@@ -50,6 +50,11 @@ export default function Climb (props){
                         Your Climb
                     </Header>
                 </Divider>
+                    <Button 
+                        inverted circular icon color='purple' className='float-right'
+                        as={Link} to={'/climbs/'+climb.data.id+'/edit'}>
+                    <Icon name='pencil'/>
+                    </Button>
                     <div className='route-desc'>
                         <h4 style={{marginRight:'10px'}}>Date Logged:</h4>
                         {formatDate(climb.data.created,'long time')}

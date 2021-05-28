@@ -58,7 +58,7 @@ export default function ClimbRoute (props){
             route.data?
             <>
             <BackButton />
-            <Segment style={{width: '80%', maxWidth:'600px', margin: '0 auto 5vh auto', border:'none', padding: '0', boxShadow: 'none'}}>
+            <Segment className='page-container'>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
                     {route.data.name}
                 </Header>
