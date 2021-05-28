@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react' 
 import {Container, Header} from 'semantic-ui-react'
+import BackButton from './BackButton'
 import ClimbCard from './ClimbCard'
 
 export default function Climbs(props) {
@@ -23,7 +24,8 @@ export default function Climbs(props) {
     console.log(climbs);
     return (
         <Container style={{margin:'50px auto', minHeight:'80vh'}}>
-        <Header>Your Climbs</Header>
+        <BackButton />
+        <Header as='h2'>Your Climbs</Header>
         {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>): ''}
         </Container>
     )

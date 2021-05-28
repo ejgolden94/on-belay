@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react' 
-import {Container} from 'semantic-ui-react'
+import {Container, Header} from 'semantic-ui-react'
+import BackButton from './BackButton'
 import ClimbRouteCard from './ClimbRouteCard'
 
 export default function Routes(props){
@@ -23,7 +24,9 @@ export default function Routes(props){
 
     console.log(routes);
     return (
-        <Container style={{margin:'100px auto', minHeight:'90vh'}}>
+        <Container style={{margin:'0 auto', minHeight:'90vh'}}>
+        <BackButton />
+        <Header as='h2'>Climb Routes</Header>
         {routes.map(route => 
             <ClimbRouteCard key={route.id} route={route}/>
         )}
