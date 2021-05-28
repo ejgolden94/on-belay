@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react' 
 import NotFound from './NotFound'
-import {Header, Image, Icon, Segment, Divider, Rating, Container} from 'semantic-ui-react'
-import {Link, useLocation} from 'react-router-dom'
-import {calculateRatingClass} from '../calculateRatingClass'
+import {Header, Image, Segment, Divider, Rating, Container} from 'semantic-ui-react'
+import {useLocation} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import ClimbCard from './ClimbCard'
+import BackButton from './BackButton'
+import RouteDetails from './RouteDetails'
+import RouteStats from './RouteStats'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -55,16 +57,7 @@ export default function ClimbRoute (props){
         return(
             route.data?
             <>
-            <Link to='/routes' style={{color:'inherit'}}>
-                    <Icon 
-                    circular inverted 
-                    color='teal' 
-                    name='angle left' 
-                    size='large' 
-                    className='back-btn'
-                    style={{zIndex:'100'}}
-                    />
-            </Link>
+            <BackButton />
             <Segment style={{width: '80%', maxWidth:'600px', margin: '0 auto 5vh auto', border:'none', padding: '0', boxShadow: 'none'}}>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
                     {route.data.name}
@@ -75,12 +68,7 @@ export default function ClimbRoute (props){
                 />
 
                 {/* ------------  Stats ----------- */}
-                <Segment className='stats' style={{backgroundColor:'lightgray', margin:'0 0 2vh 0'}}>
-                    <div>Your Stats:</div>
-                    <div>--</div>
-                    <div>--</div>
-                    <div>--</div>
-                </Segment>
+                <RouteStats />
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
@@ -88,30 +76,7 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    <div className='route-desc'>
-                        <div className={'circle '+calculateRatingClass(route.data.rating)} style={{marginRight:'10px', minWidth:'75px', height:'75px'}}>
-                            {route.data.rating}
-                        </div>
-                        <div>
-                            {route.data.description}
-                        </div>
-                    </div>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}}>Height:</h4>
-                        {route.data.height}'
-                    </div>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}}>Protection:</h4>
-                        {route.data.protection}
-                    </div>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}}>Location:</h4>
-                        {route.data.location}
-                    </div>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}}>Wall Characteristic:</h4>
-                        {route.data.wall_type}
-                    </div>
+                    <RouteDetails route={route.data} />
                     <div className='route-meta'>
                         <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
                         <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>

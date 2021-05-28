@@ -34,7 +34,7 @@
   position: absolute;
   left: 10px;
   top: 2vh;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .stats {
