@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router'
+import { Redirect} from 'react-router'
 import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
 
@@ -26,45 +26,86 @@ const climbTypeOptions = [
     { key: 'Did Not Complete', value: 'Did Not Complete', text: 'Did Not Complete'}
   ]
 
-
 export default class ClimbForm extends Component {
     constructor(props) {
         super(props);
         this.baseURL = this.props.baseURL
-        const image = this.props.climb.image? this.props.climb.image : 'No Image'
-        const notes = this.props.climb.notes? this.props.climb.notes : 'No Notes'
-        const time = this.props.climb.time? this.props.climb.time : 'No Time Recorded'
-        this.state={
-            climb_type: this.props.climb.climb_type,
-            gym_outdoor: this.props.climb.gym_outdoor,
-            image: image,
-            notes: notes,
-            performance: this.props.climb.performance,
-            time: time,
-            success: false
+        const context = this.props.location.pathname.split('/')[3]? this.props.location.pathname.split('/')[3]: this.props.location.pathname.split('/')[2]
+        if (context === 'edit') {
+            const image = this.props.climb.image? this.props.climb.image : 'No Image'
+            const notes = this.props.climb.notes? this.props.climb.notes : 'No Notes'
+            const time = this.props.climb.time? this.props.climb.time : 'No Time Recorded'
+            this.state={
+                climb_type: this.props.climb.climb_type,
+                gym_outdoor: this.props.climb.gym_outdoor,
+                image: image,
+                notes: notes,
+                performance: this.props.climb.performance,
+                time: time,
+                id: this.props.climb.id,
+                success: false,
+                context: context
+            }
+        } else if(context === 'new') {
+            this.state={
+                climb_type: '',
+                gym_outdoor: '',
+                image: '',
+                notes: '',
+                performance: '',
+                time: 0,
+                id:'',
+                route: 1,
+                success: false,
+                context: context
+            }
         }
     }
 
     editClimb = async() => {
-        const url = this.baseURL + '/climbs/' + this.props.climb.id 
+        const url = this.baseURL + '/climbs/' + this.state.id 
         const body = this.state
         delete body.success;
+        delete body.context;
 
         const requestOptions = {
-            method:'PUT',
+            method: 'PUT',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
         }
 
-        let editClimb = await fetch(url,requestOptions).then(response => response.json())
+        const editClimb = await fetch(url,requestOptions).then(response => response.json())
         console.log(editClimb);
         if (editClimb.status===200){
             this.setState({
                 success: true
             })
         }
-        ;
+    }
+
+    createClimb = async() => {
+        const url = this.baseURL + '/climbs/'
+        const body = this.state
+        delete body.success;
+        delete body.context;
+        delete body.id;
+
+        const requestOptions = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        }
+
+        const newClimb = await fetch(url,requestOptions).then(response => response.json())
+        console.log(newClimb);
+        if (newClimb.status===201){
+            this.setState({
+                success: true,
+                id: newClimb.data.id
+            })
+        }
     }
 
     handleChange = (event) => {
@@ -80,19 +121,24 @@ export default class ClimbForm extends Component {
     }
 
     handleSubmit = (event) => {
+        const {context} = this.state
         event.preventDefault()
-        this.editClimb()
+        if (context === 'edit'){
+            this.editClimb()
+        } else if (context === 'new'){
+            this.createClimb()
+        }
     }
 
     render() {
         console.log(this.state);
         if (this.state.success){
-           return <Redirect to={'/climbs/'+this.props.climb.id} />
+           return <Redirect to={'/climbs/'+this.state.id} />
         }
         return(
             <Container style={{minHeight:'90vh'}}>
             <BackButton/>
-            <Header as='h2'>Edit Climb Log</Header>
+            <Header as='h2'>{this.state.context} Climb Log</Header>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
             <Form onSubmit={(event)=>this.handleSubmit(event)}>
                 <Form.Dropdown
@@ -146,7 +192,9 @@ export default class ClimbForm extends Component {
                     value={this.state.time}
                     onChange={this.handleChange}
                 />
-                <Button color='purple'>Submit Edits</Button>
+                {this.state.context === 'edit'?             
+                <Button color='purple'>Submit Edits</Button>:
+                <Button color='purple'>Create New Climb</Button>}
             </Form>
             </Segment>
             </Container>

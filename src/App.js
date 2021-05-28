@@ -104,11 +104,17 @@ function App() {
               </footer>
             </Route>
 
+            {/* /// Create Climb /// */}
+            <Route 
+              path="/climbs/new"
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser}/>}
+            />
+
             {/* /// Edit Climb /// */}
-            <Route path="/climbs/:climbId/edit">
-              <ClimbForm baseURL={baseURL} climb={currentClimb.data}/>
-              <Footer />
-            </Route>
+            <Route 
+              path="/climbs/:climbId/edit"
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} climb={currentClimb.data}/>}
+            />
 
             {/* /// Show Climb /// */}
             <Route path="/climbs/:climbId">
