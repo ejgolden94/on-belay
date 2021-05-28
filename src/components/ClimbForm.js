@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
+import {Form, Segment, Container, Header, Button, Divider} from 'semantic-ui-react'
 import BackButton from './BackButton'
 
 const climbTypeOptions = [
@@ -140,9 +140,10 @@ export default class ClimbForm extends Component {
             <BackButton/>
             <Header as='h2'>{this.state.context} Climb Log</Header>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
-            <Form onSubmit={(event)=>this.handleSubmit(event)}>
+            <Form onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
                 <Form.Dropdown
                     placeholder={this.state.climb_type} 
+                    label='Climb Type'
                     fluid
                     search
                     selection
@@ -152,8 +153,10 @@ export default class ClimbForm extends Component {
                     value= {this.state.climb_type}
                     onChange={this.handleDropDown}
                 />
+                <br/>
                 <Form.Dropdown
                     placeholder={this.state.gym_outdoor} 
+                    label='Climb Setting'
                     fluid
                     selection
                     name='gym_outdoor'
@@ -162,22 +165,28 @@ export default class ClimbForm extends Component {
                     value= {this.state.gym_outdoor}
                     onChange={this.handleDropDown}
                 />
+                <br/>
                 <Form.Input 
                     type='text'
+                    label='Image'
                     name='image'
                     id='image'
                     value={this.state.image}
                     onChange={this.handleChange}
                 />
+                <br/>
                 <Form.TextArea
                     name='notes'
+                    label='Notes'
                     id='notes'
                     value={this.state.notes}
                     onChange={this.handleChange}
                 />
+                <br/>
                 <Form.Dropdown
                     placeholder={this.state.performance} 
                     fluid
+                    label='Performance'
                     selection
                     name='performance'
                     id='performance'
@@ -185,16 +194,20 @@ export default class ClimbForm extends Component {
                     value= {this.state.performance}
                     onChange={this.handleDropDown}
                 />
+                <br/>
                 <Form.Input 
                     type='number'
+                    label='Time'
                     name='time'
                     id='time'
                     value={this.state.time}
                     onChange={this.handleChange}
                 />
-                {this.state.context === 'edit'?             
-                <Button color='purple'>Submit Edits</Button>:
-                <Button color='purple'>Create New Climb</Button>}
+                <div style={{width: '100%', textAlign:'center'}}>
+                {this.state.context === 'edit'? 
+                    <Button color='purple'>Submit Edits</Button>         
+                    :<Button color='purple'>Create New Climb</Button>}
+                </div> 
             </Form>
             </Segment>
             </Container>
