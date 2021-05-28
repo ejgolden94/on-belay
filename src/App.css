@@ -16,26 +16,25 @@
   color: white;
 }
 
-.circle {
-  width: 100px;
-  height: 100px;
-  background: rgb(0, 255, 208);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.climbcard {
+  margin: 15px auto !important;
 }
 
+.climbcard-content{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
 .inline {
   display: inline;
 }
 
-.float-left {
+.back-btn {
   position: absolute;
   left: 10px;
   top: 2vh;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .stats {
@@ -44,4 +43,92 @@
   align-items:center;
   margin: 0;
   width: 100%
+}
+
+.route-desc {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1vh 0;
+  text-align: left;
+}
+
+.circle {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.route-meta{
+  color: gray;
+  text-align: left;
+  font-size: 0.9em;
+}
+.five{
+  background-color: rgb(25, 194, 81);
+}
+
+.six{
+  background-color: rgb(93, 194, 25);
+}
+
+.seven{
+  background-color: rgb(183, 194, 25);
+}
+
+.eight{
+  background-color: rgb(216, 184, 6);
+}
+
+.nine{
+  background-color: rgb(216, 160, 6);
+}
+
+.ten-minus{
+  background-color: rgb(216, 143, 6);
+}
+
+.ten{
+  background-color: rgb(216, 118, 6);
+}
+
+.ten-plus{
+  background-color: rgb(216, 108, 6);
+}
+
+.eleven-minus{
+  background-color: rgb(216, 83, 6);
+}
+
+.eleven{
+  background-color: rgb(216, 73, 6);
+}
+
+.eleven-plus{
+  background-color: rgb(216, 52, 6);
+}
+
+.twelve-minus{
+  background-color: rgb(216, 6, 34);
+}
+
+.twelve{
+  background-color: rgb(216, 6, 80);
+}
+
+.twelve-plus{
+  background-color: rgb(216, 6, 136);
+}
+
+.thirteen{
+  background-color: rgb(216, 6, 216);
+}
+
+.fourteen{
+  background-color: rgb(157, 6, 216);
+}
+
+.fifteen{
+  background-color: rgb(6, 167, 216);
 }

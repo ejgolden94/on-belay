@@ -6,7 +6,10 @@ import { Header, Container, Button } from 'semantic-ui-react';
 import UserForm from './components/UserForm'
 import Routes from './components/Routes'
 import ClimbRoute from './components/ClimbRoute'
+import Climbs from './components/Climbs'
+import Climb from './components/Climb'
 import Footer from './components/Footer'
+
 
 let baseURL = ''
 
@@ -43,18 +46,6 @@ function App() {
   //   console.log(newRoute);
   // }
 
-
-  const getClimbs = async() => {
-    const url = baseURL+'/climbs/'
-    const requestOptions = {
-      method:'GET',
-      credentials: 'include',
-      mode: 'cors',
-    }
-    const climbs = await fetch(url,requestOptions).then(response => response.json())
-    console.log(climbs);
-  }
-
   const getUsers = async() => {
     const url = baseURL+'/users/'
     const requestOptions = {
@@ -69,7 +60,6 @@ function App() {
   useEffect(() => {
     // putting this function call inside of an anonymous function due to warning: "Effect callbacks are synchronous to prevent race conditions."
     getUsers()
-    getClimbs()
     // postRoute()
   },[])
 
@@ -107,6 +97,22 @@ function App() {
             {/* /// Routes /// */}
             <Route path="/routes">
               <Routes baseURL={baseURL}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
+            {/* /// Show Climb /// */}
+            <Route path="/climbs/:climbId">
+              <Climb baseURL={baseURL}/>
+              <footer>
+                <Footer />
+              </footer>
+            </Route>
+
+            {/* /// Climbs /// */}
+            <Route path="/climbs">
+              <Climbs baseURL={baseURL}/>
               <footer>
                 <Footer />
               </footer>
