@@ -7,7 +7,7 @@ import {formatDate} from '../formatDate'
 import RouteDetails from './RouteDetails'
 
 export default function Climb (props){
-    const {baseURL} = props
+    const {baseURL, setCurrentClimb} = props
     const location = useLocation()
     const climbId = location.pathname.split('/')[2]
     const [climb, setClimb] = useState({});
@@ -21,10 +21,10 @@ export default function Climb (props){
             }
             const climb = await fetch(url, requestOptions).then(response => response.json())
             setClimb(climb)
-            props.setCurrentClimb(climb)
+            setCurrentClimb(climb)
         }
         getClimb()
-    }, []);
+    }, [baseURL,climbId,setCurrentClimb]);
 
     console.log(climb);
     if (climb.status === 404){
@@ -35,7 +35,7 @@ export default function Climb (props){
         climb.data? 
         <Container style={{minHeight:'90vh'}}>
         <BackButton/>
-            <Segment style={{width: '80%', maxWidth:'600px', margin: '0 auto 5vh auto', border:'none', padding: '0', boxShadow: 'none', backgroundColor: 'none'}}>
+            <Segment className='page-container'>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
                     {climb.data.route.name}
                 </Header>

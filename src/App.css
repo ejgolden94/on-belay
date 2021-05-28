@@ -69,6 +69,17 @@
   text-align: left;
   font-size: 0.9em;
 }
+
+.page-container {
+  width: 80% !important;
+  max-width: 600px !important;
+  margin: 2vh auto 5vh auto !important;
+  border:none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  background-color: none !important;
+}
+
 .five{
   background-color: rgb(25, 194, 81);
 }

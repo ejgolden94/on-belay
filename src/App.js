@@ -9,7 +9,7 @@ import ClimbRoute from './components/ClimbRoute'
 import Climbs from './components/Climbs'
 import Climb from './components/Climb'
 import Footer from './components/Footer'
-import EditClimbForm from './components/EditClimbForm';
+import ClimbForm from './components/ClimbForm';
 
 
 let baseURL = ''
@@ -106,7 +106,7 @@ function App() {
 
             {/* /// Edit Climb /// */}
             <Route path="/climbs/:climbId/edit">
-              <EditClimbForm baseURL={baseURL} climb={currentClimb.data}/>
+              <ClimbForm baseURL={baseURL} climb={currentClimb.data}/>
               <Footer />
             </Route>
 

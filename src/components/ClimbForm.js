@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Form} from 'semantic-ui-react'
+import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
+import BackButton from './BackButton'
 
 const climbTypeOptions = [
     { key: 'Sport', value: 'Sport', text: 'Sport' },
@@ -25,7 +26,7 @@ const climbTypeOptions = [
   ]
 
 
-export default class EditClimbForm extends Component {
+export default class ClimbForm extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -50,9 +51,13 @@ export default class EditClimbForm extends Component {
         })
     }
 
+
     render() {
-        console.log(this.state);
         return(
+            <Container style={{minHeight:'90vh'}}>
+            <BackButton/>
+            <Header as='h2'>Edit Climb Log</Header>
+            <Segment style={{margin: '2vh auto 5vh auto'}}>
             <Form>
                 <Form.Dropdown
                     placeholder={this.state.climb_type} 
@@ -105,7 +110,10 @@ export default class EditClimbForm extends Component {
                     value={this.state.time? this.state.time: 'No Time Recorded' }
                     onChange={this.handleChange}
                 />
+                <Button color='purple'>Submit Edits</Button>
             </Form>
+            </Segment>
+            </Container>
         )
     }
     
