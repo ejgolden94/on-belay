@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
 
@@ -29,14 +30,41 @@ const climbTypeOptions = [
 export default class ClimbForm extends Component {
     constructor(props) {
         super(props);
+        this.baseURL = this.props.baseURL
+        const image = this.props.climb.image? this.props.climb.image : 'No Image'
+        const notes = this.props.climb.notes? this.props.climb.notes : 'No Notes'
+        const time = this.props.climb.time? this.props.climb.time : 'No Time Recorded'
         this.state={
             climb_type: this.props.climb.climb_type,
             gym_outdoor: this.props.climb.gym_outdoor,
-            image: this.props.climb.image,
-            notes: this.props.climb.notes,
+            image: image,
+            notes: notes,
             performance: this.props.climb.performance,
-            time: this.props.climb.time
+            time: time,
+            success: false
         }
+    }
+
+    editClimb = async() => {
+        const url = this.baseURL + '/climbs/' + this.props.climb.id 
+        const body = this.state
+        delete body.success;
+
+        const requestOptions = {
+            method:'PUT',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        }
+
+        let editClimb = await fetch(url,requestOptions).then(response => response.json())
+        console.log(editClimb);
+        if (editClimb.status===200){
+            this.setState({
+                success: true
+            })
+        }
+        ;
     }
 
     handleChange = (event) => {
@@ -51,14 +79,22 @@ export default class ClimbForm extends Component {
         })
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.editClimb()
+    }
 
     render() {
+        console.log(this.state);
+        if (this.state.success){
+           return <Redirect to={'/climbs/'+this.props.climb.id} />
+        }
         return(
             <Container style={{minHeight:'90vh'}}>
             <BackButton/>
             <Header as='h2'>Edit Climb Log</Header>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
-            <Form>
+            <Form onSubmit={(event)=>this.handleSubmit(event)}>
                 <Form.Dropdown
                     placeholder={this.state.climb_type} 
                     fluid
@@ -84,13 +120,13 @@ export default class ClimbForm extends Component {
                     type='text'
                     name='image'
                     id='image'
-                    value={this.state.image? this.state.image: 'No Image' }
+                    value={this.state.image}
                     onChange={this.handleChange}
                 />
                 <Form.TextArea
                     name='notes'
                     id='notes'
-                    value={this.state.notes? this.state.notes: 'No Notes' }
+                    value={this.state.notes}
                     onChange={this.handleChange}
                 />
                 <Form.Dropdown
@@ -107,7 +143,7 @@ export default class ClimbForm extends Component {
                     type='number'
                     name='time'
                     id='time'
-                    value={this.state.time? this.state.time: 'No Time Recorded' }
+                    value={this.state.time}
                     onChange={this.handleChange}
                 />
                 <Button color='purple'>Submit Edits</Button>
