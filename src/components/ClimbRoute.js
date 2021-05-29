@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react' 
 import NotFound from './NotFound'
-import {Header, Image, Segment, Divider, Rating, Container} from 'semantic-ui-react'
-import {useLocation} from 'react-router-dom'
+import {Header, Image, Segment, Divider, Rating, Container, Button, Icon} from 'semantic-ui-react'
+import {useLocation, Link} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import ClimbCard from './ClimbCard'
 import BackButton from './BackButton'
@@ -12,7 +12,7 @@ export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
 
-    const {baseURL} = props
+    const {baseURL, setCurrentRoute} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
 
@@ -26,6 +26,7 @@ export default function ClimbRoute (props){
         let foundRoute = await fetch(url,requestOptions).then(response => response.json())
         console.log(foundRoute);
         setRoute(foundRoute)
+        setCurrentRoute(foundRoute)
     }
 
     const getUsersRouteClimbs = async () => {
@@ -76,6 +77,11 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
+                    <Button 
+                        inverted circular icon color='purple' className='float-right'
+                        as={Link} to={'/routes/'+route.data.id+'/edit'}>
+                        <Icon name='pencil'/>
+                    </Button>
                     <RouteDetails route={route.data} />
                     <div className='route-meta'>
                         <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
