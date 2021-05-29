@@ -35,7 +35,7 @@ export default function Climb (props){
         climb.data? 
         <Container style={{minHeight:'90vh'}}>
         <BackButton/>
-            <Segment className='page-container' style={{backgroundColor: 'rgba(0, 0, 0, 0)'}}>
+            <Segment className='page-container'>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
                     {climb.data.route.name}
                 </Header>
