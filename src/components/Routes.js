@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react' 
-import {Container, Header} from 'semantic-ui-react'
+import {Container, Header, Button, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import BackButton from './BackButton'
 import ClimbRouteCard from './ClimbRouteCard'
 
@@ -30,6 +31,9 @@ export default function Routes(props){
         {routes.map(route => 
             <ClimbRouteCard key={route.id} route={route}/>
         )}
+        <Button icon circular as={Link} to={'/routes/new'} color='purple'>
+            <Icon name='add'/>
+        </Button>
         </Container>
     )
 }

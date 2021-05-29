@@ -12,7 +12,7 @@ export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
 
-    const {baseURL} = props
+    const {baseURL, setCurrentRoute} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
 
@@ -26,6 +26,7 @@ export default function ClimbRoute (props){
         let foundRoute = await fetch(url,requestOptions).then(response => response.json())
         console.log(foundRoute);
         setRoute(foundRoute)
+        setCurrentRoute(foundRoute)
     }
 
     const getUsersRouteClimbs = async () => {
