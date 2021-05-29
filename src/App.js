@@ -70,7 +70,7 @@ function App() {
             {/* /// Edit Route /// */}
             <Route 
               path="/routes/:routeId/edit"
-              render={(props) => <RouteForm {...props} baseURL={baseURL} climb={currentRoute.data}/>}
+              render={(props) => <RouteForm {...props} baseURL={baseURL} route={currentRoute.data}/>}
             />
 
             {/* /// Show Route /// */}

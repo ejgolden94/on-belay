@@ -58,7 +58,7 @@ export default class ClimbForm extends Component {
                 rating=this.props.route.rating.slice(1)
             }else{
                 ratingPrefix = '5'
-                rating=this.props.route.rating.split('.')[1].slice(0,this.props.route.rating.length - 2)
+                rating=this.props.route.rating.split('.')[1].slice(0,this.props.route.rating.length - 3)
                 ratingSuffix=this.props.route.rating[this.props.route.rating.length - 1]
             }
 
@@ -132,7 +132,9 @@ export default class ClimbForm extends Component {
         const url = this.baseURL + '/routes/' + this.state.id 
 
         const body = this.state
-        body.rating = body.ratingPrefix + body.rating + body.ratingSuffix
+        body.rating =  body.ratingPrefix === 'V'? 
+            body.ratingPrefix + body.rating + body.ratingSuffix:
+            body.ratingPrefix + '.' + body.rating + body.ratingSuffix
         delete body.success
         delete body.context
         delete body.ratingPrefix
@@ -146,13 +148,13 @@ export default class ClimbForm extends Component {
             body: JSON.stringify(body)
         }
 
-        // const editRoute = await fetch(url,requestOptions).then(response => response.json())
-        // console.log(editRoute);
-        // if (editRoute.status===200){
-        //     this.setState({
-        //         success: true
-        //     })
-        // }
+        const editRoute = await fetch(url,requestOptions).then(response => response.json())
+        console.log(editRoute);
+        if (editRoute.status===200){
+            this.setState({
+                success: true
+            })
+        }
     }
 
     handleChange = (event) => {
@@ -257,6 +259,7 @@ export default class ClimbForm extends Component {
                 <Form.Dropdown
                     placeholder={this.state.ratingPrefix} 
                     fluid
+                    search
                     label='Rating Prefix'
                     selection
                     name='ratingPrefix'
@@ -270,6 +273,7 @@ export default class ClimbForm extends Component {
                     placeholder={this.state.rating} 
                     fluid
                     label='Rating'
+                    search
                     selection
                     name='rating'
                     id='rating'
@@ -281,6 +285,7 @@ export default class ClimbForm extends Component {
                 <Form.Dropdown
                     placeholder={this.state.ratingSuffix} 
                     fluid
+                    search
                     label='Rating Suffix'
                     selection
                     name='ratingSuffix'
