@@ -69,7 +69,7 @@ export default function ClimbRoute (props){
                 />
 
                 {/* ------------  Stats ----------- */}
-                <RouteStats />
+                <RouteStats climbs={climbs} route={route.data}/>
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
