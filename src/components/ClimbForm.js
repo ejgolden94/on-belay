@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Header, Button, Divider} from 'semantic-ui-react'
+import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
 
 const climbTypeOptions = [

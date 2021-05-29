@@ -23,7 +23,6 @@ export default function Routes(props){
         getRoutes()
     },[])
 
-    console.log(routes);
     return (
         <Container style={{margin:'0 auto', minHeight:'90vh'}}>
         <BackButton />

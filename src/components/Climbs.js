@@ -20,7 +20,7 @@ export default function Climbs(props) {
             setClimbs(climbs.data)
             }
         getClimbs()
-    },[])
+    },[baseURL])
 
     console.log(climbs);
     return (

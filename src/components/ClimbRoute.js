@@ -15,6 +15,7 @@ export default function ClimbRoute (props){
     const {baseURL, setCurrentRoute} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
+    const [seeAllClimbs, setSeeAllClimbs] = useState(false)
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -24,7 +25,6 @@ export default function ClimbRoute (props){
         }
     
         let foundRoute = await fetch(url,requestOptions).then(response => response.json())
-        console.log(foundRoute);
         setRoute(foundRoute)
         setCurrentRoute(foundRoute)
     }
@@ -36,7 +36,6 @@ export default function ClimbRoute (props){
             credentials: 'include'
         }
         const climbs = await fetch(url, requestOptions).then(response => response.json())
-        console.log(climbs);
         setClimbs(climbs.data)
     } 
 
@@ -49,7 +48,6 @@ export default function ClimbRoute (props){
         getUsersRouteClimbs()
     },[])
 
-    console.log(route);
     if(route.status === 404){
         return (
             <NotFound redirect='Routes' redirectTo='/routes'/>
@@ -96,7 +94,16 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>): ''}
+                    {!seeAllClimbs&&climbs? 
+                    <>
+                    {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
+                    <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(true)}>See All</Button>
+                    </>: ''}
+                    {seeAllClimbs&&climbs? 
+                    <>
+                    {climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
+                    <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
+                    </>: ''}
                 </Container>
 
                 {/* ------------  COMMENTS ----------- */}
