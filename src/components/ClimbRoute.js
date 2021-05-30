@@ -9,9 +9,8 @@ import {Header,
      Button, 
      Icon, 
      Menu, 
-     Dropdown,
      Sidebar} from 'semantic-ui-react'
-import {useLocation, Link} from 'react-router-dom'
+import {useLocation, Link, Redirect} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import ClimbCard from './ClimbCard'
 import BackButton from './BackButton'
@@ -27,6 +26,7 @@ export default function ClimbRoute (props){
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
     const [visible, setVisible] = useState(false)
+    const [deleted, setDeleted] = useState(false)
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -58,6 +58,17 @@ export default function ClimbRoute (props){
         setVisible(!visible)
     }
 
+    const deleteRoute = async() => {
+        const url= baseURL+'/routes/' + route.data.id 
+        const requestOptions = {
+            method: 'DELETE',
+            credentials: 'include'
+        }
+        const deletedRoute = await fetch(url, requestOptions).then(response => response.json())
+        console.log(deletedRoute)
+        setDeleted(true)
+    }
+
     useEffect(()=> {
         getRoute()
         getUsersRouteClimbs()
@@ -67,6 +78,8 @@ export default function ClimbRoute (props){
         return (
             <NotFound redirect='Routes' redirectTo='/routes'/>
         )
+    } else if (deleted){
+        return <Redirect to='/routes/'/>
     } else {
         return(
             route.data?
@@ -90,18 +103,13 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    <Button 
-                        inverted circular icon color='purple' className='float-right'
-                        as={Link} to={'/routes/'+route.data.id+'/edit'}>
-                        <Icon name='pencil'/>
-                    </Button>
                     <Sidebar
                         as={Menu}
                         animation='overlay'
                         icon='sidebar'
                         direction='right'
                         inverted
-                        onHide={() => setVisible(false)}
+                        color='teal'
                         vertical
                         visible={visible}
                         width='thin'
