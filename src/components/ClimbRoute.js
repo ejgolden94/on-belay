@@ -5,8 +5,9 @@ import {Header,
         Divider, 
         Rating, 
         Container, 
-        Button} from 'semantic-ui-react'
-import {Link, useLocation} from 'react-router-dom'
+        Button,
+        Message} from 'semantic-ui-react'
+import {Link, Route, useLocation} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
@@ -76,6 +77,9 @@ export default function ClimbRoute (props){
                 {/* ------------  Stats ----------- */}
                 <RouteStats climbs={climbs} route={route.data}/>
 
+                {/* ------------  Announcements ----------- */}
+                {route.data.announcement? <Message color='orange'>{route.data.announcement}</Message>:''}
+                
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>

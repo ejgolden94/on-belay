@@ -1,5 +1,5 @@
 import React, {useState} from 'react' 
-import {Button, Menu, Sidebar, Icon, Modal} from 'semantic-ui-react'
+import {Button, Menu, Sidebar, Icon, Modal, Form, FormInput} from 'semantic-ui-react'
 import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
@@ -8,6 +8,8 @@ export default function RouteSidebar (props){
     const [visible, setVisible] = useState(false)
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
+    const [announceModalOpen, setAnnounceModalOpen] = useState(false)
+    const [announcement, setAnnouncement] = useState(route.announcement)
 
     const toggleVisible = () => {
         setVisible(!visible)
@@ -15,6 +17,22 @@ export default function RouteSidebar (props){
 
     const toggleModalOpen = () => {
         setModalOpen(!modalOpen)
+    }
+
+    const toggleAnnounceModalOpen = () => {
+        setAnnounceModalOpen(!announceModalOpen)
+    }
+
+    const addAnnouncement = async() => {
+        const url= baseURL+'/routes/' + props.route.id 
+        const body = JSON.stringify({announcement: announcement})
+        const requestOptions = {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {'Content-Type':'application/json'},
+            body: body
+        }
+        const route = await fetch(url, requestOptions).then(request => request.json())
     }
 
     const deleteRoute = async() => {
@@ -26,6 +44,10 @@ export default function RouteSidebar (props){
         const deletedRoute = await fetch(url, requestOptions).then(response => response.json())
         console.log(deletedRoute)
         setDeleted(true)
+    }
+
+    const handleChange = (event) => {
+        setAnnouncement(event.target.value)
     }
     
     if (deleted){
@@ -56,9 +78,13 @@ export default function RouteSidebar (props){
                 <Icon name='flag' style={{margin:'1vh auto'}}/>
                 Flag For Abuse
                 </Menu.Item>
-                <Menu.Item>
-                <Icon name='announcement' style={{margin:'1vh auto'}}/>
+                <Menu.Item onClick={()=>toggleAnnounceModalOpen()}>
+                <Icon name='microphone' style={{margin:'1vh auto'}}/>
                 Make an Announcement
+                </Menu.Item>
+                <Menu.Item>
+                <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
+                Remove Announcement
                 </Menu.Item>
             </Sidebar>
             <Button icon inverted className='menu-btn' onClick={()=>toggleVisible()}>
@@ -80,6 +106,34 @@ export default function RouteSidebar (props){
                 </Button>
                 <Button positive onClick={() => deleteRoute()}>
                     Yes
+                </Button>
+                </Modal.Actions>
+            </Modal>
+
+            <Modal
+                size='mini'
+                open={announceModalOpen}
+                >
+                <Modal.Header>Make an Announcement on this Route</Modal.Header>
+                <Modal.Content>
+                <h3>Hey! What's your announcement?</h3>
+                <Form>
+                    <Form.TextArea 
+                        label='Announcement Text'
+                        id='announcement'
+                        onChange={(event)=>handleChange(event)}
+                    />
+                </Form>
+                </Modal.Content>
+                <Modal.Actions>
+                <Button negative onClick={() => toggleAnnounceModalOpen()}>
+                    Cancel
+                </Button>
+                <Button positive onClick={() => {
+                    addAnnouncement() 
+                    toggleAnnounceModalOpen()
+                    }}>
+                    Announce
                 </Button>
                 </Modal.Actions>
             </Modal>
