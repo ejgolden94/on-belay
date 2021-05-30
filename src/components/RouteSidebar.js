@@ -35,6 +35,19 @@ export default function RouteSidebar (props){
         const route = await fetch(url, requestOptions).then(request => request.json())
     }
 
+    const removeAnnouncement = async() => {
+        const url= baseURL+'/routes/' + props.route.id 
+        const body = JSON.stringify({announcement: ''})
+        const requestOptions = {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {'Content-Type':'application/json'},
+            body: body
+        }
+        const route = await fetch(url, requestOptions).then(request => request.json())
+        setAnnouncement('')
+    }
+
     const deleteRoute = async() => {
         const url= baseURL+'/routes/' + route.id 
         const requestOptions = {
@@ -82,7 +95,7 @@ export default function RouteSidebar (props){
                 <Icon name='microphone' style={{margin:'1vh auto'}}/>
                 Make an Announcement
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item onClick={()=>removeAnnouncement()}>
                 <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
                 Remove Announcement
                 </Menu.Item>
