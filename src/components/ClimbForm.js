@@ -65,6 +65,9 @@ export default class ClimbForm extends Component {
     editClimb = async() => {
         const url = this.baseURL + '/climbs/' + this.state.id 
         const body = this.state
+        if(body.image === 'No Image') { delete body.image }
+        if(body.notes === 'No Notes') { delete body.notes }
+        if(body.time === 'No Time Recorded') { delete body.time }
         delete body.success;
         delete body.context;
 
