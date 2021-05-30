@@ -1,21 +1,19 @@
 import React, {useState, useEffect} from 'react' 
-import NotFound from './NotFound'
 import {Header,
-     Image, 
-     Segment,
-     Divider, 
-     Rating, 
-     Container, 
-     Button, 
-     Icon, 
-     Menu, 
-     Sidebar} from 'semantic-ui-react'
-import {useLocation, Link, Redirect} from 'react-router-dom'
+        Image, 
+        Segment,
+        Divider, 
+        Rating, 
+        Container, 
+        Button} from 'semantic-ui-react'
+import {useLocation} from 'react-router-dom'
 import {formatDate} from '../formatDate'
+import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
 import BackButton from './BackButton'
 import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
+import RouteSidebar from './RouteSidebar'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -25,8 +23,6 @@ export default function ClimbRoute (props){
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
-    const [visible, setVisible] = useState(false)
-    const [deleted, setDeleted] = useState(false)
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -54,21 +50,6 @@ export default function ClimbRoute (props){
 
     }
 
-    const toggleVisible = () => {
-        setVisible(!visible)
-    }
-
-    const deleteRoute = async() => {
-        const url= baseURL+'/routes/' + route.data.id 
-        const requestOptions = {
-            method: 'DELETE',
-            credentials: 'include'
-        }
-        const deletedRoute = await fetch(url, requestOptions).then(response => response.json())
-        console.log(deletedRoute)
-        setDeleted(true)
-    }
-
     useEffect(()=> {
         getRoute()
         getUsersRouteClimbs()
@@ -78,8 +59,6 @@ export default function ClimbRoute (props){
         return (
             <NotFound redirect='Routes' redirectTo='/routes'/>
         )
-    } else if (deleted){
-        return <Redirect to='/routes/'/>
     } else {
         return(
             route.data?
@@ -96,6 +75,7 @@ export default function ClimbRoute (props){
 
                 {/* ------------  Stats ----------- */}
                 <RouteStats climbs={climbs} route={route.data}/>
+
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
@@ -103,29 +83,7 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    <Sidebar
-                        as={Menu}
-                        animation='overlay'
-                        icon='sidebar'
-                        direction='right'
-                        inverted
-                        color='teal'
-                        vertical
-                        visible={visible}
-                        width='thin'
-                    >
-                        <Menu.Item as={Link} to={`/routes/${route.data.id}/edit`}>
-                        <Icon name='pencil'/>
-                        Edit
-                        </Menu.Item>
-                        <Menu.Item onClick={()=>deleteRoute()}>
-                        <Icon name='delete' />
-                        Delete
-                        </Menu.Item>
-                    </Sidebar>
-                    <Button icon inverted className='menu-btn' onClick={()=>toggleVisible()}>
-                        <Icon name='sidebar' />
-                    </Button>
+                    <RouteSidebar baseURL={baseURL} route={route.data}/>
                     <RouteDetails route={route.data} />
                     <div className='route-meta'>
                         <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
@@ -156,10 +114,8 @@ export default function ClimbRoute (props){
                     {climbs.length === 0 ? 
                     <>
                         <Header as='h4'>You Haven't Climbed This Route Yet</Header>
-                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Log a Climb</Button>
+                        <Button inverted size='mini' color='purple'>Log a Climb</Button>
                     </>: ''}
-
-
                 </Container>
 
                 {/* ------------  COMMENTS ----------- */}
@@ -169,12 +125,12 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 {/* add comment s component right here */}
-                    <Segment rounded style={{display:'flex', width:'80%', margin:'0 auto'}}>
+                    <Segment style={{display:'flex', width:'80%', margin:'0 auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 1</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>I have a lot to say a bout this route...</Segment>
                         <Rating defaultRating={3} maxRating={5} disabled={true} clearable onRate={handleRate}/>
                     </Segment>
-                    <Segment rounded style={{display:'flex', width:'80%', margin:'20px auto'}}>
+                    <Segment style={{display:'flex', width:'80%', margin:'20px auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 2</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>Same...</Segment>
                         <Rating defaultRating={3} maxRating={5} disabled clearable onRate={handleRate}/>

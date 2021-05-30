@@ -1,5 +1,5 @@
 import React from 'react' 
-import {Icon, Card, Image, Segment, Header} from 'semantic-ui-react'
+import {Icon, Card, Image} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 export default function ClimbRoute (props) {
