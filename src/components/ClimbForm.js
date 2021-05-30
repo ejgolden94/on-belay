@@ -55,7 +55,7 @@ export default class ClimbForm extends Component {
                 performance: '',
                 time: 0,
                 id:'',
-                route: 1,
+                route: this.props.route.id,
                 success: false,
                 context: context
             }

@@ -6,7 +6,7 @@ import {Header,
         Rating, 
         Container, 
         Button} from 'semantic-ui-react'
-import {useLocation} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
@@ -114,8 +114,10 @@ export default function ClimbRoute (props){
                     {climbs.length === 0 ? 
                     <>
                         <Header as='h4'>You Haven't Climbed This Route Yet</Header>
-                        <Button inverted size='mini' color='purple'>Log a Climb</Button>
                     </>: ''}
+                    <Button inverted size='mini' color='purple' as={Link} to='/climbs/new'>
+                        Log a Climb
+                    </Button>
                 </Container>
 
                 {/* ------------  COMMENTS ----------- */}
@@ -124,7 +126,7 @@ export default function ClimbRoute (props){
                         Comments
                     </Header>
                 </Divider>
-                {/* add comment s component right here */}
+                {/* add comments component right here */}
                     <Segment style={{display:'flex', width:'80%', margin:'0 auto'}}>
                         <Segment circular style={{height:'75px', width: '75px'}}>User 1</Segment>
                         <Segment style={{border:'none', boxShadow:'none'}}>I have a lot to say a bout this route...</Segment>
