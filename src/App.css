@@ -44,6 +44,14 @@
   /* z-index: -1; */
 }
 
+.menu-btn {
+  position: absolute;
+  right: 10px;
+  top: 8vh;
+  border: none !important;
+  /* z-index: -1; */
+}
+
 .float-right {
   float: right;
 }

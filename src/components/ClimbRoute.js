@@ -1,6 +1,16 @@
 import React, {useState, useEffect} from 'react' 
 import NotFound from './NotFound'
-import {Header, Image, Segment, Divider, Rating, Container, Button, Icon} from 'semantic-ui-react'
+import {Header,
+     Image, 
+     Segment,
+     Divider, 
+     Rating, 
+     Container, 
+     Button, 
+     Icon, 
+     Menu, 
+     Dropdown,
+     Sidebar} from 'semantic-ui-react'
 import {useLocation, Link} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import ClimbCard from './ClimbCard'
@@ -16,6 +26,7 @@ export default function ClimbRoute (props){
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
+    const [visible, setVisible] = useState(false)
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -41,6 +52,10 @@ export default function ClimbRoute (props){
 
     const handleRate = () =>{
 
+    }
+
+    const toggleVisible = () => {
+        setVisible(!visible)
     }
 
     useEffect(()=> {
@@ -80,6 +95,29 @@ export default function ClimbRoute (props){
                         as={Link} to={'/routes/'+route.data.id+'/edit'}>
                         <Icon name='pencil'/>
                     </Button>
+                    <Sidebar
+                        as={Menu}
+                        animation='overlay'
+                        icon='sidebar'
+                        direction='right'
+                        inverted
+                        onHide={() => setVisible(false)}
+                        vertical
+                        visible={visible}
+                        width='thin'
+                    >
+                        <Menu.Item as={Link} to={`/routes/${route.data.id}/edit`}>
+                        <Icon name='pencil'/>
+                        Edit
+                        </Menu.Item>
+                        <Menu.Item onClick={()=>deleteRoute()}>
+                        <Icon name='delete' />
+                        Delete
+                        </Menu.Item>
+                    </Sidebar>
+                    <Button icon inverted className='menu-btn' onClick={()=>toggleVisible()}>
+                        <Icon name='sidebar' />
+                    </Button>
                     <RouteDetails route={route.data} />
                     <div className='route-meta'>
                         <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
@@ -94,16 +132,26 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    {!seeAllClimbs&&climbs? 
+                    {/* Shows 2 climbs and a button to expand */}
+                    {!seeAllClimbs&&climbs.length > 0 ? 
                     <>
-                    {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
-                    <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(true)}>See All</Button>
+                        {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
+                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(true)}>See All</Button>
                     </>: ''}
-                    {seeAllClimbs&&climbs? 
+                    {/* Shows All climbs and a button to collapse */}
+                    {seeAllClimbs&&climbs.length > 0? 
                     <>
-                    {climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
-                    <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
+                        {climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
+                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
                     </>: ''}
+                    {/* Shows That you havent climbed this route yet */}
+                    {climbs.length === 0 ? 
+                    <>
+                        <Header as='h4'>You Haven't Climbed This Route Yet</Header>
+                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Log a Climb</Button>
+                    </>: ''}
+
+
                 </Container>
 
                 {/* ------------  COMMENTS ----------- */}
