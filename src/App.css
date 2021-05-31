@@ -73,10 +73,28 @@
 }
 
 .circle {
-  border-radius: 50%;
+  border-radius: 50% !important;
+  display: flex !important; 
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.climb-type-container{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.climb-type{
+  height:'25vh' !important;
+  width:'calc(25vh)' !important;
+}
+
+.outdoor {
+
+}
+.indoor {
+  
 }
 
 .route-meta{

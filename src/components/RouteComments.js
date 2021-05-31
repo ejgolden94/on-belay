@@ -38,7 +38,7 @@ export default function RouteComments(props){
         }
         const postedComment = await fetch(url,requestOptions).then(response => response.json())
         const commentsCopy = comments
-        commentsCopy.push(postedComment.data)
+        commentsCopy.unshift(postedComment.data)
         setcomments(commentsCopy)
         setnewComment('')
     }
@@ -46,21 +46,20 @@ export default function RouteComments(props){
     let limit = 2
     if(seeAll){ limit = comments.length }
 
-    console.log("rendering route comments")
-    console.log(comments)
     return(
         <Container style={{textAlign:'left'}}>
         {!seeAll?
         <Button as='a' size='mini' color='purple'  onClick={()=>setSeeAll(true)}>See All Comments</Button> : 
         <Button as='a' size='mini' color='purple'  onClick={()=>setSeeAll(false)}>Collapse Comments</Button> }
+        <Comment.Group>
         {comments.slice(0,limit).map(comment => {
             return(
             <Comment key={comment.id} style={{marginTop: '2vh'}}>
             <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
             <Comment.Content>
-                <Comment.Author>{comment.creator.username}</Comment.Author>
+                <Comment.Author as='a'>{comment.creator.username}</Comment.Author>
                 <Comment.Metadata>
-                {formatDate(comment.created, 'time')}
+                    <div>{formatDate(comment.created, 'time')}</div>
                 </Comment.Metadata>
                 <Comment.Text>{comment.text}</Comment.Text>
             </Comment.Content>
@@ -75,6 +74,7 @@ export default function RouteComments(props){
                 />
             <Form.Button fluid={true} size='mini' color='purple' content='Add Reply'/>
         </Form>
+        </Comment.Group>
         </Container>
     )
 }

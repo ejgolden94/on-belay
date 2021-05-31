@@ -5,19 +5,19 @@ import { Container, Segment } from 'semantic-ui-react'
 export default function CreateClimb(props){
     const {setClimbSetting} = props
     return(
-        <Container>
+        <Container className='climb-type-container'>
             <Segment 
                 as={Link}
                 to='/routes'
                 onClick={()=>{setClimbSetting('Outdoor')}} 
-                className='outdoor'
+                className='outdoor circle climb-type'
                 >
                 Outdoor 
             </Segment>
             <Segment 
                 as={Link}
                 to='/climbs/new'
-                className='indoor' 
+                className='indoor circle climb-type' 
                 onClick={()=>{setClimbSetting('Gym')}}
                 >
                 Indoor 
