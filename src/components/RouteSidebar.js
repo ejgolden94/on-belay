@@ -8,8 +8,8 @@ export default function RouteSidebar (props){
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [announceModalOpen, setAnnounceModalOpen] = useState(false)
+    const [removeAnnounceModalOpen, setRemoveAnnounceModalOpen] = useState(false)
     
-
     const toggleVisible = () => {
         setVisible(!visible)
     }
@@ -20,6 +20,10 @@ export default function RouteSidebar (props){
 
     const toggleAnnounceModalOpen = () => {
         setAnnounceModalOpen(!announceModalOpen)
+    }
+
+    const toggleRemoveAnnounceModalOpen = () => {
+        setRemoveAnnounceModalOpen(!removeAnnounceModalOpen)
     }
 
     const addAnnouncement = async() => {
@@ -94,7 +98,7 @@ export default function RouteSidebar (props){
                     <Icon name='microphone' style={{margin:'1vh auto'}}/>
                     Make an Announcement
                 </Menu.Item>
-                <Menu.Item onClick={()=>removeAnnouncement()}>
+                <Menu.Item onClick={()=>toggleRemoveAnnounceModalOpen()}>
                     <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
                     Remove Announcement
                 </Menu.Item>
@@ -151,6 +155,28 @@ export default function RouteSidebar (props){
                     toggleAnnounceModalOpen()
                     }}>
                     Announce
+                </Button>
+                </Modal.Actions>
+            </Modal>
+
+            <Modal
+                size='mini'
+                open={removeAnnounceModalOpen}
+                >
+                <Modal.Header>Remove the Announcement on this Route</Modal.Header>
+                <Modal.Content>
+                <h4>Are you sure you what to remove the current announcement? :</h4>
+                <p>"{announcement}"</p>
+                </Modal.Content>
+                <Modal.Actions>
+                <Button negative onClick={() => toggleRemoveAnnounceModalOpen()}>
+                    Cancel
+                </Button>
+                <Button positive onClick={() => {
+                    removeAnnouncement() 
+                    toggleRemoveAnnounceModalOpen()
+                    }}>
+                    Remove Announcement
                 </Button>
                 </Modal.Actions>
             </Modal>
