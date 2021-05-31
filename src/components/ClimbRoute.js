@@ -26,6 +26,8 @@ export default function ClimbRoute (props){
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
     const [announcement, setAnnouncement] = useState('')
     const [visible, setVisible] = useState(false)
+    const [comments, setcomments] = useState([]);
+    const [newComment, setnewComment] = useState('');
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -49,7 +51,7 @@ export default function ClimbRoute (props){
         const climbs = await fetch(url, requestOptions).then(response => response.json())
         setClimbs(climbs.data)
     } 
-    
+
     useEffect(()=> {
         getRoute()
         getUsersRouteClimbs()
@@ -60,6 +62,8 @@ export default function ClimbRoute (props){
             <NotFound redirect='Routes' redirectTo='/routes'/>
         )
     } else {
+        console.log(comments)
+        console.log("rendering climb route")
         return(
             route.data?
             <>
@@ -153,6 +157,10 @@ export default function ClimbRoute (props){
                 <RouteComments 
                     baseURL={baseURL}
                     routeId={route.data.id}
+                    comments={comments}
+                    setcomments={setcomments}
+                    newComment={newComment}
+                    setnewComment={setnewComment}
                 />
 
             </Segment>
