@@ -24,6 +24,7 @@ export default function ClimbRoute (props){
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
+    const [announcement, setAnnouncement] = useState('')
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -35,6 +36,7 @@ export default function ClimbRoute (props){
         let foundRoute = await fetch(url,requestOptions).then(response => response.json())
         setRoute(foundRoute)
         setCurrentRoute(foundRoute)
+        setAnnouncement(foundRoute.data.announcement)
     }
 
     const getUsersRouteClimbs = async () => {
@@ -73,13 +75,14 @@ export default function ClimbRoute (props){
                     src={route.data.image? route.data.image:'/climb-route-stock.jpeg' } 
                     style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
                 />
+                <RouteSidebar baseURL={baseURL} route={route.data} setAnnouncement={setAnnouncement} announcement={announcement}/>
 
                 {/* ------------  Stats ----------- */}
                 <RouteStats climbs={climbs} route={route.data}/>
 
                 {/* ------------  Announcements ----------- */}
-                {route.data.announcement? <Message color='orange'>{route.data.announcement}</Message>:''}
-                
+                {announcement? <Message color='orange'>{announcement}</Message>:''}
+
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>
                     <Header as='h3'>
@@ -87,7 +90,6 @@ export default function ClimbRoute (props){
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    <RouteSidebar baseURL={baseURL} route={route.data}/>
                     <RouteDetails route={route.data} />
                     <div className='route-meta'>
                         <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>

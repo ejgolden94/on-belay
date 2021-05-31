@@ -4,12 +4,12 @@ import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
 
-    const {baseURL, route} = props
+    const {baseURL, route, setAnnouncement, announcement} = props
     const [visible, setVisible] = useState(false)
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [announceModalOpen, setAnnounceModalOpen] = useState(false)
-    const [announcement, setAnnouncement] = useState(route.announcement)
+    
 
     const toggleVisible = () => {
         setVisible(!visible)
@@ -134,6 +134,7 @@ export default function RouteSidebar (props){
                     <Form.TextArea 
                         label='Announcement Text'
                         id='announcement'
+                        value={announcement}
                         onChange={(event)=>handleChange(event)}
                     />
                 </Form>
