@@ -3,11 +3,10 @@ import {Header,
         Image, 
         Segment,
         Divider, 
-        Rating, 
         Container, 
         Button,
         Message} from 'semantic-ui-react'
-import {Link, Route, useLocation} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {formatDate} from '../formatDate'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
@@ -15,6 +14,7 @@ import BackButton from './BackButton'
 import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
 import RouteSidebar from './RouteSidebar'
+import RouteComments from './RouteComments'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -49,11 +49,7 @@ export default function ClimbRoute (props){
         const climbs = await fetch(url, requestOptions).then(response => response.json())
         setClimbs(climbs.data)
     } 
-
-    const handleRate = () =>{
-
-    }
-
+    
     useEffect(()=> {
         getRoute()
         getUsersRouteClimbs()
@@ -67,6 +63,9 @@ export default function ClimbRoute (props){
         return(
             route.data?
             <>
+            {/* ------------------------------- */}
+            {/* ------------ Header ----------- */}
+            {/* ------------------------------- */}
             <BackButton />
             <Segment className='page-container'>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
@@ -86,13 +85,19 @@ export default function ClimbRoute (props){
                     setVisible={setVisible}
                     />
 
-                {/* ------------  Stats ----------- */}
+                {/* ------------------------------- */}
+                {/* ------------ Stats ------------ */}
+                {/* ------------------------------- */}
                 <RouteStats climbs={climbs} route={route.data}/>
 
+                {/* --------------------------------------- */}
                 {/* ------------  Announcements ----------- */}
+                {/* --------------------------------------- */}
                 {announcement? <Message color='orange' style={{margin:'0'}}>{announcement}</Message>:''}
 
+                {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
+                {/* ------------------------------------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Description
@@ -106,7 +111,9 @@ export default function ClimbRoute (props){
                     </div>
                 </Container>
 
+                {/* ------------------------------------- */}
                 {/* ------------  YOUR CLIMBS ----------- */}
+                {/* ------------------------------------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Your Climbs
@@ -134,25 +141,20 @@ export default function ClimbRoute (props){
                         Log a Climb
                     </Button>
                 </Container>
-
+                 
+                {/* ---------------------------------- */}
                 {/* ------------  COMMENTS ----------- */}
+                {/* ---------------------------------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Comments
                     </Header>
                 </Divider>
-                {/* add comments component right here */}
-                    <Segment style={{display:'flex', width:'80%', margin:'0 auto'}}>
-                        <Segment circular style={{height:'75px', width: '75px'}}>User 1</Segment>
-                        <Segment style={{border:'none', boxShadow:'none'}}>I have a lot to say a bout this route...</Segment>
-                        <Rating defaultRating={3} maxRating={5} disabled={true} clearable onRate={handleRate}/>
-                    </Segment>
-                    <Segment style={{display:'flex', width:'80%', margin:'20px auto'}}>
-                        <Segment circular style={{height:'75px', width: '75px'}}>User 2</Segment>
-                        <Segment style={{border:'none', boxShadow:'none'}}>Same...</Segment>
-                        <Rating defaultRating={3} maxRating={5} disabled clearable onRate={handleRate}/>
-                    </Segment>
-                    
+                <RouteComments 
+                    baseURL={baseURL}
+                    routeId={route.data.id}
+                />
+
             </Segment>
             </>
             :''
