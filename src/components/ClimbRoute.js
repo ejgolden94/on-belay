@@ -25,6 +25,7 @@ export default function ClimbRoute (props){
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
     const [announcement, setAnnouncement] = useState('')
+    const [visible, setVisible] = useState(false)
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -74,14 +75,22 @@ export default function ClimbRoute (props){
                 <Image 
                     src={route.data.image? route.data.image:'/climb-route-stock.jpeg' } 
                     style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
+                    onClick={()=>setVisible(false)}
                 />
-                <RouteSidebar baseURL={baseURL} route={route.data} setAnnouncement={setAnnouncement} announcement={announcement}/>
+                <RouteSidebar 
+                    baseURL={baseURL} 
+                    route={route.data} 
+                    setAnnouncement={setAnnouncement} 
+                    announcement={announcement}
+                    visible={visible}
+                    setVisible={setVisible}
+                    />
 
                 {/* ------------  Stats ----------- */}
                 <RouteStats climbs={climbs} route={route.data}/>
 
                 {/* ------------  Announcements ----------- */}
-                {announcement? <Message color='orange'>{announcement}</Message>:''}
+                {announcement? <Message color='orange' style={{margin:'0'}}>{announcement}</Message>:''}
 
                 {/* ------------  Description ----------- */}
                 <Divider horizontal>

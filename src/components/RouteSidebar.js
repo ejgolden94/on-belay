@@ -4,8 +4,7 @@ import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
 
-    const {baseURL, route, setAnnouncement, announcement} = props
-    const [visible, setVisible] = useState(false)
+    const {baseURL, route, setAnnouncement, announcement, visible, setVisible} = props
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [announceModalOpen, setAnnounceModalOpen] = useState(false)
@@ -81,23 +80,27 @@ export default function RouteSidebar (props){
             >
                 <Menu.Item as={Link} to={`/routes/${route.id}/edit`}>
                 <Icon name='pencil' style={{margin:'1vh auto'}}/>
-                Edit
-                </Menu.Item>
+                    Edit
+                    </Menu.Item>
                 <Menu.Item onClick={()=>toggleModalOpen()}>
                 <Icon name='delete' style={{margin:'1vh auto'}}/>
-                Delete
-                </Menu.Item>
+                    Delete
+                    </Menu.Item>
                 <Menu.Item>
                 <Icon name='flag' style={{margin:'1vh auto'}}/>
-                Flag For Abuse
-                </Menu.Item>
+                    Flag For Abuse
+                    </Menu.Item>
                 <Menu.Item onClick={()=>toggleAnnounceModalOpen()}>
-                <Icon name='microphone' style={{margin:'1vh auto'}}/>
-                Make an Announcement
+                    <Icon name='microphone' style={{margin:'1vh auto'}}/>
+                    Make an Announcement
                 </Menu.Item>
                 <Menu.Item onClick={()=>removeAnnouncement()}>
-                <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
-                Remove Announcement
+                    <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
+                    Remove Announcement
+                </Menu.Item>
+                <Menu.Item onClick={()=>toggleVisible()}>
+                    <Icon name='arrow right' style={{margin:'1vh auto'}}/>
+                    Collapse Menu
                 </Menu.Item>
             </Sidebar>
             <Button icon inverted className='menu-btn' onClick={()=>toggleVisible()}>
