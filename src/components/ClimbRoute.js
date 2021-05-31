@@ -27,7 +27,6 @@ export default function ClimbRoute (props){
     const [announcement, setAnnouncement] = useState('')
     const [visible, setVisible] = useState(false)
     const [comments, setcomments] = useState([]);
-    const [newComment, setnewComment] = useState('');
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -160,8 +159,6 @@ export default function ClimbRoute (props){
                     routeId={route.data.id}
                     comments={comments}
                     setcomments={setcomments}
-                    newComment={newComment}
-                    setnewComment={setnewComment}
                 />
 
             </Segment>

@@ -3,7 +3,8 @@ import {Button, Comment, Container, Form} from 'semantic-ui-react'
 import {formatDate} from '../formatDate'
 
 export default function RouteComments(props){
-    const {baseURL, routeId, comments, setcomments, newComment, setnewComment} = props
+    const {baseURL, routeId, comments, setcomments} = props
+    const [newComment, setnewComment] = useState('')
     const [seeAll, setSeeAll] = useState(false)
 
     useEffect(()=>{
