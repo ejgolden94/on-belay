@@ -22,6 +22,18 @@ export default function RouteComments(props){
 
     console.log(comments)
     return(
-        'hey'
+        comments.map(comment => {
+            return(
+            <Comment>
+            <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+            <Comment.Content>
+                <Comment.Author>{comment.creator.username}</Comment.Author>
+                <Comment.Metadata>
+                {formatDate(comment.created, 'time')}
+                </Comment.Metadata>
+                <Comment.Text>{comment.text}</Comment.Text>
+            </Comment.Content>
+            </Comment>
+        )})
     )
 }
