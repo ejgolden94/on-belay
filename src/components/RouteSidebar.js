@@ -1,5 +1,5 @@
 import React, {useState} from 'react' 
-import {Button, Menu, Sidebar, Icon, Modal, Form, FormInput} from 'semantic-ui-react'
+import {Button, Menu, Sidebar, Icon, Modal, Form} from 'semantic-ui-react'
 import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
@@ -35,7 +35,7 @@ export default function RouteSidebar (props){
             headers: {'Content-Type':'application/json'},
             body: body
         }
-        const route = await fetch(url, requestOptions).then(request => request.json())
+        await fetch(url, requestOptions).then(request => request.json())
     }
 
     const removeAnnouncement = async() => {
@@ -47,7 +47,7 @@ export default function RouteSidebar (props){
             headers: {'Content-Type':'application/json'},
             body: body
         }
-        const route = await fetch(url, requestOptions).then(request => request.json())
+        await fetch(url, requestOptions).then(request => request.json())
         setAnnouncement('')
     }
 
