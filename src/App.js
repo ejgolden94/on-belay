@@ -11,6 +11,7 @@ import Climb from './components/Climb'
 import Footer from './components/Footer'
 import ClimbForm from './components/ClimbForm';
 import RouteForm from './components/RouteForm';
+import CreateClimb from './components/CreateClimb';
 
 
 let baseURL = ''
@@ -25,6 +26,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState('')
   const [currentClimb, setCurrentClimb] = useState({})
   const [currentRoute, setCurrentRoute] = useState({})
+  const [climbSetting, setClimbSetting] = useState('')
 
   const getUsers = async() => {
     const url = baseURL+'/users/'
@@ -43,6 +45,7 @@ function App() {
   },[])
 
   console.log(currentUser);
+  console.log(climbSetting)
   return (
     <div className="App" style={{margin:'0', padding: '0'}}>
       <BrowserRouter>
@@ -64,7 +67,7 @@ function App() {
             {/* /// Create Route /// */}
             <Route 
               path="/routes/new"
-              render={(props) => <RouteForm {...props} baseURL={baseURL} currentUser={currentUser}/>}
+              render={(props) => <RouteForm {...props} baseURL={baseURL} currentUser={currentUser} climbSetting={climbSetting}/>}
             />
 
             {/* /// Edit Route /// */}
@@ -75,7 +78,7 @@ function App() {
 
             {/* /// Show Route /// */}
             <Route path="/routes/:routeId">
-              <ClimbRoute baseURL={baseURL} setCurrentRoute={setCurrentRoute}/>
+              <ClimbRoute baseURL={baseURL} setCurrentRoute={setCurrentRoute} setClimbSetting={setClimbSetting}/>
               <Footer />
             </Route>
 
@@ -84,11 +87,17 @@ function App() {
               <Routes baseURL={baseURL}/>
               <Footer />
             </Route>
+            
+            {/* /// Create Climb /// */}
+            <Route 
+              path="/climbs/type"
+              render={(props) => <CreateClimb {...props} setClimbSetting={setClimbSetting}/>}
+            />
 
             {/* /// Create Climb /// */}
             <Route 
               path="/climbs/new"
-              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser} route={currentRoute.data}/>}
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser} route={currentRoute.data} climbSetting={climbSetting} />}
             />
 
             {/* /// Edit Climb /// */}
@@ -121,6 +130,7 @@ function App() {
               <Container style={{ height:'90vh'}}>
                 <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
                 <Button as={Link} to='/routes'>See Routes</Button>
+                <Button as={Link} to='/climbs/type'>Create Climb</Button>
               </Container>
               <footer>
                 <Footer style={{margin:'0', padding: '0'}}/>

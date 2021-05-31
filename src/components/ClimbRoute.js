@@ -20,7 +20,7 @@ export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
 
-    const {baseURL, setCurrentRoute} = props
+    const {baseURL, setCurrentRoute, setClimbSetting} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
@@ -55,6 +55,7 @@ export default function ClimbRoute (props){
     useEffect(()=> {
         getRoute()
         getUsersRouteClimbs()
+        setClimbSetting('Outdoor')
     },[])
 
     if(route.status === 404){
