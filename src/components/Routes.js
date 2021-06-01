@@ -9,7 +9,7 @@ export default function Routes(props){
     const [routes, setRoutes] = useState([])
 
     const getRoutes = async() => {
-        const url = baseURL + '/routes/'
+        const url = baseURL + '/routes/?setting=outdoor'
         const requestOptions = {
           method:'GET',
           credentials: 'include'

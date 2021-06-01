@@ -149,6 +149,8 @@ export default function ClimbRoute (props){
                 {/* ---------------------------------- */}
                 {/* ------------  COMMENTS ----------- */}
                 {/* ---------------------------------- */}
+                {route.data.gym_outdoor === 'Outdoor'? 
+                <>
                 <Divider horizontal>
                     <Header as='h3'>
                         Comments
@@ -160,6 +162,7 @@ export default function ClimbRoute (props){
                     comments={comments}
                     setcomments={setcomments}
                 />
+                </>:''}
 
             </Segment>
             </>

@@ -1,6 +1,5 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
-import { Container, Segment } from 'semantic-ui-react'
 import BackButton from './BackButton'
 import Footer from './Footer'
 
@@ -18,7 +17,7 @@ export default function CreateClimb(props){
                <p>Outdoor</p>
             </div> 
             </Link>
-            <Link to='/climbs/new'>
+            <Link to='/routes/new'>
             <div 
                 onClick={()=>{setClimbSetting('Indoor')}} 
                 className='indoor circle climb-type'

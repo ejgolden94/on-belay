@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect} from 'react-router'
 import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
+import {capitalize} from '../capitalize'
 
 const climbTypeOptions = [
     { key: 'Sport', value: 'Sport', text: 'Sport' },
@@ -10,11 +11,6 @@ const climbTypeOptions = [
     { key: 'Trad', value: 'Trad', text: 'Trad' },
     { key: 'Mountaineering', value: 'Mountaineering', text: 'Mountaineering' },
     { key: 'Free Solo', value: 'Free Solo', text: 'Free Solo'}
-  ]
-
-  const climbSettingOptions = [
-    { key: 'Gym', value: 'Gym', text: 'Gym' },
-    { key: 'Outdoor', value: 'Outdoor', text: 'Outdoor'}
   ]
 
   const performanceOptions = [
@@ -39,7 +35,6 @@ export default class ClimbForm extends Component {
             const time = this.props.climb.time? this.props.climb.time : 'No Time Recorded'
             this.state={
                 climb_type: this.props.climb.climb_type,
-                gym_outdoor: this.props.climb.gym_outdoor,
                 image: image,
                 notes: notes,
                 performance: this.props.climb.performance,
@@ -49,15 +44,15 @@ export default class ClimbForm extends Component {
                 context: context
             }
         } else if(context === 'new') {
+            const route = this.props.indoorRouteId? this.props.indoorRouteId: this.props.route.id
             this.state={
                 climb_type: '',
-                gym_outdoor: this.climbSetting,
                 image: '',
                 notes: '',
                 performance: '',
                 time: 0,
                 id:'',
-                route: this.props.route.id,
+                route: route,
                 success: false,
                 context: context
             }
@@ -143,7 +138,7 @@ export default class ClimbForm extends Component {
         return(
             <Container style={{minHeight:'90vh'}}>
             <BackButton/>
-            <Header as='h2'>{this.state.context} Climb Log</Header>
+            <Header as='h2'>{capitalize(this.state.context)} Climb Log</Header>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
             <Form onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
                 <Form.Dropdown
@@ -156,18 +151,6 @@ export default class ClimbForm extends Component {
                     id='climb_type'
                     options={climbTypeOptions}
                     value= {this.state.climb_type}
-                    onChange={this.handleDropDown}
-                />
-                <br/>
-                <Form.Dropdown
-                    placeholder={this.state.gym_outdoor} 
-                    label='Climb Setting'
-                    fluid
-                    selection
-                    name='gym_outdoor'
-                    id='gym_outdoor'
-                    options={climbSettingOptions}
-                    value= {this.state.gym_outdoor}
                     onChange={this.handleDropDown}
                 />
                 <br/>
