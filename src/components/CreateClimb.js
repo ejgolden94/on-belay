@@ -1,27 +1,34 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
 import { Container, Segment } from 'semantic-ui-react'
+import BackButton from './BackButton'
+import Footer from './Footer'
 
 export default function CreateClimb(props){
     const {setClimbSetting} = props
     return(
-        <Container className='climb-type-container'>
-            <Segment 
-                as={Link}
-                to='/routes'
+        <>
+        <BackButton />
+        <div className='climb-type-container'>
+            <Link to='/routes'>
+            <div 
                 onClick={()=>{setClimbSetting('Outdoor')}} 
                 className='outdoor circle climb-type'
                 >
-                Outdoor 
-            </Segment>
-            <Segment 
-                as={Link}
-                to='/climbs/new'
-                className='indoor circle climb-type' 
-                onClick={()=>{setClimbSetting('Gym')}}
+               <p>Outdoor</p>
+            </div> 
+            </Link>
+            <Link to='/climbs/new'>
+            <div 
+                onClick={()=>{setClimbSetting('Indoor')}} 
+                className='indoor circle climb-type'
                 >
-                Indoor 
-            </Segment>
-        </Container>
+                <p>Indoor</p>
+            </div> 
+            </Link>
+        </div>
+        <Footer />
+        </>
+
     )
 }

@@ -90,6 +90,7 @@ export default function Climb (props){
                 </Divider>
                 <Container style={{padding:'1vh'}}>
                     <RouteDetails route={climb.data.route} />
+                    <Button color='purple' as={Link} to={`/routes/${climb.data.route.id}`}>Go to Route</Button>
                 </Container> 
             </Segment> 
         </Container>
