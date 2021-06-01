@@ -1,6 +1,6 @@
 import React, { Component } from 'react' 
 import { Redirect } from 'react-router-dom';
-import { Container, Form, Button, Header, Message, Icon } from 'semantic-ui-react'
+import { Container, Form, Button, Header, Message, Icon, Image } from 'semantic-ui-react'
 
 export default class UserForm extends Component {
     constructor(props) {
@@ -57,13 +57,8 @@ export default class UserForm extends Component {
             return <Redirect to='/' />
           }
         return (
-            <Container style={{height:'100vh', textAlign:'center'}}>
-                <Header as='h1' color='teal' size='huge' textAlign='center' style={{width: '50%', margin:'30vh auto 20px auto', fontSize:'calc(10px + 3vmin)'}}>
-                {this.props.context === 'login'?
-                    <> Login </>:
-                    <> Sign Up </>
-                    }
-                </Header>
+            <Container style={{height:'90vh', textAlign:'center'}}>
+                <Image src='/on-belay_logo.png' style={{margin: '25vh auto 10vh auto'}}/>
                 <Form size='large' style={{width: '70%', margin:'20px auto'}} onSubmit={(event)=>this.handleSubmit(event)}>
                     <Form.Input 
                         fluid 
@@ -105,26 +100,21 @@ export default class UserForm extends Component {
                             {this.state.message}
                         </Message>: null
                     }
-                    <Button color='teal' fluid size='large'>
-                        {this.props.context === 'login'?
-                        <> Login </>:
-                        <> Sign Up </>
-                        }
-                    </Button>
+                    <Image as='button' src='/on-belay_right-arrow-button.png' className='login-btn'/>
                 </Form>
                 {/* User login Message */}
                 {this.props.context === 'login'?
-                <Message color='orange' style={{width: '70%', margin:'0 auto'}}>
-                    {/* No Login? <Link to='/user/new'>Sign Up!</Link> */}
-                    No Login? <a href='/user/new'>Sign Up!</a>
-                </Message>:null
+                <h4 style={{margin:'0 auto'}}>
+                    {/* Already have an account? <Link to='/user/login'>Sign In!</Link> */}
+                    Don't have an account? <a href='/user/new'>Sign up!</a>
+                </h4>:null
                 }
                 {/* User Sign Up Message */}
                 {this.props.context === 'signup'?
-                <Message color='orange' style={{width: '70%', margin:'0 auto'}}>
+                <h4 style={{margin:'0 auto'}}>
                     {/* Already have an account? <Link to='/user/login'>Sign In!</Link> */}
                     Already have an account? <a href='/user/login'>Sign In!</a>
-                </Message>:null
+                </h4>:null
                 }
             </Container>
         )
