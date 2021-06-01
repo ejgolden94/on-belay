@@ -12,11 +12,6 @@ const climbTypeOptions = [
     { key: 'Free Solo', value: 'Free Solo', text: 'Free Solo'}
   ]
 
-  const climbSettingOptions = [
-    { key: 'Gym', value: 'Gym', text: 'Gym' },
-    { key: 'Outdoor', value: 'Outdoor', text: 'Outdoor'}
-  ]
-
   const performanceOptions = [
     { key: 'On-sight', value: 'On-sight', text: 'On-sight' },
     { key: 'Flash', value: 'Flash', text: 'Flash' },
@@ -39,7 +34,6 @@ export default class ClimbForm extends Component {
             const time = this.props.climb.time? this.props.climb.time : 'No Time Recorded'
             this.state={
                 climb_type: this.props.climb.climb_type,
-                gym_outdoor: this.props.climb.gym_outdoor,
                 image: image,
                 notes: notes,
                 performance: this.props.climb.performance,
@@ -49,15 +43,16 @@ export default class ClimbForm extends Component {
                 context: context
             }
         } else if(context === 'new') {
+            // const route = this.props.indoorRouteId? this.props.indoorRouteId: this.props.route.id
+            const route = this.props.indoorRouteId
             this.state={
                 climb_type: '',
-                gym_outdoor: this.climbSetting,
                 image: '',
                 notes: '',
                 performance: '',
                 time: 0,
                 id:'',
-                route: this.props.route.id,
+                route: route,
                 success: false,
                 context: context
             }
@@ -156,18 +151,6 @@ export default class ClimbForm extends Component {
                     id='climb_type'
                     options={climbTypeOptions}
                     value= {this.state.climb_type}
-                    onChange={this.handleDropDown}
-                />
-                <br/>
-                <Form.Dropdown
-                    placeholder={this.state.gym_outdoor} 
-                    label='Climb Setting'
-                    fluid
-                    selection
-                    name='gym_outdoor'
-                    id='gym_outdoor'
-                    options={climbSettingOptions}
-                    value= {this.state.gym_outdoor}
                     onChange={this.handleDropDown}
                 />
                 <br/>

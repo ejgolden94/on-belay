@@ -26,7 +26,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState('')
   const [currentClimb, setCurrentClimb] = useState({})
   const [currentRoute, setCurrentRoute] = useState({})
-  const [climbSetting, setClimbSetting] = useState('')
+  const [climbSetting, setClimbSetting] = useState('Outdoor')
+  const [indoorRouteId, setIndoorRouteId] = useState('')
 
   const getUsers = async() => {
     const url = baseURL+'/users/'
@@ -46,6 +47,7 @@ function App() {
 
   console.log(currentUser);
   console.log(climbSetting)
+  console.log(indoorRouteId)
   return (
     <div className="App" style={{margin:'0', padding: '0'}}>
       <BrowserRouter>
@@ -67,13 +69,13 @@ function App() {
             {/* /// Create Route /// */}
             <Route 
               path="/routes/new"
-              render={(props) => <RouteForm {...props} baseURL={baseURL} currentUser={currentUser} climbSetting={climbSetting}/>}
+              render={(props) => <RouteForm {...props} baseURL={baseURL} currentUser={currentUser} climbSetting={climbSetting} setIndoorRouteId={setIndoorRouteId}/>}
             />
 
             {/* /// Edit Route /// */}
             <Route 
               path="/routes/:routeId/edit"
-              render={(props) => <RouteForm {...props} baseURL={baseURL} route={currentRoute.data}/>}
+              render={(props) => <RouteForm {...props} baseURL={baseURL} route={currentRoute.data} climbSetting={climbSetting} />}
             />
 
             {/* /// Show Route /// */}
@@ -97,7 +99,7 @@ function App() {
             {/* /// Create Climb /// */}
             <Route 
               path="/climbs/new"
-              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser} route={currentRoute.data} climbSetting={climbSetting} />}
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser} route={currentRoute.data} indoorRouteId={indoorRouteId}/>}
             />
 
             {/* /// Edit Climb /// */}
@@ -109,17 +111,13 @@ function App() {
             {/* /// Show Climb /// */}
             <Route path="/climbs/:climbId">
               <Climb baseURL={baseURL} setCurrentClimb={setCurrentClimb}/>
-              <footer>
-                <Footer />
-              </footer>
+              <Footer />
             </Route>
 
             {/* /// Climbs /// */}
             <Route path="/climbs">
               <Climbs baseURL={baseURL}/>
-              <footer>
-                <Footer />
-              </footer>
+              <Footer />
             </Route>
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}

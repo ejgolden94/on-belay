@@ -2,36 +2,40 @@ import React, { Component } from 'react'
 import { Redirect} from 'react-router'
 import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
+import {capitalize} from '../capitalize'
 
 const climbWallOptions = [
     { key: 'Slab', value: 'Slab', text: 'Slab' },
     { key: 'Vetical', value: 'Vertical', text: 'Vertical' },
     { key: 'Overhang', value: 'Overhang', text: 'Overhang' }
-  ]
+]
+
 const ratingPrefixOptions=[
     { key: '5', value: '5', text: '5' },
     { key: 'V', value: 'V', text: 'V' }
 ]
+
 const ratingOptions = [
-{ key: 'B', value: 'B', text: 'B' },
-{ key: '0', value: '0', text: '0' },
-{ key: '1', value: '1', text: '1' },
-{ key: '2', value: '2', text: '2' },
-{ key: '3', value: '3', text: '3' },
-{ key: '4', value: '4', text: '4' },
-{ key: '5', value: '5', text: '5' },
-{ key: '6', value: '6', text: '6' },
-{ key: '7', value: '7', text: '7' },
-{ key: '8', value: '8', text: '8' },
-{ key: '9', value: '9', text: '9' },
-{ key: '10', value: '10', text: '10' },
-{ key: '11', value: '11', text: '11' },
-{ key: '12', value: '12', text: '12' },
-{ key: '13', value: '13', text: '13' },
-{ key: '14', value: '14', text: '14' },
-{ key: '15', value: '15', text: '15' },
-{ key: '16', value: '16', text: '16' }
+    { key: 'B', value: 'B', text: 'B' },
+    { key: '0', value: '0', text: '0' },
+    { key: '1', value: '1', text: '1' },
+    { key: '2', value: '2', text: '2' },
+    { key: '3', value: '3', text: '3' },
+    { key: '4', value: '4', text: '4' },
+    { key: '5', value: '5', text: '5' },
+    { key: '6', value: '6', text: '6' },
+    { key: '7', value: '7', text: '7' },
+    { key: '8', value: '8', text: '8' },
+    { key: '9', value: '9', text: '9' },
+    { key: '10', value: '10', text: '10' },
+    { key: '11', value: '11', text: '11' },
+    { key: '12', value: '12', text: '12' },
+    { key: '13', value: '13', text: '13' },
+    { key: '14', value: '14', text: '14' },
+    { key: '15', value: '15', text: '15' },
+    { key: '16', value: '16', text: '16' }
 ]
+
 const ratingSuffixOptions=[
     { key: '-', value: '-', text: '-' },
     { key: '+', value: '+', text: '+' },
@@ -42,9 +46,10 @@ const ratingSuffixOptions=[
     { key: '', value: '', text: 'N/A' },
 ]
 
-export default class ClimbForm extends Component {
+export default class RouteForm extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
         this.baseURL = this.props.baseURL
         const context = this.props.location.pathname.split('/')[3]? this.props.location.pathname.split('/')[3]: this.props.location.pathname.split('/')[2]
         if (context === 'edit') {
@@ -72,6 +77,7 @@ export default class ClimbForm extends Component {
                 wall_type: this.props.route.wall_type,
                 description: this.props.route.description,
                 protection: this.props.route.protection,
+                gym_outdoor: this.props.climbSetting,
                 image: image,
                 id: this.props.route.id,
                 success: false,
@@ -88,6 +94,7 @@ export default class ClimbForm extends Component {
                 wall_type: '',
                 description: '',
                 protection: '',
+                gym_outdoor: this.props.climbSetting,
                 image: '',
                 id: '',
                 success: false,
@@ -108,6 +115,7 @@ export default class ClimbForm extends Component {
         delete body.id
         delete body.ratingPrefix
         delete body.ratingSuffix 
+        console.log(body)
 
         const requestOptions = {
             method:'POST',
@@ -117,7 +125,13 @@ export default class ClimbForm extends Component {
         }
     
         let newRoute = await fetch(url,requestOptions).then(response => response.json())
+
         if (newRoute.status===201){
+            if (body.gym_outdoor === 'Indoor') {
+                console.log('setting indoor route id')
+                console.log(newRoute.data.id)
+                this.props.setIndoorRouteId(newRoute.data.id)} 
+
             this.setState({
                 success: true,
                 id: newRoute.data.id
@@ -177,15 +191,20 @@ export default class ClimbForm extends Component {
     }
 
     render() {
-        if (this.state.success){
+        if (this.state.success && this.state.gym_outdoor === 'Outdoor'){
            return <Redirect to={'/routes/'+this.state.id} />
-        }
+        } 
+        if (this.state.success && this.state.gym_outdoor === 'Indoor'){
+            return <Redirect to={'/climbs/new/'} />
+        } 
         return(
             <Container style={{minHeight:'90vh'}}>
             <BackButton/>
-            <Header as='h2'>{this.state.context} Route</Header>
+            <Header as='h2'>{capitalize(this.state.context)} Route</Header>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
             <Form onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
+            {this.state.gym_outdoor === 'Outdoor'?
+                <>
                 <Form.Input 
                     type='text'
                     label='Name'
@@ -194,7 +213,7 @@ export default class ClimbForm extends Component {
                     value={this.state.name}
                     onChange={this.handleChange}
                     />
-                <br/>
+                <br/> 
                 <Form.TextArea 
                     label='Description'
                     name='description'
@@ -210,8 +229,9 @@ export default class ClimbForm extends Component {
                     id='protection'
                     value={this.state.protection}
                     onChange={this.handleChange}
-                    />
-                <br/>
+                    /> 
+                    <br/> 
+                    </>: '' }
                 <Form.Input 
                     type='text'
                     label='Location'
@@ -290,10 +310,18 @@ export default class ClimbForm extends Component {
                     value= {this.state.ratingSuffix}
                     onChange={this.handleDropDown}
                 />
+                <br/>
+                <input
+                    type='text'
+                    hidden
+                    name='gym_outdoor'
+                    id='gym_outdoor'
+                    value= {this.state.gym_outdoor}
+                />
                 <div style={{width: '100%', textAlign:'center'}}>
                 {this.state.context === 'edit'? 
                     <Button color='purple'>Submit Edits</Button>         
-                    :<Button color='purple'>Create New Climb</Button>}
+                    :<Button color='purple'>Create New Route</Button>}
                 </div> 
             </Form>
             </Segment>

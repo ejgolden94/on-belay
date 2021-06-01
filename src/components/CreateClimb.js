@@ -18,7 +18,7 @@ export default function CreateClimb(props){
                <p>Outdoor</p>
             </div> 
             </Link>
-            <Link to='/climbs/new'>
+            <Link to='/routes/new'>
             <div 
                 onClick={()=>{setClimbSetting('Indoor')}} 
                 className='indoor circle climb-type'
