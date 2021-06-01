@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect} from 'react-router'
 import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
+import {capitalize} from '../capitalize'
 
 const climbTypeOptions = [
     { key: 'Sport', value: 'Sport', text: 'Sport' },
@@ -43,8 +44,7 @@ export default class ClimbForm extends Component {
                 context: context
             }
         } else if(context === 'new') {
-            // const route = this.props.indoorRouteId? this.props.indoorRouteId: this.props.route.id
-            const route = this.props.indoorRouteId
+            const route = this.props.indoorRouteId? this.props.indoorRouteId: this.props.route.id
             this.state={
                 climb_type: '',
                 image: '',
@@ -138,7 +138,7 @@ export default class ClimbForm extends Component {
         return(
             <Container style={{minHeight:'90vh'}}>
             <BackButton/>
-            <Header as='h2'>{this.state.context} Climb Log</Header>
+            <Header as='h2'>{capitalize(this.state.context)} Climb Log</Header>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
             <Form onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
                 <Form.Dropdown

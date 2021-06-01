@@ -1,6 +1,5 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
-import { Container, Segment } from 'semantic-ui-react'
 import BackButton from './BackButton'
 import Footer from './Footer'
 

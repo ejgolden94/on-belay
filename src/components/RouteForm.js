@@ -230,8 +230,16 @@ export default class RouteForm extends Component {
                     value={this.state.protection}
                     onChange={this.handleChange}
                     /> 
-                    <br/> 
-                    </>: '' }
+                <br/> 
+                <Form.Input 
+                    type='text'
+                    label='Image'
+                    name='image'
+                    id='image'
+                    value={this.state.image}
+                    onChange={this.handleChange}
+                />
+                <br/> </>: '' }
                 <Form.Input 
                     type='text'
                     label='Location'
@@ -261,15 +269,6 @@ export default class RouteForm extends Component {
                     options={climbWallOptions}
                     value= {this.state.wall_type}
                     onChange={this.handleDropDown}
-                />
-                <br/>
-                <Form.Input 
-                    type='text'
-                    label='Image'
-                    name='image'
-                    id='image'
-                    value={this.state.image}
-                    onChange={this.handleChange}
                 />
                 <br/>
                 <Form.Dropdown

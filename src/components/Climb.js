@@ -65,7 +65,7 @@ export default function Climb (props){
                     </div>
                     <div className='route-desc'>
                         <h4 style={{marginRight:'10px'}}>Climb Setting:</h4>
-                        {climb.data.gym_outdoor}
+                        {climb.data.route.gym_outdoor}
                     </div>
                     <div className='route-desc'>
                         <h4 style={{marginRight:'10px'}}>Performance:</h4>
