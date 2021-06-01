@@ -1,20 +1,32 @@
 import React, {useState, useEffect} from 'react' 
-import NotFound from './NotFound'
-import {Header, Image, Segment, Divider, Rating, Container, Button, Icon} from 'semantic-ui-react'
-import {useLocation, Link} from 'react-router-dom'
+import {Header,
+        Image, 
+        Segment,
+        Divider, 
+        Container, 
+        Button,
+        Message} from 'semantic-ui-react'
+import {Link, useLocation} from 'react-router-dom'
 import {formatDate} from '../formatDate'
+import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
 import BackButton from './BackButton'
 import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
+import RouteSidebar from './RouteSidebar'
+import RouteComments from './RouteComments'
 
 export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
 
-    const {baseURL, setCurrentRoute} = props
+    const {baseURL, setCurrentRoute, setClimbSetting} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
+    const [seeAllClimbs, setSeeAllClimbs] = useState(false)
+    const [announcement, setAnnouncement] = useState('')
+    const [visible, setVisible] = useState(false)
+    const [comments, setcomments] = useState([]);
 
     const getRoute = async() => {
         const url = baseURL + '/routes/' + locationId
@@ -24,9 +36,9 @@ export default function ClimbRoute (props){
         }
     
         let foundRoute = await fetch(url,requestOptions).then(response => response.json())
-        console.log(foundRoute);
         setRoute(foundRoute)
         setCurrentRoute(foundRoute)
+        setAnnouncement(foundRoute.data.announcement)
     }
 
     const getUsersRouteClimbs = async () => {
@@ -36,28 +48,28 @@ export default function ClimbRoute (props){
             credentials: 'include'
         }
         const climbs = await fetch(url, requestOptions).then(response => response.json())
-        console.log(climbs);
         setClimbs(climbs.data)
     } 
-
-    const handleRate = () =>{
-
-    }
 
     useEffect(()=> {
         getRoute()
         getUsersRouteClimbs()
+        setClimbSetting('Outdoor')
     },[])
 
-    console.log(route);
     if(route.status === 404){
         return (
             <NotFound redirect='Routes' redirectTo='/routes'/>
         )
     } else {
+        console.log(comments)
+        console.log("rendering climb route")
         return(
             route.data?
             <>
+            {/* ------------------------------- */}
+            {/* ------------ Header ----------- */}
+            {/* ------------------------------- */}
             <BackButton />
             <Segment className='page-container'>
                 <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
@@ -66,22 +78,36 @@ export default function ClimbRoute (props){
                 <Image 
                     src={route.data.image? route.data.image:'/climb-route-stock.jpeg' } 
                     style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
+                    onClick={()=>setVisible(false)}
                 />
+                <RouteSidebar 
+                    baseURL={baseURL} 
+                    route={route.data} 
+                    setAnnouncement={setAnnouncement} 
+                    announcement={announcement}
+                    visible={visible}
+                    setVisible={setVisible}
+                    />
 
-                {/* ------------  Stats ----------- */}
+                {/* ------------------------------- */}
+                {/* ------------ Stats ------------ */}
+                {/* ------------------------------- */}
                 <RouteStats climbs={climbs} route={route.data}/>
+
+                {/* --------------------------------------- */}
+                {/* ------------  Announcements ----------- */}
+                {/* --------------------------------------- */}
+                {announcement? <Message color='orange' style={{margin:'0'}}>{announcement}</Message>:''}
+
+                {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
+                {/* ------------------------------------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Description
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    <Button 
-                        inverted circular icon color='purple' className='float-right'
-                        as={Link} to={'/routes/'+route.data.id+'/edit'}>
-                        <Icon name='pencil'/>
-                    </Button>
                     <RouteDetails route={route.data} />
                     <div className='route-meta'>
                         <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
@@ -89,34 +115,52 @@ export default function ClimbRoute (props){
                     </div>
                 </Container>
 
+                {/* ------------------------------------- */}
                 {/* ------------  YOUR CLIMBS ----------- */}
+                {/* ------------------------------------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Your Climbs
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
-                    {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>): ''}
+                    {/* Shows 2 climbs and a button to expand */}
+                    {!seeAllClimbs&&climbs.length > 0 ? 
+                    <>
+                        {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
+                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(true)}>See All</Button>
+                    </>: ''}
+                    {/* Shows All climbs and a button to collapse */}
+                    {seeAllClimbs&&climbs.length > 0? 
+                    <>
+                        {climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
+                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
+                    </>: ''}
+                    {/* Shows That you havent climbed this route yet */}
+                    {climbs.length === 0 ? 
+                    <>
+                        <Header as='h4'>You Haven't Climbed This Route Yet</Header>
+                    </>: ''}
+                    <Button inverted size='mini' color='purple' as={Link} to='/climbs/new'>
+                        Log a Climb
+                    </Button>
                 </Container>
-
+                 
+                {/* ---------------------------------- */}
                 {/* ------------  COMMENTS ----------- */}
+                {/* ---------------------------------- */}
                 <Divider horizontal>
                     <Header as='h3'>
                         Comments
                     </Header>
                 </Divider>
-                {/* add comment s component right here */}
-                    <Segment rounded style={{display:'flex', width:'80%', margin:'0 auto'}}>
-                        <Segment circular style={{height:'75px', width: '75px'}}>User 1</Segment>
-                        <Segment style={{border:'none', boxShadow:'none'}}>I have a lot to say a bout this route...</Segment>
-                        <Rating defaultRating={3} maxRating={5} disabled={true} clearable onRate={handleRate}/>
-                    </Segment>
-                    <Segment rounded style={{display:'flex', width:'80%', margin:'20px auto'}}>
-                        <Segment circular style={{height:'75px', width: '75px'}}>User 2</Segment>
-                        <Segment style={{border:'none', boxShadow:'none'}}>Same...</Segment>
-                        <Rating defaultRating={3} maxRating={5} disabled clearable onRate={handleRate}/>
-                    </Segment>
-                    
+                <RouteComments 
+                    baseURL={baseURL}
+                    routeId={route.data.id}
+                    comments={comments}
+                    setcomments={setcomments}
+                />
+
             </Segment>
             </>
             :''

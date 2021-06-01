@@ -23,17 +23,16 @@ export default function Routes(props){
         getRoutes()
     },[])
 
-    console.log(routes);
     return (
         <Container style={{margin:'0 auto', minHeight:'90vh'}}>
         <BackButton />
+        <Button icon circular as={Link} to={'/routes/new'} color='purple' className='add-route-btn'>
+            <Icon name='add'/>
+        </Button>
         <Header as='h2'>Climb Routes</Header>
         {routes.map(route => 
             <ClimbRouteCard key={route.id} route={route}/>
         )}
-        <Button icon circular as={Link} to={'/routes/new'} color='purple'>
-            <Icon name='add'/>
-        </Button>
         </Container>
     )
 }

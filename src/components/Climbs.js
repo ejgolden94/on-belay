@@ -20,7 +20,7 @@ export default function Climbs(props) {
             setClimbs(climbs.data)
             }
         getClimbs()
-    },[])
+    },[baseURL])
 
     console.log(climbs);
     return (
@@ -28,7 +28,7 @@ export default function Climbs(props) {
         <BackButton />
         <Header as='h2'>Your Climbs</Header>
         {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>): ''}
-        <Button icon circular as={Link} to={'/climbs/new'} color='purple'>
+        <Button icon circular as={Link} to={'/climbs/type'} color='purple'>
             <Icon name='add'/>
         </Button>
         </Container>

@@ -108,7 +108,6 @@ export default class ClimbForm extends Component {
         delete body.id
         delete body.ratingPrefix
         delete body.ratingSuffix 
-        console.log(body)
 
         const requestOptions = {
             method:'POST',
@@ -118,7 +117,6 @@ export default class ClimbForm extends Component {
         }
     
         let newRoute = await fetch(url,requestOptions).then(response => response.json())
-        console.log(newRoute);
         if (newRoute.status===201){
             this.setState({
                 success: true,
@@ -135,11 +133,11 @@ export default class ClimbForm extends Component {
         body.rating =  body.ratingPrefix === 'V'? 
             body.ratingPrefix + body.rating + body.ratingSuffix:
             body.ratingPrefix + '.' + body.rating + body.ratingSuffix
+        if (body.image === 'No Image') {delete body.image}
         delete body.success
         delete body.context
         delete body.ratingPrefix
         delete body.ratingSuffix 
-        console.log(body)
 
         const requestOptions = {
             method: 'PUT',
@@ -149,7 +147,6 @@ export default class ClimbForm extends Component {
         }
 
         const editRoute = await fetch(url,requestOptions).then(response => response.json())
-        console.log(editRoute);
         if (editRoute.status===200){
             this.setState({
                 success: true
@@ -180,7 +177,6 @@ export default class ClimbForm extends Component {
     }
 
     render() {
-        console.log(this.state);
         if (this.state.success){
            return <Redirect to={'/routes/'+this.state.id} />
         }

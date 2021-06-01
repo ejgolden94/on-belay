@@ -37,6 +37,21 @@
   /* z-index: -1; */
 }
 
+.add-route-btn {
+  position: absolute;
+  right: 10px;
+  top: 2vh;
+  /* z-index: -1; */
+}
+
+.menu-btn {
+  position: absolute;
+  right: 10px;
+  top: 8vh;
+  border: none !important;
+  /* z-index: -1; */
+}
+
 .float-right {
   float: right;
 }
@@ -58,10 +73,41 @@
 }
 
 .circle {
-  border-radius: 50%;
+  border-radius: 50% !important;
+  display: flex !important; 
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.climb-type-container{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+  width: 100%;
+  background: rgb(229,0,255);
+  background: linear-gradient(169deg, rgba(229,0,255,1) 25%, rgba(64,203,200,1) 65%);
+}
+
+.climb-type{
+  height:40vh !important;
+  width:40vh !important;
+  border: 3px solid palevioletred;
+  margin: 0 auto;
+  color: white;
+  padding: 3vh;
+  font-size: 3.75rem;
+}
+
+.outdoor {
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('https://outdoorresearch.com.imgeng.in/media/magefan_blog/_20A0440.jpg');
+  background-position: center;
+  background-size: 150%;
+}
+.indoor {
+  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/gym-rock-climbing.jpeg');
+  background-position: center;
+  background-size: 150%;
 }
 
 .route-meta{

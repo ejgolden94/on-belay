@@ -3,8 +3,6 @@ import {Segment} from 'semantic-ui-react'
 
 export default function RouteStats(props) {
     const {route, climbs} = props
-    console.log(route)
-    console.log(climbs)
     const countClimbs = (climbsArr) => {
         if(climbsArr){
             return climbsArr.length===1? climbsArr.length + ' climb' :  climbsArr.length + ' climbs' 

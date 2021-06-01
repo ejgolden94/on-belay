@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Header, Button, Divider} from 'semantic-ui-react'
+import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
 import BackButton from './BackButton'
 
 const climbTypeOptions = [
@@ -29,7 +29,9 @@ const climbTypeOptions = [
 export default class ClimbForm extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
         this.baseURL = this.props.baseURL
+        this.climbSetting = this.props.climbSetting
         const context = this.props.location.pathname.split('/')[3]? this.props.location.pathname.split('/')[3]: this.props.location.pathname.split('/')[2]
         if (context === 'edit') {
             const image = this.props.climb.image? this.props.climb.image : 'No Image'
@@ -49,13 +51,13 @@ export default class ClimbForm extends Component {
         } else if(context === 'new') {
             this.state={
                 climb_type: '',
-                gym_outdoor: '',
+                gym_outdoor: this.climbSetting,
                 image: '',
                 notes: '',
                 performance: '',
                 time: 0,
                 id:'',
-                route: 1,
+                route: this.props.route.id,
                 success: false,
                 context: context
             }
@@ -65,6 +67,9 @@ export default class ClimbForm extends Component {
     editClimb = async() => {
         const url = this.baseURL + '/climbs/' + this.state.id 
         const body = this.state
+        if(body.image === 'No Image') { delete body.image }
+        if(body.notes === 'No Notes') { delete body.notes }
+        if(body.time === 'No Time Recorded') { delete body.time }
         delete body.success;
         delete body.context;
 
