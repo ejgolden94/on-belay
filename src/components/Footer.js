@@ -3,7 +3,7 @@ import {Segment, Container, Image} from 'semantic-ui-react'
 
 export default function Footer (){
     return (
-        <Segment inverted vertical style={{padding: '2em 0em', minHeight:'11vh', margin:'0'}}>
+        <Segment inverted vertical className='footer' style={{padding: '2em 0em', minHeight:'11vh', margin:'0'}}>
         <Container>
             <h4>2021 © Ellyn Golden and Sophia Richardson</h4>
             <Image 

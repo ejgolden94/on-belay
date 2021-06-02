@@ -1,4 +1,5 @@
 import './App.css';
+import 'semantic-ui-css/semantic.min.css'
 import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import { Header, Container, Button } from 'semantic-ui-react';
@@ -11,7 +12,7 @@ import Climb from './components/Climb'
 import Footer from './components/Footer'
 import ClimbForm from './components/ClimbForm';
 import RouteForm from './components/RouteForm';
-import CreateClimb from './components/CreateClimb';
+import ClimbType from './components/ClimbType';
 
 
 let baseURL = ''
@@ -93,7 +94,7 @@ function App() {
             {/* /// Create Climb /// */}
             <Route 
               path="/climbs/type"
-              render={(props) => <CreateClimb {...props} setClimbSetting={setClimbSetting}/>}
+              render={(props) => <ClimbType {...props} setClimbSetting={setClimbSetting}/>}
             />
 
             {/* /// Create Climb /// */}
