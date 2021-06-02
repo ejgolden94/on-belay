@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Image} from 'semantic-ui-react'
+import {Form, Segment, Image} from 'semantic-ui-react'
 import BackButton from './BackButton'
 import Footer from './Footer'
 import {capitalize} from '../capitalize'

@@ -1,7 +1,6 @@
 export function calculateRatingClass (rating) {
   if (rating[0]==='5'){
     rating = parseInt(rating.split('.')[1].replace(/\D/g,''))
-    console.log(rating)
     if (rating >= 0 && rating <= 5){
         return '#0D2E41'
     } else if (rating >= 6 && rating <= 9){

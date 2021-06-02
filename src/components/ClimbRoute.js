@@ -76,7 +76,9 @@ export default function ClimbRoute (props){
                     {route.data.name}
                 </Header>
                 <Image 
-                    src={route.data.image? route.data.image:'/climb-route-stock.jpeg' } 
+                    src={route.data.image? route.data.image: route.data.gym_outdoor==='Indoor'? 
+                        '/on-belay_indoor-climb-placeholder_orange.png'
+                        :'../on-belay_outdoor-climb-placeholder_orange.png' } 
                     style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
                     onClick={()=>setVisible(false)}
                 />

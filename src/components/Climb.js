@@ -40,7 +40,9 @@ export default function Climb (props){
                     {climb.data.route.name}
                 </Header>
                 <Image 
-                    src={climb.data.image? climb.data.image: climb.data.route.image? climb.data.route.image: '/climb_stock.jpeg' } 
+                    src={climb.data.image? climb.data.image: climb.data.route.image? climb.data.route.image: 
+                        climb.data.route.gym_outdoor==='Indoor'? '/on-belay_indoor-climb-placeholder_orange.png'
+                        :'../on-belay_outdoor-climb-placeholder_orange.png' } 
                     style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
                 />
 
