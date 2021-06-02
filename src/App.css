@@ -23,6 +23,10 @@
   font-size: 3rem;
 }
 
+.page-sub-headers {
+  margin: 1vh 0 0 0;
+}
+
 .login-btn {
   border: none;
   width: 15vw;
@@ -31,6 +35,17 @@
 .go-btn {
   border: none;
   width: 100px; 
+}
+
+.card-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+}
+
+.card-content::after{
+  content: none !important;
 }
 
 .form-segment{

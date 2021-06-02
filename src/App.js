@@ -88,7 +88,6 @@ function App() {
             {/* /// Routes /// */}
             <Route path="/routes">
               <Routes baseURL={baseURL}/>
-              <Footer />
             </Route>
             
             {/* /// Create Climb /// */}
