@@ -27,15 +27,15 @@ export default function Routes(props){
     return (
         <div className='page-and-footer'>
         <BackButton />
-        <Button icon circular as={Link} to={'/routes/new'} color='purple' className='add-route-btn'>
-            <Icon name='add'/>
-        </Button>
         <div>
             <h2 as='h2' className='page-headers'>Climb Routes</h2>
             <h2 className='page-sub-headers'>Choose Your Climb Route</h2>
             {routes.map(route => 
                 <ClimbRouteCard key={route.id} route={route}/>
             )}
+            <Button icon circular as={Link} to={'/routes/new'} color='purple' className='add-btn'>
+                <Icon name='add' size='big'/>
+            </Button>
         </div>
         <Footer/>
         </div>

@@ -117,7 +117,6 @@ function App() {
             {/* /// Climbs /// */}
             <Route path="/climbs">
               <Climbs baseURL={baseURL}/>
-              <Footer />
             </Route>
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
