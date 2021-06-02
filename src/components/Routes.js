@@ -29,7 +29,7 @@ export default function Routes(props){
         <Button icon circular as={Link} to={'/routes/new'} color='purple' className='add-route-btn'>
             <Icon name='add'/>
         </Button>
-        <Header as='h2'>Climb Routes</Header>
+        <h2 as='h2' className='page-headers'>Climb Routes</h2>
         {routes.map(route => 
             <ClimbRouteCard key={route.id} route={route}/>
         )}

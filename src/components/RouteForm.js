@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
+import {Form, Segment, Container, Image} from 'semantic-ui-react'
 import BackButton from './BackButton'
 import {capitalize} from '../capitalize'
 
@@ -200,9 +200,9 @@ export default class RouteForm extends Component {
         return(
             <Container style={{minHeight:'90vh'}}>
             <BackButton/>
-            <Header as='h2'>{capitalize(this.state.context)} Route</Header>
+            <h2 className='page-headers'>{capitalize(this.state.context)} Route</h2>
             <Segment style={{margin: '2vh auto 5vh auto'}}>
-            <Form onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
+            <Form size='large' onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
             {this.state.gym_outdoor === 'Outdoor'?
                 <>
                 <Form.Input 
@@ -315,13 +315,11 @@ export default class RouteForm extends Component {
                     hidden
                     name='gym_outdoor'
                     id='gym_outdoor'
-                    value= {this.state.gym_outdoor}
+                    defaultValue= {this.state.gym_outdoor}
                 />
                 <div style={{width: '100%', textAlign:'center'}}>
-                {this.state.context === 'edit'? 
-                    <Button color='purple'>Submit Edits</Button>         
-                    :<Button color='purple'>Create New Route</Button>}
-                </div> 
+                    <Image as='button' src='/on-belay_right-arrow-button.png' className='login-btn'/>
+                </div>
             </Form>
             </Segment>
             </Container>
