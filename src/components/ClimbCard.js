@@ -12,7 +12,7 @@ export default function ClimbCard (props){
         <Card key={climb.id} className='climbcard'>
             <Card.Header>{climb.route.name}</Card.Header>
             <Card.Content className='climbcard-content'>
-                <div className={'circle '+calculateRatingClass(climb.route.rating)} style={{height:'50px', width:'50px'}}>
+                <div className={'circle'} style={{height:'50px', width:'50px', color: 'white', backgroundColor:`${calculateRatingClass(climb.route.rating)}`}}>
                     {climb.route.rating}
                 </div>
                 <div>

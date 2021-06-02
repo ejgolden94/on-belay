@@ -1,37 +1,23 @@
 export function calculateRatingClass (rating) {
-    if (rating === '5.5'){
-        return 'five'
-    } else if (rating === '5.6'){
-        return 'six'
-    } else if (rating === '5.7'){ 
-      return 'seven'
-    } else if (rating === '5.8'){
-     return 'eight'
-    } else if (rating === '5.9'){
-      return 'nine'
-    } else if (rating === '5.10-' || rating === '5.10a'){
-      return 'ten-minus'
-    } else if (rating === '5.10' || rating === '5.10b' || rating === '5.10c'){  
-      return 'ten'
-    } else if (rating === '5.10+' || rating === '5.10d'){
-      return 'ten-plus'
-    } else if (rating === '5.11-' || rating === '5.11a'){ 
-      return 'eleven-minus'
-    } else if (rating === '5.11' || rating === '5.11b' || rating === '5.11c'){    
-      return 'eleven'
-    } else if (rating === '5.11+' || rating === '5.11d'){  
-      return 'eleven-plus'
-    } else if (rating === '5.12-' || rating === '5.12a'){   
-      return 'twelve-minus'
-    } else if (rating === '5.12' || rating === '5.12b' || rating === '5.12c'){    
-      return 'twelve'
-    } else if (rating === '5.12+' || rating === '5.12d'){   
-      return 'twelve-plus'
-    } else if (rating.includes('5.13')){  
-      return 'thirteen'
-    } else if (rating.includes('5.14')){   
-      return 'fourteen'
-    } else if (rating.includes('5.15')){  
-      return 'fifteen'
+  if (rating[0]==='5'){
+    rating = parseInt(rating.split('.')[1].replace(/\D/g,''))
+    console.log(rating)
+    if (rating >= 0 && rating <= 5){
+        return '#0D2E41'
+    } else if (rating >= 6 && rating <= 9){
+        return '#00798A'
+    } else if (rating === 10){ 
+        return '#44AD9F'
+    } else if (rating === 11){
+        return '#9EAE66'
+    } else if (rating === 12){
+        return '#F8AF2C'
+    } else if (rating === 13){
+        return '#F98830'
+    } else if (rating === 14 || rating === 15){  
+        return '#FA6135'
+    } else {
+        return '#333333'
     }
+  }
 }

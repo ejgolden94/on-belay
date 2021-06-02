@@ -50,7 +50,6 @@ const ratingSuffixOptions=[
 export default class RouteForm extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.baseURL = this.props.baseURL
         const context = this.props.location.pathname.split('/')[3]? this.props.location.pathname.split('/')[3]: this.props.location.pathname.split('/')[2]
         if (context === 'edit') {
@@ -64,8 +63,8 @@ export default class RouteForm extends Component {
                 rating=this.props.route.rating.slice(1)
             }else{
                 ratingPrefix = '5'
-                rating=this.props.route.rating.split('.')[1].slice(0,this.props.route.rating.length - 3)
-                ratingSuffix=this.props.route.rating[this.props.route.rating.length - 1]
+                rating=this.props.route.rating.split('.')[1].replace(/\D/g, '')
+                ratingSuffix=this.props.route.rating.split('.')[1].replace(/[0-9]/g, '')
             }
 
             this.state={

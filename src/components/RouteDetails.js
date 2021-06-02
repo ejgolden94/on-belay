@@ -6,7 +6,8 @@ export default function RouteDetails (props){
     return (
         <>
         <div className='route-desc'>
-            <div className={'circle '+calculateRatingClass(route.rating)} style={{marginRight:'10px', minWidth:'75px', height:'75px'}}>
+            <div className={'circle'} 
+                style={{marginRight:'10px', minWidth:'75px', height:'75px',color:'white', backgroundColor:`${calculateRatingClass(route.rating)}`}}>
                 {route.rating}
             </div>
             <div>
