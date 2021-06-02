@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Image} from 'semantic-ui-react'
+import {Form, Segment, Image} from 'semantic-ui-react'
 import BackButton from './BackButton'
+import Footer from './Footer'
 import {capitalize} from '../capitalize'
 
 const climbWallOptions = [
@@ -88,10 +89,10 @@ export default class RouteForm extends Component {
                 name: '',
                 location: '',
                 height: '',
-                ratingPrefix: '',
-                rating: '',
-                ratingSuffix: '',
-                wall_type: '',
+                ratingPrefix: 'Choose One',
+                rating: 'Choose One',
+                ratingSuffix: 'Choose One',
+                wall_type: 'Choose One',
                 description: '',
                 protection: '',
                 gym_outdoor: this.props.climbSetting,
@@ -198,131 +199,134 @@ export default class RouteForm extends Component {
             return <Redirect to={'/climbs/new/'} />
         } 
         return(
-            <Container style={{minHeight:'90vh'}}>
+            <div className='page-and-footer'>
             <BackButton/>
-            <h2 className='page-headers'>{capitalize(this.state.context)} Route</h2>
-            <Segment style={{margin: '2vh auto 5vh auto'}}>
-            <Form size='large' onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
-            {this.state.gym_outdoor === 'Outdoor'?
-                <>
-                <Form.Input 
-                    type='text'
-                    label='Name'
-                    name='name'
-                    id='name'
-                    value={this.state.name}
-                    onChange={this.handleChange}
+            <div>
+                <h2 className='page-headers'>{capitalize(this.state.context)} Route</h2>
+                <Segment className='form-segment'>
+                <Form size='large' onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
+                {this.state.gym_outdoor === 'Outdoor'?
+                    <>
+                    <Form.Input 
+                        type='text'
+                        label='Name'
+                        name='name'
+                        id='name'
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        />
+                    <br/> 
+                    <Form.TextArea 
+                        label='Description'
+                        name='description'
+                        id='description'
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        />
+                    <br/>
+                    <Form.Input 
+                        type='text'
+                        label='Protection'
+                        name='protection'
+                        id='protection'
+                        value={this.state.protection}
+                        onChange={this.handleChange}
+                        /> 
+                    <br/> 
+                    <Form.Input 
+                        type='text'
+                        label='Image'
+                        name='image'
+                        id='image'
+                        value={this.state.image}
+                        onChange={this.handleChange}
                     />
-                <br/> 
-                <Form.TextArea 
-                    label='Description'
-                    name='description'
-                    id='description'
-                    value={this.state.description}
-                    onChange={this.handleChange}
+                    <br/> </>: '' }
+                    <Form.Input 
+                        type='text'
+                        label='Location'
+                        name='location'
+                        id='location'
+                        value={this.state.location}
+                        onChange={this.handleChange}
+                        />
+                    <br/>
+                    <Form.Input 
+                        type='number'
+                        label='Height'
+                        name='height'
+                        id='height'
+                        value={this.state.height}
+                        onChange={this.handleChange}
+                        />
+                    <br/>
+                    <Form.Dropdown
+                        placeholder={this.state.wall_type} 
+                        label='Wall Characteristic'
+                        fluid
+                        search
+                        selection
+                        name='wall_type'
+                        id='wall_type'
+                        options={climbWallOptions}
+                        value= {this.state.wall_type}
+                        onChange={this.handleDropDown}
                     />
-                <br/>
-                <Form.Input 
-                    type='text'
-                    label='Protection'
-                    name='protection'
-                    id='protection'
-                    value={this.state.protection}
-                    onChange={this.handleChange}
-                    /> 
-                <br/> 
-                <Form.Input 
-                    type='text'
-                    label='Image'
-                    name='image'
-                    id='image'
-                    value={this.state.image}
-                    onChange={this.handleChange}
-                />
-                <br/> </>: '' }
-                <Form.Input 
-                    type='text'
-                    label='Location'
-                    name='location'
-                    id='location'
-                    value={this.state.location}
-                    onChange={this.handleChange}
+                    <br/>
+                    <Form.Dropdown
+                        placeholder={this.state.ratingPrefix} 
+                        fluid
+                        search
+                        label='Rating Prefix'
+                        selection
+                        name='ratingPrefix'
+                        id='ratingPrefix'
+                        options={ratingPrefixOptions}
+                        value= {this.state.ratingPrefix}
+                        onChange={this.handleDropDown}
                     />
-                <br/>
-                <Form.Input 
-                    type='number'
-                    label='Height'
-                    name='height'
-                    id='height'
-                    value={this.state.height}
-                    onChange={this.handleChange}
+                    <br/>
+                    <Form.Dropdown
+                        placeholder={this.state.rating} 
+                        fluid
+                        label='Rating'
+                        search
+                        selection
+                        name='rating'
+                        id='rating'
+                        options={ratingOptions}
+                        value= {this.state.rating}
+                        onChange={this.handleDropDown}
                     />
-                <br/>
-                <Form.Dropdown
-                    placeholder={this.state.wall_type} 
-                    label='Wall Characteristic'
-                    fluid
-                    search
-                    selection
-                    name='wall_type'
-                    id='wall_type'
-                    options={climbWallOptions}
-                    value= {this.state.wall_type}
-                    onChange={this.handleDropDown}
-                />
-                <br/>
-                <Form.Dropdown
-                    placeholder={this.state.ratingPrefix} 
-                    fluid
-                    search
-                    label='Rating Prefix'
-                    selection
-                    name='ratingPrefix'
-                    id='ratingPrefix'
-                    options={ratingPrefixOptions}
-                    value= {this.state.ratingPrefix}
-                    onChange={this.handleDropDown}
-                />
-                <br/>
-                <Form.Dropdown
-                    placeholder={this.state.rating} 
-                    fluid
-                    label='Rating'
-                    search
-                    selection
-                    name='rating'
-                    id='rating'
-                    options={ratingOptions}
-                    value= {this.state.rating}
-                    onChange={this.handleDropDown}
-                />
-                <br/>
-                <Form.Dropdown
-                    placeholder={this.state.ratingSuffix} 
-                    fluid
-                    search
-                    label='Rating Suffix'
-                    selection
-                    name='ratingSuffix'
-                    id='ratingSuffix'
-                    options={ratingSuffixOptions}
-                    value= {this.state.ratingSuffix}
-                    onChange={this.handleDropDown}
-                />
-                <br/>
-                <input
-                    type='text'
-                    hidden
-                    name='gym_outdoor'
-                    id='gym_outdoor'
-                    defaultValue= {this.state.gym_outdoor}
-                />
-                <div style={{width: '100%', textAlign:'center'}}>
-                    <Image as='button' src='/on-belay_right-arrow-button.png' className='login-btn'/>
-                </div>
-            </Form>
-            </Segment>
-            </Container>
+                    <br/>
+                    <Form.Dropdown
+                        placeholder={this.state.ratingSuffix} 
+                        fluid
+                        search
+                        label='Rating Suffix'
+                        selection
+                        name='ratingSuffix'
+                        id='ratingSuffix'
+                        options={ratingSuffixOptions}
+                        value= {this.state.ratingSuffix}
+                        onChange={this.handleDropDown}
+                    />
+                    <br/>
+                    <input
+                        type='text'
+                        hidden
+                        name='gym_outdoor'
+                        id='gym_outdoor'
+                        defaultValue= {this.state.gym_outdoor}
+                    />
+                    <div style={{width: '100%', textAlign:'center'}}>
+                        <Image as='button' src='/on-belay_right-arrow-button.png' className='go-btn'/>
+                    </div>
+                </Form>
+                </Segment>
+            </div>
+            <Footer/>
+            </div>
         )
     }
     

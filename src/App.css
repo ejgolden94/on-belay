@@ -19,7 +19,7 @@
 
 .page-headers {
   font-family: inherit;
-  margin-top: 10vh;
+  margin-top: 10vh !important;
   font-size: 3rem;
 }
 
@@ -27,6 +27,17 @@
   border: none;
   width: 15vw;
 }
+
+.go-btn {
+  border: none;
+  width: 100px; 
+}
+
+.form-segment{
+  max-width: 700px ;
+  margin: 2vh auto !important;
+}
+
 .climbcard {
   margin: 15px auto !important;
 }
@@ -130,7 +141,8 @@
 .page-and-footer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  justify-content: space-between;
 }
 
 .page-container {

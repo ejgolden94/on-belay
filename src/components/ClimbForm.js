@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect} from 'react-router'
 import {Form, Segment, Container, Image} from 'semantic-ui-react'
 import BackButton from './BackButton'
+import Footer from './Footer'
 import {capitalize} from '../capitalize'
 
 const climbTypeOptions = [
@@ -136,10 +137,11 @@ export default class ClimbForm extends Component {
            return <Redirect to={'/climbs/'+this.state.id} />
         }
         return(
-            <Container style={{minHeight:'90vh'}}>
+            <div className='page-and-footer'>
             <BackButton/>
+            <div>
             <h2 className='page-headers'>{capitalize(this.state.context)} Climb Log</h2>
-            <Segment style={{margin: '2vh auto 5vh auto'}}>
+            <Segment className='form-segment'>
             <Form size='large' onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
                 <Form.Dropdown
                     placeholder={this.state.climb_type} 
@@ -192,11 +194,13 @@ export default class ClimbForm extends Component {
                     onChange={this.handleChange}
                 />
                 <div style={{width: '100%', textAlign:'center'}}>
-                    <Image as='button' src='/on-belay_right-arrow-button.png' className='login-btn'/>
+                    <Image as='button' src='/on-belay_right-arrow-button.png' className='go-btn'/>
                 </div>
             </Form>
             </Segment>
-            </Container>
+            </div>
+            <Footer/>
+            </div>
         )
     }
     
