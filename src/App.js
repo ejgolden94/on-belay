@@ -114,9 +114,9 @@ function App() {
             </Route>
 
             {/* /// Climbs /// */}
-            <Route path="/climbs">
-              <Climbs baseURL={baseURL}/>
-            </Route>
+            <Route path="/climbs"
+              render={(props) => <Climbs {...props} baseURL={baseURL} />} 
+            />
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">

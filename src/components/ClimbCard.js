@@ -5,7 +5,7 @@ import {calculateRatingClass} from '../calculateRatingClass'
 import {formatDate} from '../formatDate'
 
 export default function ClimbCard (props){
-    const {climb} = props
+    const {climb, location} = props
     const ratingColor = calculateRatingClass(climb.route.rating)
     return(
         <Link to={'/climbs/'+ climb.id} style={{color:'inherit'}}>
@@ -16,12 +16,15 @@ export default function ClimbCard (props){
                     <img src='/on-belay_climb-log-icon.png' style={{maxHeight:'8vh'}}/>
 
                     <div className='climbcard-desc'>
-
+                        {/* CLIMB SETTING */}
                         <div style={{color:'#999999'}}>{formatDate(climb.created, 'long')} | {climb.route.gym_outdoor}</div>
-
+                        
+                        {/* CLIMB NAME */}
+                        {location === 'climbs'? 
                         <div><h2 style={{margin:'1.5vh'}}>{climb.route.name? climb.route.name : climb.route.location}</h2></div>
+                        :''}
 
-
+                        {/* CLIMB TAGS: type, performance, rating */}
                         <div style={{display:'flex', alignItems: 'center',justifyContent: 'space-evenly'}}>
                             <div style={{color:'white', backgroundColor:`${ratingColor}`, padding:'1.5vmin', borderRadius:'2vmin', fontWeight:'700'}}>
                                 {climb.climb_type}

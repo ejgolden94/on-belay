@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react' 
-import { Link } from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {Button, Icon, Divider} from 'semantic-ui-react'
 import BackButton from './BackButton'
 import ClimbCard from './ClimbCard'
@@ -7,6 +7,7 @@ import Footer from './Footer'
 
 export default function Climbs(props) {
     const {baseURL} = props
+    const location = useLocation();
     const [climbs, setClimbs] = useState([])
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export default function Climbs(props) {
             <div>
                 <h2 className='page-headers'>Your Climbs</h2>
                 <Divider className='climbDivider'/>
-                {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>): ''}
+                {climbs? climbs.map(climb => <ClimbCard key={climb.id} climb={climb} location={location.pathname.split('/')[1]}/>): ''}
                 <Button icon circular as={Link} to={'/climbs/type'} color='purple' className='add-btn'>
                     <Icon name='add' size='big'/>
                 </Button>

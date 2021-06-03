@@ -35,15 +35,15 @@ export default function RouteStats(props) {
             >{route.rating}</div>
             <div style={{display:'flex', width:'50%', justifyContent: 'space-evenly', color:'white', fontWeight:'bold'}}>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    <h2 style={{margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{route.height}'</h2>
+                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{route.height}'</h2>
                     <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Height</p>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    <h2 style={{margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))' }}>{countClimbs(climbs)}</h2>
+                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))' }}>{countClimbs(climbs)}</h2>
                     <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Climbs</p>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    <h2 style={{margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{countSuccesses(climbs)}</h2>
+                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{countSuccesses(climbs)}</h2>
                     <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Successes</p>
                 </div>
             </div>
