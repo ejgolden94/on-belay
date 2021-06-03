@@ -22,6 +22,10 @@
   border-radius: 0 !important;
 }
 
+.nav-icon{
+  margin: 1vh auto !important;
+}
+
 .page-headers {
   font-family: inherit;
   margin-top: 10vh !important;
