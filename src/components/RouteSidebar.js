@@ -77,32 +77,31 @@ export default function RouteSidebar (props){
                 direction='right'
                 inverted
                 icon
-                color='teal'
                 vertical
                 visible={visible}
                 width='thin'
             >
-                <Menu.Item as={Link} to={`/routes/${route.id}/edit`}>
+                <Menu.Item as={Link} to={`/routes/${route.id}/edit`} className='font-inherit'>
                 <Icon name='pencil' style={{margin:'1vh auto'}}/>
                     Edit
                     </Menu.Item>
-                <Menu.Item onClick={()=>toggleModalOpen()}>
+                <Menu.Item onClick={()=>toggleModalOpen()} className='font-inherit'>
                 <Icon name='delete' style={{margin:'1vh auto'}}/>
                     Delete
                     </Menu.Item>
-                <Menu.Item>
+                <Menu.Item className='font-inherit'>
                 <Icon name='flag' style={{margin:'1vh auto'}}/>
                     Flag For Abuse
                     </Menu.Item>
-                <Menu.Item onClick={()=>toggleAnnounceModalOpen()}>
+                <Menu.Item onClick={()=>toggleAnnounceModalOpen()} className='font-inherit'>
                     <Icon name='microphone' style={{margin:'1vh auto'}}/>
                     Make an Announcement
                 </Menu.Item>
-                <Menu.Item onClick={()=>toggleRemoveAnnounceModalOpen()}>
+                <Menu.Item onClick={()=>toggleRemoveAnnounceModalOpen()} className='font-inherit'>
                     <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
                     Remove Announcement
                 </Menu.Item>
-                <Menu.Item onClick={()=>toggleVisible()}>
+                <Menu.Item onClick={()=>toggleVisible()} className='font-inherit'>
                     <Icon name='arrow right' style={{margin:'1vh auto'}}/>
                     Collapse Menu
                 </Menu.Item>

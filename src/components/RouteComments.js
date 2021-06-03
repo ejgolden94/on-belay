@@ -48,15 +48,15 @@ export default function RouteComments(props){
     if(seeAll){ limit = comments.length }
 
     return(
-        <Container style={{textAlign:'left'}}>
+        <Container style={{textAlign:'left', marginBottom: '5vh'}}>
         {!seeAll?
-        <Button as='a' size='mini' color='purple'  onClick={()=>setSeeAll(true)}>See All Comments</Button> : 
-        <Button as='a' size='mini' color='purple'  onClick={()=>setSeeAll(false)}>Collapse Comments</Button> }
+        <Button as='a' size='small' className='route-btns' onClick={()=>setSeeAll(true)}>See All Comments</Button> : 
+        <Button as='a' size='small' className='route-btns'  onClick={()=>setSeeAll(false)}>Collapse Comments</Button> }
         <Comment.Group>
         {comments.slice(0,limit).map(comment => {
             return(
             <Comment key={comment.id} style={{marginTop: '2vh'}}>
-            <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+            <Comment.Avatar src='/on-belay_profile-photo-placeholder_orange.png' />
             <Comment.Content>
                 <Comment.Author as='a'>{comment.creator.username}</Comment.Author>
                 <Comment.Metadata>
@@ -73,7 +73,6 @@ export default function RouteComments(props){
                 value={newComment}
                 onChange={(event)=>handleChange(event)}
                 />
-            <Form.Button fluid={true} size='mini' color='purple' content='Add Reply'/>
         </Form>
         </Comment.Group>
         </Container>

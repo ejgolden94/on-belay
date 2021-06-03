@@ -102,9 +102,15 @@ export default function ClimbRoute (props){
                 {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
                 {/* ------------------------------------- */}
-                <div style={{textAlign:'left', margin:'3vh auto', width:'70%', maxWidth:'1024px'}}>
-                    <h2 style={{fontFamily:'Poppins, sans-serif'}}>{route.data.name? route.data.name: route.data.location}</h2>
-                    <div><Icon name='point'/> <h3 style={{display:'inline',  fontFamily:'Poppins, sans-serif' }}>Burlington, VT</h3></div>
+                {/* <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
+                    Log a Climb
+                </Button> */}
+                <div style={{textAlign:'left', margin:'3vh auto', width:'90%', maxWidth:'1024px'}}>
+                <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
+                    Climb
+                </Button>
+                    <h2 style={{margin: '2vmin', fontFamily:'Poppins, sans-serif'}}>{route.data.name? route.data.name: route.data.location}</h2>
+                    <div style={{margin: '2vmin'}}><Icon name='point'/> <h3 style={{display:'inline',  fontFamily:'Poppins, sans-serif' }}>Burlington, VT</h3></div>
                 </div>
                 <Divider horizontal>
                     <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
@@ -128,22 +134,19 @@ export default function ClimbRoute (props){
                     {!seeAllClimbs&&climbs.length > 0 ? 
                     <>
                         {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb} location={location.pathname.split('/')[1]}/>)}
-                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(true)}>See All</Button>
+                        <Button size='small' className='route-btns' onClick={() => setSeeAllClimbs(true)}>See All</Button>
                     </>: ''}
                     {/* Shows All climbs and a button to collapse */}
                     {seeAllClimbs&&climbs.length > 0? 
                     <>
                         {climbs.map(climb => <ClimbCard key={climb.id} climb={climb} location={location.pathname.split('/')[1]}/>)}
-                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
+                        <Button size='small' className='route-btns' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
                     </>: ''}
                     {/* Shows That you havent climbed this route yet */}
                     {climbs.length === 0 ? 
                     <>
                         <Header as='h4'>You Haven't Climbed This Route Yet</Header>
                     </>: ''}
-                    <Button inverted size='mini' color='purple' as={Link} to='/climbs/new'>
-                        Log a Climb
-                    </Button>
                 </Container>
                  
                 {/* ---------------------------------- */}
@@ -152,7 +155,7 @@ export default function ClimbRoute (props){
                 {route.data.gym_outdoor === 'Outdoor'? 
                 <>
                 <Divider horizontal>
-                    <Header as='h3'>
+                    <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
                         Comments
                     </Header>
                 </Divider>

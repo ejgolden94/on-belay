@@ -11,14 +11,6 @@ export default function RouteStats(props) {
         }
     }
 
-    const calcHeightClimbed = (climbsArr) => {
-        if(climbsArr){
-            return climbsArr.length * route.height
-        } else {
-            return 0
-        }
-    }
-
     const countSuccesses = (climbsArr) => {
         if(climbsArr){
             const successes = climbsArr.filter(element => ['Flash', 'On-sight', 'Redpoint'].includes(element.performance))
@@ -31,19 +23,19 @@ export default function RouteStats(props) {
     return (
         <div className='route-stats' style={{backgroundColor:`${ratingColor}`}}>
             <div
-                style={{color:'white', padding:'7vw', fontFamily:'Poppins, sans-serif', fontSize:'calc(30px + 30 * ((100vw - 320px) / 1050))', fontWeight:'bold'}}
+                style={{color:'white', padding:'7vw', fontFamily:'Poppins, sans-serif', fontSize:'calc(30px + 20 * ((100vw - 320px) / 1050))', fontWeight:'bold'}}
             >{route.rating}</div>
             <div style={{display:'flex', width:'50%', justifyContent: 'space-evenly', color:'white', fontWeight:'bold'}}>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{route.height}'</h2>
+                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 10 * ((100vw - 320px) / 1050))'}}>{route.height}'</h2>
                     <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Height</p>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))' }}>{countClimbs(climbs)}</h2>
+                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 10 * ((100vw - 320px) / 1050))' }}>{countClimbs(climbs)}</h2>
                     <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Climbs</p>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{countSuccesses(climbs)}</h2>
+                    <h2 style={{fontFamily:'Poppins, sans-serif', margin:'0', fontSize: 'calc(22px + 10 * ((100vw - 320px) / 1050))'}}>{countSuccesses(climbs)}</h2>
                     <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Successes</p>
                 </div>
             </div>
