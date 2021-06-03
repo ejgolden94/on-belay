@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react' 
 import {Header,
         Image, 
-        Segment,
+        Icon,
         Divider, 
         Container, 
         Button,
         Message} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
-import {formatDate} from '../formatDate'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
 import BackButton from './BackButton'
@@ -16,7 +15,6 @@ import RouteStats from './RouteStats'
 import RouteSidebar from './RouteSidebar'
 import RouteComments from './RouteComments'
 import Footer from './Footer'
-import { calculateRatingClass } from '../calculateRatingClass'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -72,7 +70,7 @@ export default function ClimbRoute (props){
             {/* ------------------------------- */}
             <BackButton />
             <div>
-                <h2 className='page-headers'>{route.data.name}</h2>
+                <h2 className='page-headers'></h2>
                 <div style={{backgroundColor:'rgba(0,0,0,0.5'}}>
                     <Image 
                         className='route-img'
@@ -96,11 +94,6 @@ export default function ClimbRoute (props){
                     setVisible={setVisible}
                     />
 
-                {/* ------------------------------- */}
-                {/* ------------ Stats ------------ */}
-                {/* ------------------------------- */}
-                {/* <RouteStats climbs={climbs} route={route.data}/> */}
-
                 {/* --------------------------------------- */}
                 {/* ------------  Announcements ----------- */}
                 {/* --------------------------------------- */}
@@ -109,24 +102,24 @@ export default function ClimbRoute (props){
                 {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
                 {/* ------------------------------------- */}
+                <div style={{textAlign:'left', margin:'3vh auto', width:'70%', maxWidth:'1024px'}}>
+                    <h2 style={{fontFamily:'Poppins, sans-serif'}}>{route.data.name}</h2>
+                    <div><Icon name='point'/> <h3 style={{display:'inline',  fontFamily:'Poppins, sans-serif' }}>Burlington, VT</h3></div>
+                </div>
                 <Divider horizontal>
-                    <Header as='h3'>
+                    <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
                         Description
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
                     <RouteDetails route={route.data} />
-                    <div className='route-meta'>
-                        <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
-                        <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>
-                    </div>
                 </Container>
 
                 {/* ------------------------------------- */}
                 {/* ------------  YOUR CLIMBS ----------- */}
                 {/* ------------------------------------- */}
                 <Divider horizontal>
-                    <Header as='h3'>
+                    <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
                         Your Climbs
                     </Header>
                 </Divider>
