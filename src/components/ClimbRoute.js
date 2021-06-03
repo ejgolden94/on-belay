@@ -14,6 +14,7 @@ import RouteStats from './RouteStats'
 import RouteSidebar from './RouteSidebar'
 import RouteComments from './RouteComments'
 import Footer from './Footer'
+import {formatDate} from '../formatDate'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -108,7 +109,7 @@ export default function ClimbRoute (props){
                 {/* <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
                     Log a Climb
                 </Button> */}
-                <div style={{textAlign:'left', margin:'3vh auto', width:'90%', maxWidth:'1024px'}}>
+                <div className='route-climb-info'>
                 <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
                     Climb
                 </Button>
@@ -116,7 +117,7 @@ export default function ClimbRoute (props){
                     <div style={{margin: '2vmin'}}><Icon name='point'/> <h3 style={{display:'inline',  fontFamily:'Poppins, sans-serif' }}>Burlington, VT</h3></div>
                 </div>
                 <Divider horizontal>
-                    <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
+                    <Header as='h3' className='font-inherit'>
                         Description
                     </Header>
                 </Divider>
@@ -128,7 +129,7 @@ export default function ClimbRoute (props){
                 {/* ------------  YOUR CLIMBS ----------- */}
                 {/* ------------------------------------- */}
                 <Divider horizontal>
-                    <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
+                    <Header as='h3' className='font-inherit'>
                         Your Climbs
                     </Header>
                 </Divider>
@@ -148,7 +149,7 @@ export default function ClimbRoute (props){
                     {/* Shows That you havent climbed this route yet */}
                     {climbs.length === 0 ? 
                     <>
-                        <Header as='h4'>You Haven't Climbed This Route Yet</Header>
+                        <p className='font-inherit'>You Haven't Climbed This Route Yet</p>
                     </>: ''}
                 </Container>
                  
@@ -158,7 +159,7 @@ export default function ClimbRoute (props){
                 {route.data.gym_outdoor === 'Outdoor'? 
                 <>
                 <Divider horizontal>
-                    <Header as='h3' style={{fontFamily:'Poppins, sans-serif'}}>
+                    <Header as='h3' className='font-inherit'>
                         Comments
                     </Header>
                 </Divider>
@@ -169,6 +170,11 @@ export default function ClimbRoute (props){
                     setcomments={setcomments}
                 />
                 </>:''}
+   
+                <div className='route-meta route-climb-info'>
+                    <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
+                    <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>
+                </div>
             </div>
             <Footer />
             </div>
