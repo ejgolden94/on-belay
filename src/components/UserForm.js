@@ -1,6 +1,6 @@
 import React, { Component } from 'react' 
 import { Redirect } from 'react-router-dom';
-import { Container, Form, Button, Header, Message, Icon, Image } from 'semantic-ui-react'
+import { Container, Form, Message, Icon, Image } from 'semantic-ui-react'
 
 export default class UserForm extends Component {
     constructor(props) {

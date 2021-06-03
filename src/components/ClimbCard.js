@@ -1,5 +1,5 @@
 import React from 'react' 
-import {Card, Divider, Icon} from 'semantic-ui-react'
+import {Divider, Icon} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {calculateRatingClass} from '../calculateRatingClass'
 import {formatDate} from '../formatDate'
@@ -13,7 +13,7 @@ export default function ClimbCard (props){
             <Card.Content className='climbcard-content'> */}
             <div className='climbcard'> 
                 <div className='climbcard-content'>
-                    <img src='/on-belay_climb-log-icon.png' style={{maxHeight:'8vh'}}/>
+                    <img src='/on-belay_climb-log-icon.png' alt='climber icon' style={{maxHeight:'8vh'}}/>
 
                     <div className='climbcard-desc'>
                         {/* CLIMB SETTING */}

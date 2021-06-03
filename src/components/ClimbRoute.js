@@ -4,8 +4,7 @@ import {Header,
         Icon,
         Divider, 
         Container, 
-        Button,
-        Message} from 'semantic-ui-react'
+        Button} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
@@ -70,7 +69,7 @@ export default function ClimbRoute (props){
             {/* ------------------------------- */}
             <BackButton />
             <div>
-                <h2 className='page-headers'></h2>
+                <h2 className='page-headers'>Route Info</h2>
                 {/* --------------------------------------- */}
                 {/* ------------  Announcements ----------- */}
                 {/* --------------------------------------- */}
