@@ -6,6 +6,7 @@ import BackButton from './BackButton'
 import {formatDate} from '../formatDate'
 import {capitalize} from '../capitalize'
 import RouteDetails from './RouteDetails'
+import ClimbStats from './ClimbStats'
 
 export default function Climb (props){
     const {baseURL, setCurrentClimb} = props
@@ -51,7 +52,7 @@ export default function Climb (props){
                     {/* ------------------------------- */}
                     {/* ------------ Stats ------------ */}
                     {/* ------------------------------- */}
-                    {/* <RouteStats climbs={climbs} route={route.data}/> */}
+                    <ClimbStats climb={climb.data}/>
                 </div>
 
                 <div className='route-climb-info'>
