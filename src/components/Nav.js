@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import {Menu, Icon, Sidebar} from 'semantic-ui-react'
 import BackButton from './BackButton'
 import useWindowSize from '../useWindowSize'
+import RouteSidebar from './RouteSidebar'
 
 export default function Nav (props){
     const { height, width } = useWindowSize();
-
     const [ sideBarVisible, setSideBarVisible ] = useState(false)
-
+    const {baseURL, location, route, setAnnouncement, announcement} = props
+    console.log(location)
     const toggleSideBarVisible =()=>{
         setSideBarVisible(!sideBarVisible)
     }
@@ -50,14 +51,45 @@ export default function Nav (props){
         </>
     )
     
-    if(width >= 605){
+    if(width >= 690){
     return (
+        <>
         <Menu icon='labeled' size='small' inverted  className='nav'>
             <Menu.Item>
                 <BackButton />
             </Menu.Item>
             {MenuItems}
-        </Menu>
+            {location && location==='routes'?
+            <Menu.Item>
+                    <Icon inverted name='angle double right' size='large' onClick={()=> toggleSideBarVisible()}/>
+                    more
+            </Menu.Item> 
+            :''}
+            </Menu>
+
+            <Sidebar
+                as={Menu}
+                animation='overlay'
+                direction='right'
+                inverted
+                icon
+                vertical
+                visible={sideBarVisible}
+                width='thin'
+                >
+                <Menu.Item onClick={()=>toggleSideBarVisible()} className='font-inherit'>
+                    <Icon name='arrow right' style={{margin:'1vh auto'}}/>
+                    Collapse Menu
+                </Menu.Item>
+                {location && location==='routes'?
+                    <RouteSidebar 
+                        baseURL={baseURL} 
+                        route={route} 
+                        setAnnouncement={setAnnouncement} 
+                        announcement={announcement}
+                />:''}
+            </Sidebar>
+            </>
     )
     }else{
         return(
@@ -85,7 +117,13 @@ export default function Nav (props){
                     <Icon name='arrow right' style={{margin:'1vh auto'}}/>
                     Collapse Menu
                 </Menu.Item>
-
+                {location && location==='routes'?
+                    <RouteSidebar 
+                        baseURL={baseURL} 
+                        route={route} 
+                        setAnnouncement={setAnnouncement} 
+                        announcement={announcement}
+                    />:''}
                 {MenuItems}
             </Sidebar>
             </>

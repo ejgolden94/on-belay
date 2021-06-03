@@ -50,6 +50,14 @@
   max-width: 100px;
 }
 
+.lost-btn{
+  margin-top:5vh !important;
+  background-color: #00998A !important; 
+  color:white !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+}
+
 .go-btn {
   border: none;
   width: 100px; 

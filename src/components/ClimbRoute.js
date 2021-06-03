@@ -19,13 +19,13 @@ import Nav from './Nav'
 export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
+    const locationName = location.pathname.split('/')[1]
 
     const {baseURL, setCurrentRoute, setClimbSetting} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
     const [announcement, setAnnouncement] = useState('')
-    const [visible, setVisible] = useState(false)
     const [comments, setcomments] = useState([]);
 
     const getRoute = async() => {
@@ -68,7 +68,13 @@ export default function ClimbRoute (props){
             {/* ------------------------------- */}
             {/* ------------ Header ----------- */}
             {/* ------------------------------- */}
-            <Nav />
+                <Nav 
+                    baseURL={baseURL} 
+                    location={locationName}
+                    route={route.data} 
+                    setAnnouncement={setAnnouncement} 
+                    announcement={announcement}
+                    />
             <div>
                 <h2 className='page-headers'>Route Info</h2>
                 {/* --------------------------------------- */}
@@ -87,21 +93,12 @@ export default function ClimbRoute (props){
                             '/on-belay_indoor-climb-placeholder_orange.png'
                             :'/on-belay_outdoor-climb-placeholder_orange.png' } 
                         style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
-                        onClick={()=>setVisible(false)}
                     />
                     {/* ------------------------------- */}
                     {/* ------------ Stats ------------ */}
                     {/* ------------------------------- */}
                     <RouteStats climbs={climbs} route={route.data}/>
                 </div>
-                <RouteSidebar 
-                    baseURL={baseURL} 
-                    route={route.data} 
-                    setAnnouncement={setAnnouncement} 
-                    announcement={announcement}
-                    visible={visible}
-                    setVisible={setVisible}
-                    />
 
                 {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}

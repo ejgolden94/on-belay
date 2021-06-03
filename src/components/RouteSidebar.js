@@ -1,18 +1,15 @@
 import React, {useState} from 'react' 
-import {Button, Menu, Sidebar, Icon, Modal, Form} from 'semantic-ui-react'
+import {Button, Menu, Icon, Modal, Form} from 'semantic-ui-react'
 import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
 
-    const {baseURL, route, setAnnouncement, announcement, visible, setVisible} = props
+    const {baseURL, route, setAnnouncement, announcement} = props
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [announceModalOpen, setAnnounceModalOpen] = useState(false)
     const [removeAnnounceModalOpen, setRemoveAnnounceModalOpen] = useState(false)
     
-    const toggleVisible = () => {
-        setVisible(!visible)
-    }
 
     const toggleModalOpen = () => {
         setModalOpen(!modalOpen)
@@ -71,44 +68,26 @@ export default function RouteSidebar (props){
     } else {
         return (
             <>
-            <Sidebar
-                as={Menu}
-                animation='overlay'
-                direction='right'
-                inverted
-                icon
-                vertical
-                visible={visible}
-                width='thin'
-            >
-                <Menu.Item as={Link} to={`/routes/${route.id}/edit`} className='font-inherit'>
-                <Icon name='pencil' style={{margin:'1vh auto'}}/>
-                    Edit
-                    </Menu.Item>
-                <Menu.Item onClick={()=>toggleModalOpen()} className='font-inherit'>
-                <Icon name='delete' style={{margin:'1vh auto'}}/>
-                    Delete
-                    </Menu.Item>
-                <Menu.Item className='font-inherit'>
-                <Icon name='flag' style={{margin:'1vh auto'}}/>
-                    Flag For Abuse
-                    </Menu.Item>
-                <Menu.Item onClick={()=>toggleAnnounceModalOpen()} className='font-inherit'>
-                    <Icon name='microphone' style={{margin:'1vh auto'}}/>
-                    Make an Announcement
+            <Menu.Item as={Link} to={`/routes/${route.id}/edit`} className='font-inherit'>
+                <Icon name='pencil' className='nav-icon'/>
+                Edit
                 </Menu.Item>
-                <Menu.Item onClick={()=>toggleRemoveAnnounceModalOpen()} className='font-inherit'>
-                    <Icon name='microphone slash' style={{margin:'1vh auto'}}/>
-                    Remove Announcement
+            <Menu.Item onClick={()=>toggleModalOpen()} className='font-inherit'>
+            <Icon name='delete' className='nav-icon'/>
+                Delete
                 </Menu.Item>
-                <Menu.Item onClick={()=>toggleVisible()} className='font-inherit'>
-                    <Icon name='arrow right' style={{margin:'1vh auto'}}/>
-                    Collapse Menu
+            <Menu.Item className='font-inherit'>
+            <Icon name='flag' className='nav-icon'/>
+                Flag For Abuse
                 </Menu.Item>
-            </Sidebar>
-            <Button icon inverted className='menu-btn' onClick={()=>toggleVisible()}>
-                <Icon name='sidebar' />
-            </Button>
+            <Menu.Item onClick={()=>toggleAnnounceModalOpen()} className='font-inherit'>
+                <Icon name='microphone' className='nav-icon'/>
+                Make an Announcement
+            </Menu.Item>
+            <Menu.Item onClick={()=>toggleRemoveAnnounceModalOpen()} className='font-inherit'>
+                <Icon name='microphone slash' className='nav-icon'/>
+                Remove Announcement
+            </Menu.Item>
 
 
             <Modal
@@ -130,7 +109,7 @@ export default function RouteSidebar (props){
             </Modal>
 
             <Modal
-                size='mini'
+                size='small'
                 open={announceModalOpen}
                 >
                 <Modal.Header>Make an Announcement on this Route</Modal.Header>
@@ -159,7 +138,7 @@ export default function RouteSidebar (props){
             </Modal>
 
             <Modal
-                size='mini'
+                size='small'
                 open={removeAnnounceModalOpen}
                 >
                 <Modal.Header>Remove the Announcement on this Route</Modal.Header>
