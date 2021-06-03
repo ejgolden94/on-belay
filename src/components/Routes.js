@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react' 
 import {Button, Icon} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-import BackButton from './BackButton'
 import ClimbRouteCard from './ClimbRouteCard'
 import Footer from './Footer'
+import Nav from './Nav'
 
 export default function Routes(props){
     const {baseURL} = props
@@ -26,7 +26,7 @@ export default function Routes(props){
 
     return (
         <div className='page-and-footer'>
-        <BackButton />
+        <Nav />
         <div>
             <h2 as='h2' className='page-headers'>Climb Routes</h2>
             <h2 className='page-sub-headers'>Choose Your Climb Route</h2>

@@ -8,13 +8,13 @@ import {Header,
 import {Link, useLocation} from 'react-router-dom'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
-import BackButton from './BackButton'
 import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
 import RouteSidebar from './RouteSidebar'
 import RouteComments from './RouteComments'
 import Footer from './Footer'
 import {formatDate} from '../formatDate'
+import Nav from './Nav'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -68,7 +68,7 @@ export default function ClimbRoute (props){
             {/* ------------------------------- */}
             {/* ------------ Header ----------- */}
             {/* ------------------------------- */}
-            <BackButton />
+            <Nav />
             <div>
                 <h2 className='page-headers'>Route Info</h2>
                 {/* --------------------------------------- */}

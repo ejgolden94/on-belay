@@ -1,13 +1,13 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
-import BackButton from './BackButton'
 import Footer from './Footer'
+import Nav from './Nav'
 
 export default function CreateClimb(props){
     const {setClimbSetting} = props
     return(
         <div className='page-and-footer'>
-        <BackButton />
+        <Nav />
         <h2 className='page-headers'>Log A Climb</h2>
         <h2 className='page-sub-headers'>Choose Your Climb Setting</h2>
         <div className='climb-type-container'>

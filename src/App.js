@@ -122,7 +122,7 @@ function App() {
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
-              {/* {!currentUser? <Redirect to='/user/login'/> :  */}
+              {!currentUser? <Redirect to='/user/login'/> : 
               <>
               <Nav/>
               <Container style={{ height:'90vh'}}>
@@ -134,7 +134,7 @@ function App() {
                 <Footer style={{margin:'0', padding: '0'}}/>
               </footer>
               </>
-              {/* } */}
+              }
             </Route>
 
 

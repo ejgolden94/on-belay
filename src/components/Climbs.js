@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react' 
 import {Link, useLocation} from 'react-router-dom'
 import {Button, Icon, Divider} from 'semantic-ui-react'
-import BackButton from './BackButton'
 import ClimbCard from './ClimbCard'
 import Footer from './Footer'
+import Nav from './Nav'
 
 export default function Climbs(props) {
     const {baseURL} = props
@@ -26,7 +26,7 @@ export default function Climbs(props) {
 
     return (
         <div className='page-and-footer'>
-            <BackButton />
+            <Nav />
             <div>
                 <h2 className='page-headers'>Your Climbs</h2>
                 <Divider className='climbDivider'/>

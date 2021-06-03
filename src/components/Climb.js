@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {Header, Divider,Image, Button, Icon } from 'semantic-ui-react'
 import NotFound from './NotFound'
-import BackButton from './BackButton'
 import {formatDate} from '../formatDate'
 import {capitalize} from '../capitalize'
 import RouteDetails from './RouteDetails'
 import ClimbStats from './ClimbStats'
+import Nav from './Nav'
 
 export default function Climb (props){
     const {baseURL, setCurrentClimb} = props
@@ -36,7 +36,7 @@ export default function Climb (props){
     return(
         climb.data? 
         <div className='page-and-footer'>
-        <BackButton/>
+        <Nav />
         <div>
             <h2 className='page-headers'>{capitalize(climb.data.route.gym_outdoor)} Climb</h2>
             <p>{formatDate(climb.data.created,'long time')}</p>

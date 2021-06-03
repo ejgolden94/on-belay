@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
 import {Form, Segment, Image} from 'semantic-ui-react'
-import BackButton from './BackButton'
 import Footer from './Footer'
 import {capitalize} from '../capitalize'
+import Nav from './Nav'
 
 const climbTypeOptions = [
     { key: 'Sport', value: 'Sport', text: 'Sport' },
@@ -138,7 +138,7 @@ export default class ClimbForm extends Component {
         }
         return(
             <div className='page-and-footer'>
-            <BackButton/>
+            <Nav/>
             <div>
             <h2 className='page-headers'>{capitalize(this.state.context)} Climb Log</h2>
             <Segment className='form-segment'>
