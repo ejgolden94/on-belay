@@ -71,6 +71,16 @@
   margin: 0 !important;
 }
 
+.route-stats{
+  display:flex; 
+  align-items: center;
+  justify-content:space-between;
+  min-height: 5vh;
+  max-height:15vh;
+  max-width: 1050px;
+  margin: 0 auto;
+} 
+
 .inline {
   display: inline;
 }
@@ -157,6 +167,11 @@
   background-image: url('./images/on-belay_indoor-climb-placeholder_orange.png');
   background-position: center;
   background-size: 150%;
+}
+
+.route-img{
+  width: 100%;
+  max-width: 1050px !important;
 }
 
 .route-meta{

@@ -23,7 +23,6 @@ export default function Climbs(props) {
         getClimbs()
     },[baseURL])
 
-    console.log(climbs);
     return (
         <div className='page-and-footer'>
             <BackButton />

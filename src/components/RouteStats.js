@@ -1,13 +1,13 @@
 import React from 'react'
-import {Segment} from 'semantic-ui-react'
+import {calculateRatingClass} from '../calculateRatingClass'
 
 export default function RouteStats(props) {
     const {route, climbs} = props
     const countClimbs = (climbsArr) => {
         if(climbsArr){
-            return climbsArr.length===1? climbsArr.length + ' climb' :  climbsArr.length + ' climbs' 
+            return climbsArr.length
         } else {
-            return '0 climbs'
+            return 0
         }
     }
 
@@ -22,18 +22,31 @@ export default function RouteStats(props) {
     const countSuccesses = (climbsArr) => {
         if(climbsArr){
             const successes = climbsArr.filter(element => ['Flash', 'On-sight', 'Redpoint'].includes(element.performance))
-            return successes.length === 1? successes.length + ' success': successes.length + ' successes'
+            return successes.length
         } else {
-            return `0 successes`
+            return 0
         }
     }
-
+    const ratingColor = calculateRatingClass(route.rating)
     return (
-        <Segment className='stats' style={{backgroundColor:'lightgray', margin:'0 0 2vh 0'}}>
-                    <div>Your Stats:</div>
-                    <div>{countClimbs(climbs)}</div>
-                    <div>{calcHeightClimbed(climbs)}' climbed</div>
-                    <div>{countSuccesses(climbs)}</div>
-        </Segment>
+        <div className='route-stats' style={{backgroundColor:`${ratingColor}`}}>
+            <div
+                style={{color:'white', padding:'7vw', fontFamily:'Poppins, sans-serif', fontSize:'calc(30px + 30 * ((100vw - 320px) / 1050))', fontWeight:'bold'}}
+            >{route.rating}</div>
+            <div style={{display:'flex', width:'50%', justifyContent: 'space-evenly', color:'white', fontWeight:'bold'}}>
+                <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+                    <h2 style={{margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{route.height}'</h2>
+                    <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Height</p>
+                </div>
+                <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+                    <h2 style={{margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))' }}>{countClimbs(climbs)}</h2>
+                    <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Climbs</p>
+                </div>
+                <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+                    <h2 style={{margin:'0', fontSize: 'calc(22px + 22 * ((100vw - 320px) / 1050))'}}>{countSuccesses(climbs)}</h2>
+                    <p style={{fontSize: 'calc(10px + 6 * ((100vw - 320px) / 1050))'}}>Successes</p>
+                </div>
+            </div>
+        </div>
     )
 }

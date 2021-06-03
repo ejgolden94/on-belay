@@ -14,7 +14,7 @@ export default function ClimbRoute (props) {
                 style={{maxHeight:'200px', objectFit:'cover'}} 
                 src={route.image? route.image: route.gym_outdoor==='Indoor'? 
                         '/on-belay_indoor-climb-placeholder_orange.png'
-                        :'../on-belay_outdoor-climb-placeholder_orange.png' } 
+                        :'/on-belay_outdoor-climb-placeholder_orange.png' } 
                 />
             <Card.Content className='card-content'>
             <div>

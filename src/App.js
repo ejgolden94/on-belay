@@ -82,7 +82,6 @@ function App() {
             {/* /// Show Route /// */}
             <Route path="/routes/:routeId">
               <ClimbRoute baseURL={baseURL} setCurrentRoute={setCurrentRoute} setClimbSetting={setClimbSetting}/>
-              <Footer />
             </Route>
 
             {/* /// Routes /// */}

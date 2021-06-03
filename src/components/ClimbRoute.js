@@ -15,6 +15,8 @@ import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
 import RouteSidebar from './RouteSidebar'
 import RouteComments from './RouteComments'
+import Footer from './Footer'
+import { calculateRatingClass } from '../calculateRatingClass'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -62,26 +64,29 @@ export default function ClimbRoute (props){
             <NotFound redirect='Routes' redirectTo='/routes'/>
         )
     } else {
-        console.log(comments)
-        console.log("rendering climb route")
         return(
             route.data?
-            <>
+            <div className='page-and-footer'>
             {/* ------------------------------- */}
             {/* ------------ Header ----------- */}
             {/* ------------------------------- */}
             <BackButton />
-            <Segment className='page-container'>
-                <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
-                    {route.data.name}
-                </Header>
-                <Image 
-                    src={route.data.image? route.data.image: route.data.gym_outdoor==='Indoor'? 
-                        '/on-belay_indoor-climb-placeholder_orange.png'
-                        :'../on-belay_outdoor-climb-placeholder_orange.png' } 
-                    style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
-                    onClick={()=>setVisible(false)}
-                />
+            <div>
+                <h2 className='page-headers'>{route.data.name}</h2>
+                <div style={{backgroundColor:'rgba(0,0,0,0.5'}}>
+                    <Image 
+                        className='route-img'
+                        src={route.data.image? route.data.image: route.data.gym_outdoor==='Indoor'? 
+                            '/on-belay_indoor-climb-placeholder_orange.png'
+                            :'/on-belay_outdoor-climb-placeholder_orange.png' } 
+                        style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
+                        onClick={()=>setVisible(false)}
+                    />
+                    {/* ------------------------------- */}
+                    {/* ------------ Stats ------------ */}
+                    {/* ------------------------------- */}
+                    <RouteStats climbs={climbs} route={route.data}/>
+                </div>
                 <RouteSidebar 
                     baseURL={baseURL} 
                     route={route.data} 
@@ -94,7 +99,7 @@ export default function ClimbRoute (props){
                 {/* ------------------------------- */}
                 {/* ------------ Stats ------------ */}
                 {/* ------------------------------- */}
-                <RouteStats climbs={climbs} route={route.data}/>
+                {/* <RouteStats climbs={climbs} route={route.data}/> */}
 
                 {/* --------------------------------------- */}
                 {/* ------------  Announcements ----------- */}
@@ -165,9 +170,9 @@ export default function ClimbRoute (props){
                     setcomments={setcomments}
                 />
                 </>:''}
-
-            </Segment>
-            </>
+            </div>
+            <Footer />
+            </div>
             :''
         )
     }

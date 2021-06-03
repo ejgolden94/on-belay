@@ -1,19 +1,13 @@
 import React from 'react'
-import {calculateRatingClass} from '../calculateRatingClass'
 
 export default function RouteDetails (props){
     const {route} = props
     return (
         <>
+        {route.description?
         <div className='route-desc'>
-            <div className={'circle'} 
-                style={{marginRight:'10px', minWidth:'75px', height:'75px',color:'white', backgroundColor:`${calculateRatingClass(route.rating)}`}}>
-                {route.rating}
-            </div>
-            <div>
-                {route.description}
-            </div>
-        </div>
+            {route.description}
+        </div> : ''}
         <div className='route-desc'>
             <h4 style={{marginRight:'10px'}}>Height:</h4>
             {route.height}'
