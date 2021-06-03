@@ -71,6 +71,15 @@ export default function ClimbRoute (props){
             <BackButton />
             <div>
                 <h2 className='page-headers'></h2>
+                {/* --------------------------------------- */}
+                {/* ------------  Announcements ----------- */}
+                {/* --------------------------------------- */}
+                {announcement? 
+                    <div style={{margin:'0', backgroundColor:'black', color:'white', padding: '2vmin'}}>
+                        <strong>!Announcement:</strong> {announcement}
+                    </div>:''}
+
+
                 <div style={{backgroundColor:'rgba(0,0,0,0.5'}}>
                     <Image 
                         className='route-img'
@@ -93,11 +102,6 @@ export default function ClimbRoute (props){
                     visible={visible}
                     setVisible={setVisible}
                     />
-
-                {/* --------------------------------------- */}
-                {/* ------------  Announcements ----------- */}
-                {/* --------------------------------------- */}
-                {announcement? <Message color='orange' style={{margin:'0'}}>{announcement}</Message>:''}
 
                 {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
