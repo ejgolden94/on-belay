@@ -11,7 +11,7 @@ export default function BackButton (){
     }
     
     return(
-        <Button onClick={goBack} className='back-btn' circular>
+        <Button onClick={goBack} className='back-btn'>
             <Image 
                 src="/on-belay_left-arrow-button.png"
                 className='back-btn-image'

@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import ClimbForm from './components/ClimbForm';
 import RouteForm from './components/RouteForm';
 import ClimbType from './components/ClimbType';
+import Nav from './components/Nav';
 
 
 let baseURL = ''
@@ -121,8 +122,9 @@ function App() {
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
-              {!currentUser? <Redirect to='/user/login'/> : 
+              {/* {!currentUser? <Redirect to='/user/login'/> :  */}
               <>
+              <Nav/>
               <Container style={{ height:'90vh'}}>
                 <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
                 <Button as={Link} to='/routes'>See Routes</Button>
@@ -132,7 +134,7 @@ function App() {
                 <Footer style={{margin:'0', padding: '0'}}/>
               </footer>
               </>
-              }
+              {/* } */}
             </Route>
 
 

@@ -17,6 +17,11 @@
   color: white;
 }
 
+.nav{
+  align-items: center;
+  border-radius: 0 !important;
+}
+
 .page-headers {
   font-family: inherit;
   margin-top: 10vh !important;
@@ -102,14 +107,17 @@
 }
 
 .back-btn {
-  position: absolute;
+  /* position: absolute;
   left: 10px;
-  top: 2vh;
+  top: 2vh; */
+  padding: 0 !important;
   background-color: inherit !important;
 }
 
 .back-btn-image {
   height: 5vh;
+  min-height: 40px;
+  max-height: 75px;
 }
 
 .add-route-btn {
