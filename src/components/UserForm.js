@@ -1,6 +1,7 @@
 import React, { Component } from 'react' 
 import { Redirect } from 'react-router-dom';
-import { Container, Form, Message, Icon, Image } from 'semantic-ui-react'
+import {Form, Message, Icon, Image } from 'semantic-ui-react'
+import Footer from './Footer';
 
 export default class UserForm extends Component {
     constructor(props) {
@@ -57,7 +58,8 @@ export default class UserForm extends Component {
             return <Redirect to='/' />
           }
         return (
-            <Container style={{height:'90vh', textAlign:'center'}}>
+            <div className='page-and-footer'>
+                <div className='login-container'>
                 <Image src='/on-belay_logo.png' style={{margin: '25vh auto 10vh auto'}}/>
                 <Form size='large' style={{width: '70%', margin:'20px auto'}} onSubmit={(event)=>this.handleSubmit(event)}>
                     <Form.Input 
@@ -116,7 +118,9 @@ export default class UserForm extends Component {
                     Already have an account? <a href='/user/login'>Sign In!</a>
                 </h4>:null
                 }
-            </Container>
+                </div>
+                <Footer/>
+            </div>
         )
     }
 }

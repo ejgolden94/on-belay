@@ -58,14 +58,12 @@ function App() {
             {/* /// User Login /// */}
             <Route path="/user/login">
               <UserForm context='login' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
-              <Footer />
             </Route>
 
 
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
-              <Footer />
             </Route>
 
             {/* /// Create Route /// */}

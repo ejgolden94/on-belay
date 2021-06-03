@@ -26,7 +26,6 @@ const climbTypeOptions = [
 export default class ClimbForm extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.baseURL = this.props.baseURL
         this.climbSetting = this.props.climbSetting
         const context = this.props.location.pathname.split('/')[3]? this.props.location.pathname.split('/')[3]: this.props.location.pathname.split('/')[2]
