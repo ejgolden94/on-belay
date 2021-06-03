@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,100;1,300;1,400;1,700&display=swap');
 
 .App {
   text-align: center;
-  /* font-family: 'Poppins, sans-serif'; */
+  font-family: Poppins, sans-serif;
 }
 
 .App-header {
@@ -16,14 +17,110 @@
   color: white;
 }
 
+.nav{
+  align-items: center;
+  border-radius: 0 !important;
+}
+
+.nav-icon{
+  margin: 1vh auto !important;
+}
+
+.page-and-footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.page-headers {
+  font-family: inherit;
+  margin-top: 2vh !important;
+  font-size: 3rem;
+}
+
+.page-sub-headers {
+  margin: 1vh 0 0 0;
+}
+
+.login-btn {
+  border: none;
+  width: 15vmin;
+  min-width: 75px;
+  max-width: 100px;
+}
+
+.lost-btn{
+  margin-top:5vh !important;
+  background-color: #00998A !important; 
+  color:white !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+}
+
+.go-btn {
+  border: none;
+  width: 100px; 
+}
+
+.card-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+}
+
+.card-content::after{
+  content: none !important;
+}
+
+.form-segment{
+  max-width: 700px ;
+  margin: 2vh auto !important;
+}
+
 .climbcard {
-  margin: 15px auto !important;
+  margin: 0 auto !important;
+  padding: 2vh 0 !important;
+  max-width: 600px;
 }
 
 .climbcard-content{
-  display:flex;
-  justify-content: space-evenly;
+  display:flex; 
   align-items: center;
+  justify-content:space-evenly;
+  min-height: 5vh;
+  max-height:15vh;
+} 
+
+.climbDivider{
+  margin: 0 !important;
+}
+
+.route-stats{
+  display:flex; 
+  align-items: center;
+  justify-content:space-between;
+  min-height: 5vh;
+  max-height:15vh;
+  max-width: 1050px;
+  margin: 0 auto;
+  color: white;
+} 
+
+.climb-stats{
+  display:flex; 
+  align-items: center;
+  justify-content:space-around;
+  min-height: 5vh;
+  max-width: 1050px;
+  margin: 0 auto;
+  color: white;
+} 
+
+.route-btns{
+  margin-top: 2vh !important;
+  font-family: inherit !important;
 }
 
 .inline {
@@ -31,17 +128,27 @@
 }
 
 .back-btn {
-  position: absolute;
+  /* position: absolute;
   left: 10px;
-  top: 2vh;
-  /* z-index: -1; */
+  top: 2vh; */
+  padding: 0 !important;
+  background-color: inherit !important;
+}
+
+.back-btn-image {
+  height: 5vh;
+  min-height: 40px;
+  max-height: 75px;
 }
 
 .add-route-btn {
   position: absolute;
   right: 10px;
   top: 2vh;
-  /* z-index: -1; */
+}
+
+.add-btn {
+  margin: 3vh !important;
 }
 
 .menu-btn {
@@ -49,11 +156,20 @@
   right: 10px;
   top: 8vh;
   border: none !important;
-  /* z-index: -1; */
+}
+
+.log-climb {
+  margin-right: 2vmin !important;
+  position: relative;
+  top: -3vmin;
 }
 
 .float-right {
   float: right;
+}
+
+.float-left {
+  float: left;
 }
 
 .stats {
@@ -83,38 +199,54 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100vh;
+  height: 70vh;
   width: 100%;
-  background: rgb(229,0,255);
-  background: linear-gradient(169deg, rgba(229,0,255,1) 25%, rgba(64,203,200,1) 65%);
 }
 
 .climb-type{
-  height:40vh !important;
-  width:40vh !important;
-  border: 3px solid palevioletred;
+  height: 27vh !important;
+  width: 27vh !important;
   margin: 0 auto;
-  color: white;
+  color: black;
+  font-weight: 900;
   padding: 3vh;
   font-size: 3.75rem;
 }
 
 .outdoor {
-  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('https://outdoorresearch.com.imgeng.in/media/magefan_blog/_20A0440.jpg');
+  background-image: url('./images/on-belay_outdoor-climb-placeholder_orange.png');
   background-position: center;
   background-size: 150%;
 }
 .indoor {
-  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/gym-rock-climbing.jpeg');
+  background-image: url('./images/on-belay_indoor-climb-placeholder_orange.png');
   background-position: center;
   background-size: 150%;
 }
 
+.route-img{
+  width: 100%;
+  max-width: 1050px !important;
+}
+
+.route-climb-info{
+  text-align: left;
+  margin: 3vh auto;
+  width:90%;
+  max-width:1024px;
+}
+
 .route-meta{
   color: gray;
-  text-align: left;
   font-size: 0.9em;
 }
+
+.login-container {
+  width: 90% !important;
+  max-width: 600px !important;
+  margin: 0 auto 10vh auto !important;
+}
+
 
 .page-container {
   width: 80% !important;
@@ -126,70 +258,6 @@
   background-color: rgba(0, 0, 0, 0) !important;
 }
 
-.five{
-  background-color: rgb(25, 194, 81);
-}
-
-.six{
-  background-color: rgb(93, 194, 25);
-}
-
-.seven{
-  background-color: rgb(183, 194, 25);
-}
-
-.eight{
-  background-color: rgb(216, 184, 6);
-}
-
-.nine{
-  background-color: rgb(216, 160, 6);
-}
-
-.ten-minus{
-  background-color: rgb(216, 143, 6);
-}
-
-.ten{
-  background-color: rgb(216, 118, 6);
-}
-
-.ten-plus{
-  background-color: rgb(216, 108, 6);
-}
-
-.eleven-minus{
-  background-color: rgb(216, 83, 6);
-}
-
-.eleven{
-  background-color: rgb(216, 73, 6);
-}
-
-.eleven-plus{
-  background-color: rgb(216, 52, 6);
-}
-
-.twelve-minus{
-  background-color: rgb(216, 6, 34);
-}
-
-.twelve{
-  background-color: rgb(216, 6, 80);
-}
-
-.twelve-plus{
-  background-color: rgb(216, 6, 136);
-}
-
-.thirteen{
-  background-color: rgb(216, 6, 216);
-}
-
-.fourteen{
-  background-color: rgb(157, 6, 216);
-}
-
-.fifteen{
-  background-color: rgb(6, 167, 216);
+.font-inherit{
+  font-family: Poppins, sans-serif !important;
 }

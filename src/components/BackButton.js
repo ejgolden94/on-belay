@@ -1,6 +1,6 @@
 import React from 'react' 
 import {useHistory} from 'react-router-dom'
-import {Button, Icon} from 'semantic-ui-react'
+import {Button, Image} from 'semantic-ui-react'
 
 
 export default function BackButton (){
@@ -11,11 +11,10 @@ export default function BackButton (){
     }
     
     return(
-        <Button icon onClick={goBack} className='back-btn' circular 
-            color='teal'>
-            <Icon 
-            name='angle left' 
-            size='large' 
+        <Button onClick={goBack} className='back-btn'>
+            <Image 
+                src="/on-belay_left-arrow-button.png"
+                className='back-btn-image'
             />
         </Button>
     )

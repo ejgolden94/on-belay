@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect} from 'react-router'
-import {Form, Segment, Container, Header, Button} from 'semantic-ui-react'
-import BackButton from './BackButton'
+import {Form, Segment, Image} from 'semantic-ui-react'
+import Footer from './Footer'
 import {capitalize} from '../capitalize'
+import Nav from './Nav'
 
 const climbTypeOptions = [
     { key: 'Sport', value: 'Sport', text: 'Sport' },
@@ -25,7 +26,6 @@ const climbTypeOptions = [
 export default class ClimbForm extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.baseURL = this.props.baseURL
         this.climbSetting = this.props.climbSetting
         const context = this.props.location.pathname.split('/')[3]? this.props.location.pathname.split('/')[3]: this.props.location.pathname.split('/')[2]
@@ -46,10 +46,10 @@ export default class ClimbForm extends Component {
         } else if(context === 'new') {
             const route = this.props.indoorRouteId? this.props.indoorRouteId: this.props.route.id
             this.state={
-                climb_type: '',
+                climb_type: 'Choose One',
                 image: '',
                 notes: '',
-                performance: '',
+                performance:'Choose One',
                 time: 0,
                 id:'',
                 route: route,
@@ -136,11 +136,12 @@ export default class ClimbForm extends Component {
            return <Redirect to={'/climbs/'+this.state.id} />
         }
         return(
-            <Container style={{minHeight:'90vh'}}>
-            <BackButton/>
-            <Header as='h2'>{capitalize(this.state.context)} Climb Log</Header>
-            <Segment style={{margin: '2vh auto 5vh auto'}}>
-            <Form onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
+            <div className='page-and-footer'>
+            <Nav/>
+            <div>
+            <h2 className='page-headers'>{capitalize(this.state.context)} Climb Log</h2>
+            <Segment className='form-segment'>
+            <Form size='large' onSubmit={(event)=>this.handleSubmit(event)} style={{textAlign: 'left'}}>
                 <Form.Dropdown
                     placeholder={this.state.climb_type} 
                     label='Climb Type'
@@ -192,13 +193,13 @@ export default class ClimbForm extends Component {
                     onChange={this.handleChange}
                 />
                 <div style={{width: '100%', textAlign:'center'}}>
-                {this.state.context === 'edit'? 
-                    <Button color='purple'>Submit Edits</Button>         
-                    :<Button color='purple'>Create New Climb</Button>}
-                </div> 
+                    <Image as='button' src='/on-belay_right-arrow-button.png' className='go-btn'/>
+                </div>
             </Form>
             </Segment>
-            </Container>
+            </div>
+            <Footer/>
+            </div>
         )
     }
     

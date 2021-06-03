@@ -1,4 +1,5 @@
 import './App.css';
+import 'semantic-ui-css/semantic.min.css'
 import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import { Header, Container, Button } from 'semantic-ui-react';
@@ -11,7 +12,8 @@ import Climb from './components/Climb'
 import Footer from './components/Footer'
 import ClimbForm from './components/ClimbForm';
 import RouteForm from './components/RouteForm';
-import CreateClimb from './components/CreateClimb';
+import ClimbType from './components/ClimbType';
+import Nav from './components/Nav';
 
 
 let baseURL = ''
@@ -56,14 +58,12 @@ function App() {
             {/* /// User Login /// */}
             <Route path="/user/login">
               <UserForm context='login' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
-              <Footer />
             </Route>
 
 
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={setCurrentUser}/>
-              <Footer />
             </Route>
 
             {/* /// Create Route /// */}
@@ -81,19 +81,17 @@ function App() {
             {/* /// Show Route /// */}
             <Route path="/routes/:routeId">
               <ClimbRoute baseURL={baseURL} setCurrentRoute={setCurrentRoute} setClimbSetting={setClimbSetting}/>
-              <Footer />
             </Route>
 
             {/* /// Routes /// */}
             <Route path="/routes">
               <Routes baseURL={baseURL}/>
-              <Footer />
             </Route>
             
             {/* /// Create Climb /// */}
             <Route 
               path="/climbs/type"
-              render={(props) => <CreateClimb {...props} setClimbSetting={setClimbSetting}/>}
+              render={(props) => <ClimbType {...props} setClimbSetting={setClimbSetting}/>}
             />
 
             {/* /// Create Climb /// */}
@@ -115,16 +113,16 @@ function App() {
             </Route>
 
             {/* /// Climbs /// */}
-            <Route path="/climbs">
-              <Climbs baseURL={baseURL}/>
-              <Footer />
-            </Route>
+            <Route path="/climbs"
+              render={(props) => <Climbs {...props} baseURL={baseURL} />} 
+            />
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
               {!currentUser? <Redirect to='/user/login'/> : 
               <>
+              <Nav/>
               <Container style={{ height:'90vh'}}>
                 <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
                 <Button as={Link} to='/routes'>See Routes</Button>

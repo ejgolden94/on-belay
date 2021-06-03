@@ -1,31 +1,31 @@
 import React, {useState, useEffect} from 'react' 
 import {Header,
         Image, 
-        Segment,
+        Icon,
         Divider, 
         Container, 
-        Button,
-        Message} from 'semantic-ui-react'
+        Button} from 'semantic-ui-react'
 import {Link, useLocation} from 'react-router-dom'
-import {formatDate} from '../formatDate'
 import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
-import BackButton from './BackButton'
 import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
 import RouteSidebar from './RouteSidebar'
 import RouteComments from './RouteComments'
+import Footer from './Footer'
+import {formatDate} from '../formatDate'
+import Nav from './Nav'
 
 export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
+    const locationName = location.pathname.split('/')[1]
 
     const {baseURL, setCurrentRoute, setClimbSetting} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
     const [announcement, setAnnouncement] = useState('')
-    const [visible, setVisible] = useState(false)
     const [comments, setcomments] = useState([]);
 
     const getRoute = async() => {
@@ -62,64 +62,71 @@ export default function ClimbRoute (props){
             <NotFound redirect='Routes' redirectTo='/routes'/>
         )
     } else {
-        console.log(comments)
-        console.log("rendering climb route")
         return(
             route.data?
-            <>
+            <div className='page-and-footer'>
             {/* ------------------------------- */}
             {/* ------------ Header ----------- */}
             {/* ------------------------------- */}
-            <BackButton />
-            <Segment className='page-container'>
-                <Header style={{margin:'2vh', fontSize:'2.5em', fontWeight:'900'}}>
-                    {route.data.name}
-                </Header>
-                <Image 
-                    src={route.data.image? route.data.image:'/climb-route-stock.jpeg' } 
-                    style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
-                    onClick={()=>setVisible(false)}
-                />
-                <RouteSidebar 
+                <Nav 
                     baseURL={baseURL} 
+                    location={locationName}
                     route={route.data} 
                     setAnnouncement={setAnnouncement} 
                     announcement={announcement}
-                    visible={visible}
-                    setVisible={setVisible}
                     />
-
-                {/* ------------------------------- */}
-                {/* ------------ Stats ------------ */}
-                {/* ------------------------------- */}
-                <RouteStats climbs={climbs} route={route.data}/>
-
+            <div>
+                <h2 className='page-headers'>Route Info</h2>
                 {/* --------------------------------------- */}
                 {/* ------------  Announcements ----------- */}
                 {/* --------------------------------------- */}
-                {announcement? <Message color='orange' style={{margin:'0'}}>{announcement}</Message>:''}
+                {announcement? 
+                    <div style={{margin:'0', backgroundColor:'black', color:'white', padding: '2vmin'}}>
+                        <strong>!Announcement:</strong> {announcement}
+                    </div>:''}
+
+
+                <div style={{backgroundColor:'rgba(0,0,0,0.5'}}>
+                    <Image 
+                        className='route-img'
+                        src={route.data.image? route.data.image: route.data.gym_outdoor==='Indoor'? 
+                            '/on-belay_indoor-climb-placeholder_orange.png'
+                            :'/on-belay_outdoor-climb-placeholder_orange.png' } 
+                        style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
+                    />
+                    {/* ------------------------------- */}
+                    {/* ------------ Stats ------------ */}
+                    {/* ------------------------------- */}
+                    <RouteStats climbs={climbs} route={route.data}/>
+                </div>
 
                 {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
                 {/* ------------------------------------- */}
+                {/* <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
+                    Log a Climb
+                </Button> */}
+                <div className='route-climb-info'>
+                <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
+                    Climb
+                </Button>
+                    <h2 style={{margin: '2vmin', fontFamily:'Poppins, sans-serif'}}>{route.data.name? route.data.name: route.data.location}</h2>
+                    <div style={{margin: '2vmin'}}><Icon name='point'/> <h3 style={{display:'inline',  fontFamily:'Poppins, sans-serif' }}>Burlington, VT</h3></div>
+                </div>
                 <Divider horizontal>
-                    <Header as='h3'>
+                    <Header as='h3' className='font-inherit'>
                         Description
                     </Header>
                 </Divider>
                 <Container style={{padding:'1vh'}}>
                     <RouteDetails route={route.data} />
-                    <div className='route-meta'>
-                        <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
-                        <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>
-                    </div>
                 </Container>
 
                 {/* ------------------------------------- */}
                 {/* ------------  YOUR CLIMBS ----------- */}
                 {/* ------------------------------------- */}
                 <Divider horizontal>
-                    <Header as='h3'>
+                    <Header as='h3' className='font-inherit'>
                         Your Climbs
                     </Header>
                 </Divider>
@@ -127,23 +134,20 @@ export default function ClimbRoute (props){
                     {/* Shows 2 climbs and a button to expand */}
                     {!seeAllClimbs&&climbs.length > 0 ? 
                     <>
-                        {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
-                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(true)}>See All</Button>
+                        {climbs.slice(0,2).map(climb => <ClimbCard key={climb.id} climb={climb} location={location.pathname.split('/')[1]}/>)}
+                        <Button size='small' className='route-btns' onClick={() => setSeeAllClimbs(true)}>See All</Button>
                     </>: ''}
                     {/* Shows All climbs and a button to collapse */}
                     {seeAllClimbs&&climbs.length > 0? 
                     <>
-                        {climbs.map(climb => <ClimbCard key={climb.id} climb={climb}/>)}
-                        <Button inverted size='mini' color='purple' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
+                        {climbs.map(climb => <ClimbCard key={climb.id} climb={climb} location={location.pathname.split('/')[1]}/>)}
+                        <Button size='small' className='route-btns' onClick={() => setSeeAllClimbs(false)}>Collapse</Button>
                     </>: ''}
                     {/* Shows That you havent climbed this route yet */}
                     {climbs.length === 0 ? 
                     <>
-                        <Header as='h4'>You Haven't Climbed This Route Yet</Header>
+                        <p className='font-inherit'>You Haven't Climbed This Route Yet</p>
                     </>: ''}
-                    <Button inverted size='mini' color='purple' as={Link} to='/climbs/new'>
-                        Log a Climb
-                    </Button>
                 </Container>
                  
                 {/* ---------------------------------- */}
@@ -152,7 +156,7 @@ export default function ClimbRoute (props){
                 {route.data.gym_outdoor === 'Outdoor'? 
                 <>
                 <Divider horizontal>
-                    <Header as='h3'>
+                    <Header as='h3' className='font-inherit'>
                         Comments
                     </Header>
                 </Divider>
@@ -163,9 +167,14 @@ export default function ClimbRoute (props){
                     setcomments={setcomments}
                 />
                 </>:''}
-
-            </Segment>
-            </>
+   
+                <div className='route-meta route-climb-info'>
+                    <em style={{display:'block'}}>This route was created on {formatDate(route.data.created)}.</em>
+                    <em style={{display:'block'}}>This route was created by On Belay user, {route.data.creator.username}.</em>
+                </div>
+            </div>
+            <Footer />
+            </div>
             :''
         )
     }

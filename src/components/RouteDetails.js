@@ -1,35 +1,32 @@
 import React from 'react'
-import {calculateRatingClass} from '../calculateRatingClass'
 
 export default function RouteDetails (props){
     const {route} = props
     return (
-        <>
+        <div className='route-climb-info' >
+        <div style={{fontSize: 'calc(14px + 2 * ((100vw - 320px) / 1050))', lineHeight:'1.5'}}>
+        {route.description?
         <div className='route-desc'>
-            <div className={'circle '+calculateRatingClass(route.rating)} style={{marginRight:'10px', minWidth:'75px', height:'75px'}}>
-                {route.rating}
-            </div>
-            <div>
-                {route.description}
-            </div>
-        </div>
+            {route.description}
+        </div> : ''}
         <div className='route-desc'>
-            <h4 style={{marginRight:'10px'}}>Height:</h4>
+            <p style={{marginRight:'10px', fontWeight:'700'}}>Height:</p>
             {route.height}'
         </div>
         {route.gym_outdoor === 'Outdoor'?
         <div className='route-desc'>
-            <h4 style={{marginRight:'10px'}}>Protection:</h4>
+            <p style={{marginRight:'10px', fontWeight:'700'}}>Protection:</p>
             {route.protection}
         </div>:''}
         <div className='route-desc'>
-            <h4 style={{marginRight:'10px'}}>Location:</h4>
+            <p style={{marginRight:'10px', fontWeight:'700'}}>Location:</p>
             {route.location}
         </div>
         <div className='route-desc'>
-            <h4 style={{marginRight:'10px'}}>Wall Characteristic:</h4>
+            <p style={{marginRight:'10px', fontWeight:'700'}}>Wall Characteristic:</p>
             {route.wall_type}
         </div>
-        </>
+        </div>
+        </div>
         )
 }
