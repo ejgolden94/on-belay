@@ -79,6 +79,17 @@
   max-height:15vh;
   max-width: 1050px;
   margin: 0 auto;
+  color: white;
+} 
+
+.climb-stats{
+  display:flex; 
+  align-items: center;
+  justify-content:space-around;
+  min-height: 5vh;
+  max-width: 1050px;
+  margin: 0 auto;
+  color: white;
 } 
 
 .route-btns{

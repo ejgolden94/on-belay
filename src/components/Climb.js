@@ -73,20 +73,12 @@ export default function Climb (props){
                     <Icon name='pencil'/>
                     </Button>
                     <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Climb Type:</h4>
-                        {climb.data.climb_type}
-                    </div>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Performance:</h4>
-                        {climb.data.performance}
-                    </div>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Your Notes:</h4>
+                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Notes:</h4>
                         {climb.data.notes}
                     </div>
                     {climb.data.time? 
                         <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Your Time:</h4>
+                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Time:</h4>
                         {climb.data.time} seconds
                     </div>: ''
                     }
