@@ -8,6 +8,7 @@ import Nav from './Nav'
 export default function Routes(props){
     const {baseURL, currentUser} = props
     const [routes, setRoutes] = useState([])
+    const [limit, setlimit] = useState(5)
 
     const getRoutes = async() => {
         const url = baseURL + '/routes/?setting=outdoor'
@@ -30,9 +31,10 @@ export default function Routes(props){
         <div>
             <h2 as='h2' className='page-headers'>Climb Routes</h2>
             <h2 className='page-sub-headers'>Choose Your Climb Route</h2>
-            {routes.map(route => 
+            {routes.slice(0,limit).map(route => 
                 <ClimbRouteCard key={route.id} route={route}/>
             )}
+            <Button className='route-btns' onClick={()=>{setlimit(limit+5)}}>See More Routes</Button>
             <Button icon circular as={Link} to={'/routes/new'} color='purple' className='add-btn'>
                 <Icon name='add' size='big'/>
             </Button>

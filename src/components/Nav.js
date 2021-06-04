@@ -4,12 +4,13 @@ import {Menu, Icon, Sidebar} from 'semantic-ui-react'
 import BackButton from './BackButton'
 import useWindowSize from '../useWindowSize'
 import RouteSidebar from './RouteSidebar'
+import ClimbSidebar from './ClimbSidebar'
 
 export default function Nav (props){
     const { width } = useWindowSize();
     const [ sideBarVisible, setSideBarVisible ] = useState(false)
     const [loggedOut, setLoggedOut] = useState(false)
-    const {baseURL, location, route, setAnnouncement, announcement, currentUser} = props
+    const {baseURL, location, route, climb, setAnnouncement, announcement, currentUser} = props
 
     const toggleSideBarVisible =()=>{
         setSideBarVisible(!sideBarVisible)
@@ -90,12 +91,20 @@ export default function Nav (props){
                     <Icon name='arrow right' style={{margin:'1vh auto'}}/>
                     Collapse Menu
                 </Menu.Item>
+
                 {location && location==='routes'?
                     <RouteSidebar 
                         baseURL={baseURL} 
                         route={route} 
                         setAnnouncement={setAnnouncement} 
                         announcement={announcement}
+                        currentUser={currentUser}
+                />:''}
+
+                {location && location==='climbs'?
+                    <ClimbSidebar
+                        baseURL={baseURL} 
+                        climb={climb} 
                         currentUser={currentUser}
                 />:''}
             </Sidebar>
@@ -135,6 +144,14 @@ export default function Nav (props){
                         announcement={announcement}
                         currentUser={currentUser}
                     />:''}
+
+                {location && location==='climbs'?
+                    <ClimbSidebar
+                        baseURL={baseURL} 
+                        climb={climb} 
+                        currentUser={currentUser}
+                    />:''}
+                    
                 {MenuItems}
             </Sidebar>
             </>
