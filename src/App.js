@@ -31,6 +31,7 @@ function App() {
 
   const getUsers = async() => {
     const url = baseURL+'/users/'
+    console.log(url)
     const requestOptions = {
       method:'GET',
       credentials: 'include',
