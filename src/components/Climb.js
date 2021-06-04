@@ -8,6 +8,7 @@ import RouteDetails from './RouteDetails'
 import ClimbStats from './ClimbStats'
 import Nav from './Nav'
 import Footer from './Footer'
+import { createPortal } from 'react-dom'
 
 export default function Climb (props){
     const {baseURL, setCurrentClimb, currentUser} = props
@@ -34,8 +35,6 @@ export default function Climb (props){
     if (climb.status === 404){
         return <NotFound redirect='Climbs' redirectTo='/climbs' baseURL={baseURL}/>
     }
-
-
     
     return(
         climb.data? 
