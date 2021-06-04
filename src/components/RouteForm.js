@@ -107,9 +107,13 @@ export default class RouteForm extends Component {
         const url = this.baseURL + '/routes/'
 
         const body = this.state
+        body.ratingSuffix = body.ratingSuffix === 'Choose One'? '' :  body.ratingSuffix
+        body.wall_type = body.wall_type === 'Choose One'? '' :  body.wall_type
+
         body.rating =  body.ratingPrefix === 'V'? 
             body.ratingPrefix + body.rating + body.ratingSuffix:
             body.ratingPrefix + '.' + body.rating + body.ratingSuffix
+
         delete body.success
         delete body.context
         delete body.id
@@ -278,6 +282,7 @@ export default class RouteForm extends Component {
                         search
                         label='Rating Prefix'
                         selection
+                        required
                         name='ratingPrefix'
                         id='ratingPrefix'
                         options={ratingPrefixOptions}
@@ -291,6 +296,7 @@ export default class RouteForm extends Component {
                         label='Rating'
                         search
                         selection
+                        required
                         name='rating'
                         id='rating'
                         options={ratingOptions}
