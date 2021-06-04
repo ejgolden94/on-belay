@@ -10,20 +10,20 @@ export default function Routes(props){
     const [routes, setRoutes] = useState([])
     const [limit, setlimit] = useState(5)
 
-    const getRoutes = async() => {
-        const url = baseURL + '/routes/?setting=outdoor'
-        const requestOptions = {
-          method:'GET',
-          credentials: 'include'
-        }
-    
-        let foundRoutes = await fetch(url,requestOptions).then(response => response.json())
-        setRoutes(foundRoutes.data)
-    }
-
     useEffect(()=> {
+        const getRoutes = async() => {
+            const url = baseURL + '/routes/?setting=outdoor'
+            const requestOptions = {
+              method:'GET',
+              credentials: 'include'
+            }
+        
+            let foundRoutes = await fetch(url,requestOptions).then(response => response.json())
+            setRoutes(foundRoutes.data)
+        }
+
         getRoutes()
-    },[])
+    },[baseURL, setRoutes])
 
     return (
         <div className='page-and-footer'>

@@ -1,7 +1,7 @@
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 //// Components
 import UserForm from './components/UserForm'
 import Routes from './components/Routes'
@@ -115,7 +115,7 @@ function App() {
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
               {!currentUser? <Redirect to='/user/login'/> : 
-              <HomePage currentUser={currentUser} currentUser={currentUser} baseURL={baseURL}/>
+              <HomePage currentUser={currentUser} baseURL={baseURL}/>
               }
             </Route>
 
