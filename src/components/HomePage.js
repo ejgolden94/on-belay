@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react' 
-import {Form, Message, Icon, Image } from 'semantic-ui-react'
 import Footer from './Footer';
 import Nav from './Nav';
 import {capitalize} from '../capitalize'
@@ -46,7 +45,7 @@ export default function HomePage (props){
             <Nav baseURL={baseURL} currentUser={currentUser}/>
             <div className='page-container'>
                 <div>
-                    <img src='/on-belay_profile-photo-placeholder_orange.png' className='profile-avatar' />
+                    <img src='/on-belay_profile-photo-placeholder_orange.png' alt='user profile' className='profile-avatar' />
                     <h2 className='font-inherit'>{capitalize(currentUser.username)}'s Profile</h2>
                     <p className='font-inherit user-meta'>User since {formatDate(currentUser.created)} </p>
                     <div className='profile-stats'>

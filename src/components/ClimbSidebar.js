@@ -4,7 +4,7 @@ import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
 
-    const {baseURL, route, currentUser, climb} = props
+    const {baseURL, currentUser, climb} = props
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     
@@ -19,8 +19,7 @@ export default function RouteSidebar (props){
             method: 'DELETE',
             credentials: 'include'
         }
-        const deletedClimb = await fetch(url, requestOptions).then(response => response.json())
-        console.log(deletedClimb)
+        await fetch(url, requestOptions).then(response => response.json())
         setDeleted(true)
     }
 

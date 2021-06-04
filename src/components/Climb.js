@@ -8,7 +8,6 @@ import RouteDetails from './RouteDetails'
 import ClimbStats from './ClimbStats'
 import Nav from './Nav'
 import Footer from './Footer'
-import { createPortal } from 'react-dom'
 
 export default function Climb (props){
     const {baseURL, setCurrentClimb, currentUser} = props

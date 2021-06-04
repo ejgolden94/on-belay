@@ -18,7 +18,7 @@ export default function RouteComments(props){
             setcomments(comments.data)
         }
         getRouteComments()
-    }, [baseURL, routeId])
+    }, [baseURL, routeId, setcomments])
 
     const handleChange = (event) => {
         setnewComment(event.target.value)
