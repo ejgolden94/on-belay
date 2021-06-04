@@ -30,13 +30,13 @@ export default function Climb (props){
 
     console.log(climb);
     if (climb.status === 404){
-        return <NotFound redirect='Climbs' redirectTo='/climbs'/>
+        return <NotFound redirect='Climbs' redirectTo='/climbs' baseURL={baseURL}/>
     }
     
     return(
         climb.data? 
         <div className='page-and-footer'>
-        <Nav />
+        <Nav baseURL={baseURL}/>
         <div>
             <h2 className='page-headers'>{capitalize(climb.data.route.gym_outdoor)} Climb</h2>
             <p>{formatDate(climb.data.created,'long time')}</p>
