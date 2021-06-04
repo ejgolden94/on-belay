@@ -6,10 +6,10 @@ import Footer from './Footer'
 
 
 export default function NotFound (props){
-    const {redirect, redirectTo, baseURL} = props
+    const {redirect, redirectTo, baseURL, currentUser} = props
     return(
         <div className='page-and-footer'>
-        <Nav baseURL={baseURL}/>
+        <Nav baseURL={baseURL} currentUser={currentUser}/>
         <div className='page-container'>
             <h1 className='font-inherit'>404 Page not found!</h1>
             <Image size='huge' src='/ohno.jpeg'/>

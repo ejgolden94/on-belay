@@ -50,6 +50,37 @@
   max-width: 100px;
 }
 
+.user-meta{
+  font-size: calc(14px + 2*(100vw - 320px)/ 1050);
+  color: #999999;
+}
+
+.profile-avatar{
+  border-radius: 50%;
+  width: 50%;
+  min-width: 100px;
+  max-width: 300px;
+}
+
+.profile-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  max-width: 500px;
+  margin: 2vh auto;
+}
+
+.profile-stat {
+  font-size: 50px;
+  margin-bottom: 0;
+  margin-right: 2vw;
+}
+
+.stat-title{
+  font-size: calc(14px + 2*(100vw - 320px)/ 1050);
+}
+
 .lost-btn{
   margin-top:5vh !important;
   background-color: #00998A !important; 
@@ -207,19 +238,19 @@
   height: 27vh !important;
   width: 27vh !important;
   margin: 0 auto;
-  color: black;
+  color: white;
   font-weight: 900;
   padding: 3vh;
-  font-size: 3.75rem;
+  font-size: calc(2.5rem + 60*(100vw - 320px)/ 1050);
 }
 
 .outdoor {
-  background-image: url('./images/on-belay_outdoor-climb-placeholder_orange.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('./images/on-belay_outdoor-climb-placeholder.png');
   background-position: center;
   background-size: 150%;
 }
 .indoor {
-  background-image: url('./images/on-belay_indoor-climb-placeholder_orange.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('./images/on-belay_indoor-placeholder.png');
   background-position: center;
   background-size: 150%;
 }
@@ -232,7 +263,7 @@
 .route-climb-info{
   text-align: left;
   margin: 3vh auto;
-  width:90%;
+  width:85%;
   max-width:1024px;
 }
 

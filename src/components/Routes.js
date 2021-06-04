@@ -6,7 +6,7 @@ import Footer from './Footer'
 import Nav from './Nav'
 
 export default function Routes(props){
-    const {baseURL} = props
+    const {baseURL, currentUser} = props
     const [routes, setRoutes] = useState([])
 
     const getRoutes = async() => {
@@ -26,7 +26,7 @@ export default function Routes(props){
 
     return (
         <div className='page-and-footer'>
-        <Nav baseURL={baseURL}/>
+        <Nav baseURL={baseURL} currentUser={currentUser}/>
         <div>
             <h2 as='h2' className='page-headers'>Climb Routes</h2>
             <h2 className='page-sub-headers'>Choose Your Climb Route</h2>

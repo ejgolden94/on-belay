@@ -1,19 +1,17 @@
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
-import { Header, Container, Button } from 'semantic-ui-react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 //// Components
 import UserForm from './components/UserForm'
 import Routes from './components/Routes'
 import ClimbRoute from './components/ClimbRoute'
 import Climbs from './components/Climbs'
 import Climb from './components/Climb'
-import Footer from './components/Footer'
 import ClimbForm from './components/ClimbForm';
 import RouteForm from './components/RouteForm';
 import ClimbType from './components/ClimbType';
-import Nav from './components/Nav';
+import HomePage from './components/HomePage';
 
 
 let baseURL = ''
@@ -47,9 +45,6 @@ function App() {
     getUsers()
   },[])
 
-  console.log(currentUser);
-  console.log(climbSetting)
-  console.log(indoorRouteId)
   return (
     <div className="App" style={{margin:'0', padding: '0'}}>
       <BrowserRouter>
@@ -75,12 +70,12 @@ function App() {
             {/* /// Edit Route /// */}
             <Route 
               path="/routes/:routeId/edit"
-              render={(props) => <RouteForm {...props} baseURL={baseURL} route={currentRoute.data} climbSetting={climbSetting} />}
+              render={(props) => <RouteForm {...props} baseURL={baseURL} route={currentRoute.data} climbSetting={climbSetting} currentUser={currentUser}/>}
             />
 
             {/* /// Show Route /// */}
             <Route path="/routes/:routeId">
-              <ClimbRoute baseURL={baseURL} setCurrentRoute={setCurrentRoute} setClimbSetting={setClimbSetting}/>
+              <ClimbRoute baseURL={baseURL} setCurrentRoute={setCurrentRoute} setClimbSetting={setClimbSetting} currentUser={currentUser}/>
             </Route>
 
             {/* /// Routes /// */}
@@ -91,7 +86,7 @@ function App() {
             {/* /// Create Climb /// */}
             <Route 
               path="/climbs/type"
-              render={(props) => <ClimbType {...props} baseURL={baseURL} setClimbSetting={setClimbSetting}/>}
+              render={(props) => <ClimbType {...props} baseURL={baseURL} setClimbSetting={setClimbSetting} currentUser={currentUser}/>}
             />
 
             {/* /// Create Climb /// */}
@@ -103,36 +98,25 @@ function App() {
             {/* /// Edit Climb /// */}
             <Route 
               path="/climbs/:climbId/edit"
-              render={(props) => <ClimbForm {...props} baseURL={baseURL} climb={currentClimb.data}/>}
+              render={(props) => <ClimbForm {...props} baseURL={baseURL} currentUser={currentUser} climb={currentClimb.data}/>}
             />
 
             {/* /// Show Climb /// */}
             <Route path="/climbs/:climbId">
-              <Climb baseURL={baseURL} setCurrentClimb={setCurrentClimb}/>
-              <Footer />
+              <Climb baseURL={baseURL} setCurrentClimb={setCurrentClimb} currentUser={currentUser}/>
             </Route>
 
             {/* /// Climbs /// */}
             <Route path="/climbs"
-              render={(props) => <Climbs {...props} baseURL={baseURL} />} 
+              render={(props) => <Climbs {...props} baseURL={baseURL} currentUser={currentUser}/>} 
             />
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
-              {!currentUser? <Redirect to='/user/login'/> : 
-              <>
-              <Nav baseURL={baseURL}/>
-              <Container style={{ height:'90vh'}}>
-                <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
-                <Button as={Link} to='/routes'>See Routes</Button>
-                <Button as={Link} to='/climbs/type'>Create Climb</Button>
-              </Container>
-              <footer>
-                <Footer style={{margin:'0', padding: '0'}}/>
-              </footer>
-              </>
-              }
+              {/* {!currentUser? <Redirect to='/user/login'/> :  */}
+              <HomePage currentUser={currentUser} currentUser={currentUser} baseURL={baseURL}/>
+              {/* } */}
             </Route>
 
 

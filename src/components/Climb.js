@@ -7,9 +7,10 @@ import {capitalize} from '../capitalize'
 import RouteDetails from './RouteDetails'
 import ClimbStats from './ClimbStats'
 import Nav from './Nav'
+import Footer from './Footer'
 
 export default function Climb (props){
-    const {baseURL, setCurrentClimb} = props
+    const {baseURL, setCurrentClimb, currentUser} = props
     const location = useLocation()
     const climbId = location.pathname.split('/')[2]
     const [climb, setClimb] = useState({});
@@ -36,7 +37,7 @@ export default function Climb (props){
     return(
         climb.data? 
         <div className='page-and-footer'>
-        <Nav baseURL={baseURL}/>
+        <Nav baseURL={baseURL} currentUser={currentUser}/>
         <div>
             <h2 className='page-headers'>{capitalize(climb.data.route.gym_outdoor)} Climb</h2>
             <p>{formatDate(climb.data.created,'long time')}</p>
@@ -93,6 +94,7 @@ export default function Climb (props){
                     <RouteDetails route={climb.data.route} />
                     <Button as={Link} to={`/routes/${climb.data.route.id}`} className='font-inherit' style={{marginBottom: '2vh'}}>Go to Route</Button>
             </div> 
+            <Footer/>
         </div>
         :''
     )

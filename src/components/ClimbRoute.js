@@ -19,8 +19,8 @@ export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
     const locationName = location.pathname.split('/')[1]
+    const {baseURL, setCurrentRoute, setClimbSetting, currentUser} = props
 
-    const {baseURL, setCurrentRoute, setClimbSetting} = props
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)
@@ -73,6 +73,7 @@ export default function ClimbRoute (props){
                     route={route.data} 
                     setAnnouncement={setAnnouncement} 
                     announcement={announcement}
+                    currentUser={currentUser}
                     />
             <div>
                 <h2 className='page-headers'>Route Info</h2>
@@ -117,9 +118,7 @@ export default function ClimbRoute (props){
                         Description
                     </Header>
                 </Divider>
-                <Container style={{padding:'1vh'}}>
-                    <RouteDetails route={route.data} />
-                </Container>
+                <RouteDetails route={route.data} />
 
                 {/* ------------------------------------- */}
                 {/* ------------  YOUR CLIMBS ----------- */}

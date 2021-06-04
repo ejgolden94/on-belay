@@ -9,8 +9,7 @@ export default function Nav (props){
     const { width } = useWindowSize();
     const [ sideBarVisible, setSideBarVisible ] = useState(false)
     const [loggedOut, setLoggedOut] = useState(false)
-    const {baseURL, location, route, setAnnouncement, announcement} = props
-
+    const {baseURL, location, route, setAnnouncement, announcement, currentUser} = props
 
     const toggleSideBarVisible =()=>{
         setSideBarVisible(!sideBarVisible)
@@ -31,34 +30,26 @@ export default function Nav (props){
 
     const MenuItems = (
         <>
-        <Menu.Item name='profile' position='right' className='font-inherit'>
+        <Menu.Item name='profile' position='right' className='font-inherit' as={Link} to='/'>
             <Icon inverted name='user' className='nav-icon'/>
             profile
         </Menu.Item>
-        <Link to='/'>
-            <Menu.Item name='home' className='font-inherit'>
-                <Icon inverted name='home' className='nav-icon'/>
-                home
-            </Menu.Item>
-        </Link>
-        <Link to='/climbs/type'>
-            <Menu.Item name='add' className='font-inherit'>
-                <Icon inverted name='add circle' className='nav-icon'/>
-                climb
-            </Menu.Item>
-        </Link>
-        <Link to='/routes'>
-            <Menu.Item name='compass outline' className='font-inherit'>
-                    <Icon inverted name='compass outline' className='nav-icon'/>
-                    routes
-            </Menu.Item>
-        </Link>
-        <Link to='/climbs'>
-            <Menu.Item name='history' className='font-inherit'>
-                <Icon inverted name='history' className='nav-icon'/>
-                history
-            </Menu.Item>
-        </Link>
+        <Menu.Item name='home' className='font-inherit' as={Link} to='/'>
+            <Icon inverted name='home' className='nav-icon'/>
+            home
+        </Menu.Item>
+        <Menu.Item name='add' className='font-inherit' as={Link} to='/climbs/type'>
+            <Icon inverted name='add circle' className='nav-icon'/>
+            climb
+        </Menu.Item>
+        <Menu.Item name='compass outline' className='font-inherit' as={Link} to='/routes'>
+                <Icon inverted name='compass outline' className='nav-icon'/>
+                routes
+        </Menu.Item>
+        <Menu.Item name='history' className='font-inherit' as={Link} to='/climbs'>
+            <Icon inverted name='history' className='nav-icon'/>
+            history
+        </Menu.Item>
         <Menu.Item name='sign-out' className='font-inherit' onClick={()=>logout()}>
             <Icon inverted name='sign-out' className='nav-icon'/>
             sign-out
@@ -105,6 +96,7 @@ export default function Nav (props){
                         route={route} 
                         setAnnouncement={setAnnouncement} 
                         announcement={announcement}
+                        currentUser={currentUser}
                 />:''}
             </Sidebar>
             </>
@@ -141,6 +133,7 @@ export default function Nav (props){
                         route={route} 
                         setAnnouncement={setAnnouncement} 
                         announcement={announcement}
+                        currentUser={currentUser}
                     />:''}
                 {MenuItems}
             </Sidebar>
