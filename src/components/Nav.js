@@ -11,7 +11,6 @@ export default function Nav (props){
     const [loggedOut, setLoggedOut] = useState(false)
     const {baseURL, location, route, setAnnouncement, announcement, currentUser} = props
 
-
     const toggleSideBarVisible =()=>{
         setSideBarVisible(!sideBarVisible)
     }
@@ -134,6 +133,7 @@ export default function Nav (props){
                         route={route} 
                         setAnnouncement={setAnnouncement} 
                         announcement={announcement}
+                        currentUser={currentUser}
                     />:''}
                 {MenuItems}
             </Sidebar>

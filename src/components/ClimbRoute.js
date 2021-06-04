@@ -19,8 +19,8 @@ export default function ClimbRoute (props){
     const location = useLocation();
     const locationId = location.pathname.split('/')[2]
     const locationName = location.pathname.split('/')[1]
-
     const {baseURL, setCurrentRoute, setClimbSetting, currentUser} = props
+
     const [route, setRoute] = useState([])
     const [climbs, setClimbs] = useState([])
     const [seeAllClimbs, setSeeAllClimbs] = useState(false)

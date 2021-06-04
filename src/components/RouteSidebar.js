@@ -62,13 +62,13 @@ export default function RouteSidebar (props){
     const handleChange = (event) => {
         setAnnouncement(event.target.value)
     }
-    
+
     if (deleted){
         return <Redirect to='/routes/'/>
     } else {
         return (
             <>
-            {currentUser === route.creator?
+            {currentUser.email === route.creator.email?
             <>
             <Menu.Item as={Link} to={`/routes/${route.id}/edit`} className='font-inherit'>
                 <Icon name='pencil' className='nav-icon'/>
