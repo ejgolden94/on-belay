@@ -1,17 +1,32 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import {Menu, Icon, Sidebar} from 'semantic-ui-react'
 import BackButton from './BackButton'
 import useWindowSize from '../useWindowSize'
 import RouteSidebar from './RouteSidebar'
 
 export default function Nav (props){
-    const { height, width } = useWindowSize();
+    const { width } = useWindowSize();
     const [ sideBarVisible, setSideBarVisible ] = useState(false)
+    const [loggedOut, setLoggedOut] = useState(false)
     const {baseURL, location, route, setAnnouncement, announcement} = props
-    console.log(location)
+
+
     const toggleSideBarVisible =()=>{
         setSideBarVisible(!sideBarVisible)
+    }
+
+    const logout = async() => {
+        console.log(baseURL + '/users/logout/' )
+        const url=baseURL + '/users/logout' 
+        const requestOptions = {
+            method:'GET',
+            credentials:'include'
+        }
+        const logout = await fetch(url, requestOptions).then(response=> response.json())
+        if(logout){
+            setLoggedOut(true)
+        }
     }
 
     const MenuItems = (
@@ -44,13 +59,16 @@ export default function Nav (props){
                 history
             </Menu.Item>
         </Link>
-        <Menu.Item name='sign-out' className='font-inherit'>
+        <Menu.Item name='sign-out' className='font-inherit' onClick={()=>logout()}>
             <Icon inverted name='sign-out' className='nav-icon'/>
             sign-out
         </Menu.Item>
         </>
     )
-    
+
+    if(loggedOut){
+        return <Redirect to='/user/login'/>
+    }
     if(width >= 690){
     return (
         <>

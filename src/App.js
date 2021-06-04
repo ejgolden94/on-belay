@@ -91,7 +91,7 @@ function App() {
             {/* /// Create Climb /// */}
             <Route 
               path="/climbs/type"
-              render={(props) => <ClimbType {...props} setClimbSetting={setClimbSetting}/>}
+              render={(props) => <ClimbType {...props} baseURL={baseURL} setClimbSetting={setClimbSetting}/>}
             />
 
             {/* /// Create Climb /// */}
@@ -122,7 +122,7 @@ function App() {
               {/* if current user is not logged in this will redirect you to user login */}
               {!currentUser? <Redirect to='/user/login'/> : 
               <>
-              <Nav/>
+              <Nav baseURL={baseURL}/>
               <Container style={{ height:'90vh'}}>
                 <Header style={{paddingTop: '30vh'}}> Welcome, {currentUser.username} </Header>
                 <Button as={Link} to='/routes'>See Routes</Button>

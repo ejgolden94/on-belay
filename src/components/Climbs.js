@@ -26,7 +26,7 @@ export default function Climbs(props) {
 
     return (
         <div className='page-and-footer'>
-            <Nav />
+            <Nav baseURL={baseURL}/>
             <div>
                 <h2 className='page-headers'>Your Climbs</h2>
                 <Divider className='climbDivider'/>

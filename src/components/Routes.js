@@ -26,7 +26,7 @@ export default function Routes(props){
 
     return (
         <div className='page-and-footer'>
-        <Nav />
+        <Nav baseURL={baseURL}/>
         <div>
             <h2 as='h2' className='page-headers'>Climb Routes</h2>
             <h2 className='page-sub-headers'>Choose Your Climb Route</h2>

@@ -10,7 +10,6 @@ import NotFound from './NotFound'
 import ClimbCard from './ClimbCard'
 import RouteDetails from './RouteDetails'
 import RouteStats from './RouteStats'
-import RouteSidebar from './RouteSidebar'
 import RouteComments from './RouteComments'
 import Footer from './Footer'
 import {formatDate} from '../formatDate'
@@ -59,7 +58,7 @@ export default function ClimbRoute (props){
 
     if(route.status === 404){
         return (
-            <NotFound redirect='Routes' redirectTo='/routes'/>
+            <NotFound redirect='Routes' redirectTo='/routes' baseURL={baseURL}/>
         )
     } else {
         return(
