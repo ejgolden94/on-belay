@@ -9,7 +9,7 @@ export default function Nav (props){
     const { width } = useWindowSize();
     const [ sideBarVisible, setSideBarVisible ] = useState(false)
     const [loggedOut, setLoggedOut] = useState(false)
-    const {baseURL, location, route, setAnnouncement, announcement} = props
+    const {baseURL, location, route, setAnnouncement, announcement, currentUser} = props
 
 
     const toggleSideBarVisible =()=>{
@@ -97,6 +97,7 @@ export default function Nav (props){
                         route={route} 
                         setAnnouncement={setAnnouncement} 
                         announcement={announcement}
+                        currentUser={currentUser}
                 />:''}
             </Sidebar>
             </>

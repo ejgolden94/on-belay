@@ -4,7 +4,7 @@ import {Redirect, Link} from 'react-router-dom'
 
 export default function RouteSidebar (props){
 
-    const {baseURL, route, setAnnouncement, announcement} = props
+    const {baseURL, route, setAnnouncement, announcement, currentUser} = props
     const [deleted, setDeleted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [announceModalOpen, setAnnounceModalOpen] = useState(false)
@@ -68,14 +68,18 @@ export default function RouteSidebar (props){
     } else {
         return (
             <>
+            {currentUser === route.creator?
+            <>
             <Menu.Item as={Link} to={`/routes/${route.id}/edit`} className='font-inherit'>
                 <Icon name='pencil' className='nav-icon'/>
                 Edit
                 </Menu.Item>
             <Menu.Item onClick={()=>toggleModalOpen()} className='font-inherit'>
-            <Icon name='delete' className='nav-icon'/>
+                <Icon name='delete' className='nav-icon'/>
                 Delete
-                </Menu.Item>
+            </Menu.Item>
+            </>
+            :''}
             <Menu.Item className='font-inherit'>
             <Icon name='flag' className='nav-icon'/>
                 Flag For Abuse

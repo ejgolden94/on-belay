@@ -6,7 +6,7 @@ import Footer from './Footer'
 import Nav from './Nav'
 
 export default function Climbs(props) {
-    const {baseURL} = props
+    const {baseURL, currentUser} = props
     const location = useLocation();
     const [climbs, setClimbs] = useState([])
 
@@ -26,7 +26,7 @@ export default function Climbs(props) {
 
     return (
         <div className='page-and-footer'>
-            <Nav baseURL={baseURL}/>
+            <Nav baseURL={baseURL} currentUser={currentUser}/>
             <div>
                 <h2 className='page-headers'>Your Climbs</h2>
                 <Divider className='climbDivider'/>

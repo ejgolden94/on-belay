@@ -43,7 +43,7 @@ export default function HomePage (props){
 
     return (
         <div className='page-and-footer'>
-            <Nav baseURL={baseURL}/>
+            <Nav baseURL={baseURL} currentUser={currentUser}/>
             <div className='page-container'>
                 <div>
                     <img src='/on-belay_profile-photo-placeholder_orange.png' className='profile-avatar' />

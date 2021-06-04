@@ -137,7 +137,7 @@ export default class ClimbForm extends Component {
         }
         return(
             <div className='page-and-footer'>
-            <Nav baseURL={this.props.baseURL}/>
+            <Nav baseURL={this.props.baseURL} currentUser={this.props.currentUser}/>
             <div>
             <h2 className='page-headers'>{capitalize(this.state.context)} Climb Log</h2>
             <Segment className='form-segment'>

@@ -199,7 +199,7 @@ export default class RouteForm extends Component {
         } 
         return(
             <div className='page-and-footer'>
-            <Nav baseURL={this.baseURL}/>
+            <Nav baseURL={this.baseURL} currentUser={this.props.currentUser}/>
             <div>
                 <h2 className='page-headers'>{capitalize(this.state.context)} Route</h2>
                 <Segment className='form-segment'>
