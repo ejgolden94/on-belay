@@ -114,9 +114,9 @@ function App() {
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
               {/* if current user is not logged in this will redirect you to user login */}
-              {/* {!currentUser? <Redirect to='/user/login'/> :  */}
+              {!currentUser? <Redirect to='/user/login'/> : 
               <HomePage currentUser={currentUser} currentUser={currentUser} baseURL={baseURL}/>
-              {/* } */}
+              }
             </Route>
 
 
