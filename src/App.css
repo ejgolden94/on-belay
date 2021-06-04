@@ -149,6 +149,10 @@
   color: white;
 } 
 
+.comment-avatar > img{
+  border-radius: 50% !important;
+}
+
 .route-btns{
   margin-top: 2vh !important;
   font-family: inherit !important;

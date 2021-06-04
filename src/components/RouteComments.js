@@ -56,7 +56,7 @@ export default function RouteComments(props){
         {comments.slice(0,limit).map(comment => {
             return(
             <Comment key={comment.id} style={{marginTop: '2vh'}}>
-            <Comment.Avatar src='/on-belay_profile-photo-placeholder_orange.png' />
+            <Comment.Avatar src='/on-belay_profile-photo-placeholder_orange.png' className='comment-avatar' />
             <Comment.Content>
                 <Comment.Author as='a'>{comment.creator.username}</Comment.Author>
                 <Comment.Metadata>
