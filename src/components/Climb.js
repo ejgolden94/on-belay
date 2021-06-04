@@ -13,6 +13,7 @@ export default function Climb (props){
     const {baseURL, setCurrentClimb, currentUser} = props
     const location = useLocation()
     const climbId = location.pathname.split('/')[2]
+    const locationName = location.pathname.split('/')[1]
     const [climb, setClimb] = useState({});
 
     useEffect(() => {
@@ -29,15 +30,17 @@ export default function Climb (props){
         getClimb()
     }, [baseURL,climbId,setCurrentClimb]);
 
-    console.log(climb);
+
     if (climb.status === 404){
         return <NotFound redirect='Climbs' redirectTo='/climbs' baseURL={baseURL}/>
     }
+
+
     
     return(
         climb.data? 
         <div className='page-and-footer'>
-        <Nav baseURL={baseURL} currentUser={currentUser}/>
+        <Nav baseURL={baseURL} currentUser={currentUser} location={locationName} climb={climb.data}/>
         <div>
             <h2 className='page-headers'>{capitalize(climb.data.route.gym_outdoor)} Climb</h2>
             <p>{formatDate(climb.data.created,'long time')}</p>

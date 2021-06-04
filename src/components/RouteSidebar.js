@@ -95,7 +95,7 @@ export default function RouteSidebar (props){
 
 
             <Modal
-                size='mini'
+                size='small'
                 open={modalOpen}
                 >
                 <Modal.Header>Delete This Route</Modal.Header>
