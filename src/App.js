@@ -22,6 +22,8 @@ if (process.env.NODE_ENV === 'development'){
   baseURL = process.env.REACT_APP_PROD_URL
 }
 
+console.log(baseURL)
+
 function App() {
   const [currentUser, setCurrentUser] = useState('')
   const [currentClimb, setCurrentClimb] = useState({})
@@ -31,7 +33,6 @@ function App() {
 
   const getUsers = async() => {
     const url = baseURL+'/users/'
-    console.log(url)
     const requestOptions = {
       method:'GET',
       credentials: 'include',
