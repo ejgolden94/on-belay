@@ -231,7 +231,9 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 70vh;
+  max-width: 500px;
   width: 100%;
+  margin: 0 auto;
 }
 
 .climb-type{
@@ -241,7 +243,8 @@
   color: white;
   font-weight: 900;
   padding: 3vh;
-  font-size: calc(2.5rem + 60*(100vw - 320px)/ 1050);
+  /* font-size: 500%; */
+  font-size: calc(30px + 60*(27vh - 153px)/330);
 }
 
 .outdoor {
