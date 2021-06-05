@@ -4,7 +4,7 @@ export default function RouteDetails (props){
     const {route} = props
     return (
         <div className='route-climb-info' >
-            <div style={{fontSize: 'calc(14px + 2 * ((100vw - 320px) / 1050))', lineHeight:'1.5'}}>
+            <div style={{fontSize: 'calc(14px + 2 * ((100vw - 320px) / 950))', lineHeight:'1.5'}}>
                 {route.description?
                 <div className='route-desc'>
                     {route.description}
