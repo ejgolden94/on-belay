@@ -35,6 +35,7 @@ export default function Routes(props){
                 <ClimbRouteCard key={route.id} route={route}/>
             )}
             <Button className='route-btns' onClick={()=>{setlimit(limit+5)}}>See More Routes</Button>
+            <Button className='route-btns' onClick={()=>{setlimit(5)}}>Collapse Routes</Button>
             <Button icon circular as={Link} to={'/routes/new'} color='purple' className='add-btn'>
                 <Icon name='add' size='big'/>
             </Button>
