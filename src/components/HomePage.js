@@ -45,7 +45,7 @@ export default function HomePage (props){
             <Nav baseURL={baseURL} currentUser={currentUser}/>
             <div className='page-container'>
                 <div>
-                    <img src='/on-belay_profile-photo-placeholder_orange.png' alt='user profile' className='profile-avatar' />
+                    <img src={`/on-belay_profile-${(currentUser.id%7)+1}.png`} alt='user profile' className='profile-avatar' />
                     <h2 className='font-inherit'>{capitalize(currentUser.username)}'s Profile</h2>
                     <p className='font-inherit user-meta'>User since {formatDate(currentUser.created)} </p>
                     <div className='profile-stats'>

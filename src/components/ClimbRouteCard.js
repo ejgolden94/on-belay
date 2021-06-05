@@ -5,16 +5,15 @@ import {calculateRatingClass} from '../calculateRatingClass'
 
 export default function ClimbRoute (props) {
     const {route} = props
-    const rating_color = calculateRatingClass(route.rating)
+    const ratingColor = calculateRatingClass(route.rating)
+
     return (
         <Link to={'/routes/'+route.id} style={{color:'inherit'}} >
         <Card size='small' 
-            style={{width:'80%', maxWidth:'600px', margin:'30px auto',color:'white', backgroundColor:`${rating_color}`}}>
+            style={{width:'80%', maxWidth:'600px', margin:'30px auto',color:'white', backgroundColor:`${ratingColor}`}}>
             <Image 
                 style={{maxHeight:'200px', objectFit:'cover'}} 
-                src={route.image? route.image: route.gym_outdoor==='Indoor'? 
-                        '/on-belay_indoor-climb-placeholder_orange.png'
-                        :'/on-belay_outdoor-climb-placeholder_orange.png' } 
+                src={route.image? route.image: `/on-belay_outdoor-${ratingColor.replace('#','')}.png`}
                 />
             <Card.Content className='card-content'>
             {/* ROUTE NAME */}
@@ -24,7 +23,7 @@ export default function ClimbRoute (props) {
             </div>
 
             {/* ROUTE RATING */}
-            <div style={{color:`${rating_color}`, backgroundColor:'rgba(255,255,255,0.8)', borderRadius:'1vw', padding:'1vw'}}>
+            <div style={{color:`${ratingColor}`, backgroundColor:'rgba(255,255,255,0.8)', borderRadius:'1vw', padding:'1vw'}}>
                 <h2 style={{fontFamily:'Poppins, sans-serif', fontSize:'2em'}}>{route.rating}</h2>
             </div>
             </Card.Content>

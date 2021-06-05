@@ -69,7 +69,7 @@ export default function Nav (props){
                 <BackButton />
             </Menu.Item>
             {MenuItems}
-            {location && location==='routes'?
+            {(location && location==='routes') || (location && location==='climbs') ?
             <Menu.Item>
                     <Icon inverted name='angle double right' size='large' onClick={()=> toggleSideBarVisible()}/>
                     more

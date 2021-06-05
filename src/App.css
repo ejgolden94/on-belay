@@ -149,6 +149,10 @@
   color: white;
 } 
 
+.comment-avatar > img{
+  border-radius: 50% !important;
+}
+
 .route-btns{
   margin-top: 2vh !important;
   font-family: inherit !important;
@@ -243,18 +247,28 @@
   color: white;
   font-weight: 900;
   padding: 3vh;
-  /* font-size: 500%; */
   font-size: calc(30px + 60*(27vh - 153px)/330);
 }
 
 .outdoor {
-  background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('./images/on-belay_outdoor-climb-placeholder.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('./images/on-belay_outdoor.png');
   background-position: center;
   background-size: 150%;
 }
 .indoor {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('./images/on-belay_indoor-placeholder.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('./images/on-belay_indoor.png');
   background-position: center;
+  background-size: 150%;
+}
+
+.indoor-image-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('./images/on-belay_indoor.png');
+  background-size: cover;
+}
+
+.outdoor-image-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('./images/on-belay_outdoor.png');
+  background-size: cover;
   background-size: 150%;
 }
 
@@ -267,7 +281,7 @@
   text-align: left;
   margin: 3vh auto;
   width:85%;
-  max-width:1024px;
+  max-width:950px;
 }
 
 .route-meta{

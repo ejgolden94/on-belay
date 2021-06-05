@@ -8,6 +8,7 @@ import RouteDetails from './RouteDetails'
 import ClimbStats from './ClimbStats'
 import Nav from './Nav'
 import Footer from './Footer'
+import {calculateRatingClass} from '../calculateRatingClass'
 
 export default function Climb (props){
     const {baseURL, setCurrentClimb, currentUser} = props
@@ -15,6 +16,8 @@ export default function Climb (props){
     const climbId = location.pathname.split('/')[2]
     const locationName = location.pathname.split('/')[1]
     const [climb, setClimb] = useState({});
+
+    const ratingColor = climb.data? calculateRatingClass(climb.data.route.rating) : ''
 
     useEffect(() => {
         const getClimb = async() => {
@@ -42,13 +45,11 @@ export default function Climb (props){
         <div>
             <h2 className='page-headers'>{capitalize(climb.data.route.gym_outdoor)} Climb</h2>
             <p>{formatDate(climb.data.created,'long time')}</p>
-            <div style={{backgroundColor:'rgba(0,0,0,0.5'}}>
+            <div className={`${climb.data.route.gym_outdoor.toLowerCase()}-image-background`}>
                     <Image 
                         className='route-img'
                         src={climb.data.image? climb.data.image: climb.data.route.image? climb.data.route.image: 
-                            climb.data.route.gym_outdoor==='Indoor'? 
-                            '/on-belay_indoor-climb-placeholder_orange.png'
-                            :'/on-belay_outdoor-climb-placeholder_orange.png' } 
+                            `/on-belay_${climb.data.route.gym_outdoor.toLowerCase()}-${ratingColor.replace('#','')}.png`} 
                         style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
                     />
                     {/* ------------------------------- */}
@@ -69,21 +70,18 @@ export default function Climb (props){
                     </Header>
                 </Divider>
                     <div className='route-climb-info'>
-                    <Button 
-                        inverted circular icon color='purple' className='float-right'
-                        as={Link} to={'/climbs/'+climb.data.id+'/edit'}>
-                    <Icon name='pencil'/>
-                    </Button>
-                    <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Notes:</h4>
-                        {climb.data.notes}
-                    </div>
-                    {climb.data.time? 
+                    <div style={{fontSize: 'calc(14px + 2 * ((100vw - 320px) / 950))', lineHeight:'1.5'}}>
                         <div className='route-desc'>
-                        <h4 style={{marginRight:'10px'}} className='font-inherit'>Time:</h4>
-                        {climb.data.time} seconds
-                    </div>: ''
-                    }
+                            <h4 style={{marginRight:'10px'}} className='font-inherit'>Notes:</h4>
+                            {climb.data.notes}
+                        </div>
+                        {climb.data.time? 
+                            <div className='route-desc'>
+                            <h4 style={{marginRight:'10px'}} className='font-inherit'>Time:</h4>
+                            {climb.data.time} seconds
+                        </div>: ''
+                        }
+                        </div>
                     </div>
 
                 {/* ------------ Route Details ----------- */}

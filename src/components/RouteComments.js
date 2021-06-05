@@ -46,7 +46,6 @@ export default function RouteComments(props){
    
     let limit = 2
     if(seeAll){ limit = comments.length }
-
     return(
         <Container style={{textAlign:'left', marginBottom: '5vh'}}>
         {!seeAll?
@@ -56,7 +55,7 @@ export default function RouteComments(props){
         {comments.slice(0,limit).map(comment => {
             return(
             <Comment key={comment.id} style={{marginTop: '2vh'}}>
-            <Comment.Avatar src='/on-belay_profile-photo-placeholder_orange.png' />
+            <Comment.Avatar src={`/on-belay_profile-${(parseInt(comment.creator.id)%7)+1}.png`} className='comment-avatar' />
             <Comment.Content>
                 <Comment.Author as='a'>{comment.creator.username}</Comment.Author>
                 <Comment.Metadata>

@@ -14,6 +14,7 @@ import RouteComments from './RouteComments'
 import Footer from './Footer'
 import {formatDate} from '../formatDate'
 import Nav from './Nav'
+import {calculateRatingClass} from '../calculateRatingClass'
 
 export default function ClimbRoute (props){
     const location = useLocation();
@@ -27,34 +28,36 @@ export default function ClimbRoute (props){
     const [announcement, setAnnouncement] = useState('')
     const [comments, setcomments] = useState([]);
 
-    const getRoute = async() => {
-        const url = baseURL + '/routes/' + locationId
-        const requestOptions = {
-          method:'GET',
-          credentials: 'include'
-        }
-    
-        let foundRoute = await fetch(url,requestOptions).then(response => response.json())
-        setRoute(foundRoute)
-        setCurrentRoute(foundRoute)
-        setAnnouncement(foundRoute.data.announcement)
-    }
-
-    const getUsersRouteClimbs = async () => {
-        const url = baseURL + '/routes/' + locationId + '/climbs?user=true'
-        const requestOptions = {
-            method:'GET',
-            credentials: 'include'
-        }
-        const climbs = await fetch(url, requestOptions).then(response => response.json())
-        setClimbs(climbs.data)
-    } 
+    const ratingColor = route.data? calculateRatingClass(route.data.rating) : ''
 
     useEffect(()=> {
+        const getRoute = async() => {
+            const url = baseURL + '/routes/' + locationId
+            const requestOptions = {
+            method:'GET',
+            credentials: 'include'
+            }
+        
+            let foundRoute = await fetch(url,requestOptions).then(response => response.json())
+            setRoute(foundRoute)
+            setCurrentRoute(foundRoute)
+            setAnnouncement(foundRoute.data.announcement)
+        }
+
+        const getUsersRouteClimbs = async () => {
+            const url = baseURL + '/routes/' + locationId + '/climbs?user=true'
+            const requestOptions = {
+                method:'GET',
+                credentials: 'include'
+            }
+            const climbs = await fetch(url, requestOptions).then(response => response.json())
+            setClimbs(climbs.data)
+        } 
+
         getRoute()
         getUsersRouteClimbs()
         setClimbSetting('Outdoor')
-    },[])
+    },[baseURL,setRoute,setCurrentRoute,setAnnouncement,setClimbs, setClimbSetting, locationId])
 
     if(route.status === 404){
         return (
@@ -86,12 +89,10 @@ export default function ClimbRoute (props){
                     </div>:''}
 
 
-                <div style={{backgroundColor:'rgba(0,0,0,0.5'}}>
+                <div className={`${route.data.gym_outdoor.toLowerCase()}-image-background`}>
                     <Image 
                         className='route-img'
-                        src={route.data.image? route.data.image: route.data.gym_outdoor==='Indoor'? 
-                            '/on-belay_indoor-climb-placeholder_orange.png'
-                            :'/on-belay_outdoor-climb-placeholder_orange.png' } 
+                        src={route.data.image? route.data.image: `/on-belay_${route.data.gym_outdoor.toLowerCase()}-${ratingColor.replace('#','')}.png`} 
                         style={{width: '100%', height:'30vh', objectFit: 'cover', margin: '0 auto'}}
                     />
                     {/* ------------------------------- */}
@@ -103,9 +104,6 @@ export default function ClimbRoute (props){
                 {/* ------------------------------------- */}
                 {/* ------------  Description ----------- */}
                 {/* ------------------------------------- */}
-                {/* <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
-                    Log a Climb
-                </Button> */}
                 <div className='route-climb-info'>
                 <Button size='small' as={Link} to='/climbs/new' className='route-btns float-right log-climb'>
                     Climb
