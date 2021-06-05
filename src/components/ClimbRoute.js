@@ -30,34 +30,34 @@ export default function ClimbRoute (props){
 
     const ratingColor = route.data? calculateRatingClass(route.data.rating) : ''
 
-    const getRoute = async() => {
-        const url = baseURL + '/routes/' + locationId
-        const requestOptions = {
-          method:'GET',
-          credentials: 'include'
-        }
-    
-        let foundRoute = await fetch(url,requestOptions).then(response => response.json())
-        setRoute(foundRoute)
-        setCurrentRoute(foundRoute)
-        setAnnouncement(foundRoute.data.announcement)
-    }
-
-    const getUsersRouteClimbs = async () => {
-        const url = baseURL + '/routes/' + locationId + '/climbs?user=true'
-        const requestOptions = {
+    useEffect(()=> {
+        const getRoute = async() => {
+            const url = baseURL + '/routes/' + locationId
+            const requestOptions = {
             method:'GET',
             credentials: 'include'
+            }
+        
+            let foundRoute = await fetch(url,requestOptions).then(response => response.json())
+            setRoute(foundRoute)
+            setCurrentRoute(foundRoute)
+            setAnnouncement(foundRoute.data.announcement)
         }
-        const climbs = await fetch(url, requestOptions).then(response => response.json())
-        setClimbs(climbs.data)
-    } 
 
-    useEffect(()=> {
+        const getUsersRouteClimbs = async () => {
+            const url = baseURL + '/routes/' + locationId + '/climbs?user=true'
+            const requestOptions = {
+                method:'GET',
+                credentials: 'include'
+            }
+            const climbs = await fetch(url, requestOptions).then(response => response.json())
+            setClimbs(climbs.data)
+        } 
+
         getRoute()
         getUsersRouteClimbs()
         setClimbSetting('Outdoor')
-    },[])
+    },[baseURL,setRoute,setCurrentRoute,setAnnouncement,setClimbs, setClimbSetting, locationId])
 
     if(route.status === 404){
         return (

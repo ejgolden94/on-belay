@@ -1,6 +1,6 @@
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 //// Components
 import UserForm from './components/UserForm'
@@ -22,30 +22,12 @@ if (process.env.NODE_ENV === 'development'){
   baseURL = process.env.REACT_APP_PROD_URL
 }
 
-console.log(baseURL)
-
 function App() {
   const [currentUser, setCurrentUser] = useState('')
   const [currentClimb, setCurrentClimb] = useState({})
   const [currentRoute, setCurrentRoute] = useState({})
   const [climbSetting, setClimbSetting] = useState('Outdoor')
   const [indoorRouteId, setIndoorRouteId] = useState('')
-
-  const getUsers = async() => {
-    const url = baseURL+'/users/'
-    const requestOptions = {
-      method:'GET',
-      credentials: 'include',
-      mode: 'cors',
-    }
-    const users = await fetch(url,requestOptions).then(response => response.json())
-    console.log(users);
-  }
-
-  useEffect(() => {
-    // putting this function call inside of an anonymous function due to warning: "Effect callbacks are synchronous to prevent race conditions."
-    getUsers()
-  },[])
 
   return (
     <div className="App" style={{margin:'0', padding: '0'}}>

@@ -70,11 +70,6 @@ export default function Climb (props){
                     </Header>
                 </Divider>
                     <div className='route-climb-info'>
-                    <Button 
-                        inverted circular icon color='purple' className='float-right'
-                        as={Link} to={'/climbs/'+climb.data.id+'/edit'}>
-                    <Icon name='pencil'/>
-                    </Button>
                     <div style={{fontSize: 'calc(14px + 2 * ((100vw - 320px) / 950))', lineHeight:'1.5'}}>
                         <div className='route-desc'>
                             <h4 style={{marginRight:'10px'}} className='font-inherit'>Notes:</h4>
