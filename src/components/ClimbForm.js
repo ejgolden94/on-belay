@@ -76,7 +76,7 @@ export default class ClimbForm extends Component {
         }
 
         const editClimb = await fetch(url,requestOptions).then(response => response.json())
-        console.log(editClimb);
+
         if (editClimb.status===200){
             this.setState({
                 success: true
@@ -99,7 +99,6 @@ export default class ClimbForm extends Component {
         }
 
         const newClimb = await fetch(url,requestOptions).then(response => response.json())
-        console.log(newClimb);
         if (newClimb.status===201){
             this.setState({
                 success: true,

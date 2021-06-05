@@ -17,7 +17,6 @@ export default function Nav (props){
     }
 
     const logout = async() => {
-        console.log(baseURL + '/users/logout/' )
         const url=baseURL + '/users/logout' 
         const requestOptions = {
             method:'GET',

@@ -119,7 +119,6 @@ export default class RouteForm extends Component {
         delete body.id
         delete body.ratingPrefix
         delete body.ratingSuffix 
-        console.log(body)
 
         const requestOptions = {
             method:'POST',
@@ -132,8 +131,6 @@ export default class RouteForm extends Component {
 
         if (newRoute.status===201){
             if (body.gym_outdoor === 'Indoor') {
-                console.log('setting indoor route id')
-                console.log(newRoute.data.id)
                 this.props.setIndoorRouteId(newRoute.data.id)} 
 
             this.setState({
