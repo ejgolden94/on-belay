@@ -45,6 +45,8 @@ export default class ClimbForm extends Component {
             }
         } else if(context === 'new') {
             const route = this.props.indoorRouteId? this.props.indoorRouteId: this.props.route.id
+            if(this.props.indoorRouteId){ this.props.setIndoorRouteId('') }
+            
             this.state={
                 climb_type: 'Choose One',
                 image: '',
