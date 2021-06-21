@@ -18,7 +18,10 @@ export default function Climbs(props) {
                 credentials: 'include',
                 mode: 'cors',
             }
-            const climbs = await fetch(url,requestOptions).then(response => response.json())
+            const climbs = await fetch(url,requestOptions).then(response => {
+                console.log(response)
+                return response.json()
+            })
             setClimbs(climbs.data)
             }
         getClimbs()
